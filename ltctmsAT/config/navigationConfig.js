@@ -122,7 +122,7 @@ const getTabBarIcon = (navigation, tintColor) => {
     iconName = `ios-log-out`;
   }
 
-  return <IconComponent name={iconName} size={25} color={tintColor} />;
+  return <IconComponent name={iconName} size={30} color={tintColor} />;
 };
 
 
@@ -149,7 +149,7 @@ const AppBottomTabNavigation = createBottomTabNavigator({
       activeTintColor: '#E95736',
       inactiveTintColor: 'gray',
       labelStyle: {
-        fontSize: 13,
+        fontSize: 15,
         //fontFamily: ''
       },
       style: {
