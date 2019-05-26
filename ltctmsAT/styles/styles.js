@@ -79,8 +79,11 @@ const styles = StyleSheet.create({
   loginForm:
   {
     // style for TextInput component for SignInScreen.js
+    backgroundColor: '#ffffff',
     height: verticalScale(35),
     color: 'black',
+    marginBottom: 5,
+    width: 362,
   },
   statusToggle:
   {
