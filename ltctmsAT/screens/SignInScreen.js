@@ -54,6 +54,8 @@ class SignInScreen extends React.Component {
             style={styles.loginForm}
             placeholder="Username"
             placeholderTextColor='black'
+            returnKeyType={"next"}
+            onSubmitEditing={()=>this.secondTextInput.focus()}
             onChangeText={(username) => this.setState({ username })}
           />
           <TextInput
@@ -61,6 +63,8 @@ class SignInScreen extends React.Component {
             secureTextEntry={true}
             placeholder="Password"
             placeholderTextColor='black'
+            returnKeyType = {"go"}
+            ref={(input)=>this.secondTextInput = input}
             onChangeText={(password) => this.setState({ password })}
           />
           <Button
