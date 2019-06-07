@@ -1,42 +1,35 @@
 {
   "project_info": {
-    "project_number": "917274264132",
-    "firebase_url": "https://browserteam.firebaseio.com",
-    "project_id": "browserteam",
-    "storage_bucket": "browserteam.appspot.com"
+    "project_number": "284533224750",
+    "firebase_url": "https://mcultc4.firebaseio.com",
+    "project_id": "mcultc4",
+    "storage_bucket": "mcultc4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917274264132:android:b728bd57327e7917",
+        "mobilesdk_app_id": "1:284533224750:android:51cbf36a79828e36",
         "android_client_info": {
-          "package_name": "com.ku.ltctms"
+          "package_name": "com.mcu.ltc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "917274264132-k69mf5n2t64rii26lk3b77ugiig454uc.apps.googleusercontent.com",
+          "client_id": "284533224750-psoild0s5vgbk0ocvrtud0uh57uhtg28.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAyIjPFpnDRwfwAt18LV_3GQDhqfcyBV84"
+          "current_key": "AIzaSyDcyYUsKcK6E8ebuM_5rZMMMstZ-ptIr4k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "917274264132-k69mf5n2t64rii26lk3b77ugiig454uc.apps.googleusercontent.com",
+              "client_id": "284533224750-psoild0s5vgbk0ocvrtud0uh57uhtg28.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "917274264132-qdi80ou2nt9gm1h2e9v4rdk7f7dq0mnt.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ku.ltctms"
-              }
             }
           ]
         }

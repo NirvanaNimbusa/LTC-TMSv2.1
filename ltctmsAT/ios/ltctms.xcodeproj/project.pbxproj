@@ -1616,7 +1616,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ku.ltctms;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcu.ltc;
 				PRODUCT_NAME = ltctms;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1647,7 +1647,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ku.ltctms;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcu.ltc;
 				PRODUCT_NAME = ltctms;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

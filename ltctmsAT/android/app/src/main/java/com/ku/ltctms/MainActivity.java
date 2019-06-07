@@ -1,4 +1,4 @@
-package com.ku.ltctms;
+package com.mcu.ltc;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
