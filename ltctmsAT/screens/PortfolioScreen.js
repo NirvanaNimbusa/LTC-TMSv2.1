@@ -64,19 +64,7 @@ class PortfolioScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles2.container}>
-          <Text style={styles.itemPortfolio}>Name: {this.state.name}</Text>
-          <Text style={styles.itemPortfolio}>User ID: {this.state.userID}</Text>
-          <Text style={styles.itemPortfolio}>Position: {this.state.position}</Text>
-          <Text style={styles.itemPortfolio}>Address: {this.state.address}</Text>
-          <Text style={styles.itemPortfolio}>Room #: {this.state.room}</Text>
-          <Text style={styles.itemPortfolio}>Nationality: {this.state.nationality}</Text>
-          <Text style={styles.itemPortfolio}>National ID: {this.state.nationalID}</Text>
-          <Text style={styles.itemPortfolio}>Gender: {this.state.gender}</Text>
-          <Text style={styles.itemPortfolio}>Brief Description: {this.state.description}</Text>
-          <Text style={styles.itemPortfolio}>Date of Birth: {this.state.DOB}</Text>
-          <Text style={styles.itemPortfolio}>E-mail Address: {this.state.email}</Text>
-          <Text style={styles.itemPortfolio}>Admission Reason: {this.state.admissionReason}</Text>
-          <Text style={styles.itemPortfolio}>Medical Records: {this.state.medicalRecord}</Text>
+          
           {(this.state.position == "CNA") ? 
           <View>
                     <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
