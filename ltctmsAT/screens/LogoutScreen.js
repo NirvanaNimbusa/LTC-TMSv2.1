@@ -90,13 +90,12 @@ class LogoutScreen extends React.Component {
       <TouchableOpacity onPress={()=>navigation.state.params.navigatePress()}>
         <Text>Logout</Text>
       </TouchableOpacity>
-
     );
     return { title: navigation.getParam('otherParam', 'UserPortfolio'),
-      
       headerRight,
       };
   };
+
   LogoutButton=()=>{
     Alert.alert('Log out','Are you sure?',
     [
