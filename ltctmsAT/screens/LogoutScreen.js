@@ -6,7 +6,7 @@
 /* Filename:                                                                                    */
 /* Last Edited By:                                                                              */
 /* /*********************************************************************************************/
-import React from 'react';
+import React ,{Component}from 'react';
 import {
   ActivityIndicator,
   StatusBar,
@@ -15,6 +15,7 @@ import {
   Text,
   Alert,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
@@ -28,33 +29,13 @@ class LogoutScreen extends React.Component {
     super(props);
 
     this.state = {
+      userInfo: '',
       position: 'sadf',
       userID: 'afsdaasfd',
     };
 
   }
-//top bar title 
-  static navigationOptions = {
-    title: 'UserPortfolio',
-    UserPortfolio: {
-      screen:LogoutScreen, 
-    },
-    
-    headerRight:(
-      <Button
-        onPress={()=> Alert.alert('Log out','Are you sure?',
-        [
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-          {text: 'OK', onPress: () => this._signOutAsync()},
-        ],
-        )}
 
-        />
-
-    ),
- 
-    
-  };
 /*************************************************************************/
   /* */
   /* Function name: _fetchUserInfo */
@@ -103,6 +84,35 @@ class LogoutScreen extends React.Component {
     })
   }
 
+  static navigationOptions=({navigation,screenProps}) => {
+    const { params ={} }= navigation.state;
+    const headerRight = ( 
+      <TouchableOpacity onPress={()=>navigation.state.params.navigatePress()}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
+    );
+    return { title: navigation.getParam('otherParam', 'UserPortfolio'),
+      headerRight,
+      };
+  };
+
+  LogoutButton=()=>{
+    Alert.alert('Log out','Are you sure?',
+    [
+      {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+      {text: 'OK', onPress: () => this._logout ()},
+    ],
+    )
+  }
+
+  componentDidMount(){
+    this.props.navigation.setParams({navigatePress:this.LogoutButton});
+  }
+  _logout (){
+    AsyncStorage.removeItem('userInfo');
+    this.props.navigation.navigate('Auth');
+  }
+ 
   render() {
     const user = this.state.userInfo;
     return (
@@ -128,17 +138,14 @@ class LogoutScreen extends React.Component {
 
 
     );
+  
+ 
   }
-
-
 
 
   // handler to clear the locally stored user info (logout) and navigate to the
   // sign in screen
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
+ 
 
 
 }
