@@ -116,4 +116,4 @@ Try deleting the xcode workspace file, also in the ios directory
 
 This is a test
 Ask Peter.
-Or ask Atakan. 
+Or maybe ask Atakan. 
