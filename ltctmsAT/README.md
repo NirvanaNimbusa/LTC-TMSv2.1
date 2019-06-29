@@ -115,4 +115,4 @@ Try deleting your Podfile.lock in the ios directoy, then rebuild your pods with 
 Try deleting the xcode workspace file, also in the ios directory
 
 Ask Peter.
-Or ask Atakan. 
+Or maybe ask Atakan. 
