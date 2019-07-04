@@ -80,9 +80,9 @@ export default class AnnouncementList extends Component {
 
   FlatListItemSeparator = () => {
     return (
-      <View
-        style={styles.separator}
+      <View style={styles.separator}
       />
+
     );
   }
 
@@ -113,7 +113,7 @@ export default class AnnouncementList extends Component {
   renderHeader() {
     return (
       <View>
-        <Text style={styles.headerText}>Announcements</Text>
+        <Text style={styles.headerText}>These are announcements</Text>
       </View>
     )
   }
