@@ -46,7 +46,7 @@ class SignInScreen extends React.Component {
   // toggle, and buttons
   render() {
     return (
-      <KeyboardAvoidingView behavior='position' style={{ flex: 1, backgroundColor: '#e6f3ff' }}>
+      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, backgroundColor: '#e6f3ff' }}>
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
           <Text style={styles.signInHeader}>Sign In</Text>
@@ -54,6 +54,8 @@ class SignInScreen extends React.Component {
             style={styles.loginForm}
             placeholder="Username"
             placeholderTextColor='black'
+            returnKeyType={"next"}
+            onSubmitEditing={()=>this.secondTextInput.focus()}
             onChangeText={(username) => this.setState({ username })}
           />
           <TextInput
@@ -61,6 +63,8 @@ class SignInScreen extends React.Component {
             secureTextEntry={true}
             placeholder="Password"
             placeholderTextColor='black'
+            returnKeyType = {"go"}
+            ref={(input)=>this.secondTextInput = input}
             onChangeText={(password) => this.setState({ password })}
           />
           <Button
