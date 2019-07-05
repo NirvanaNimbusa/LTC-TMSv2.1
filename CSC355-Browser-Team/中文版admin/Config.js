@@ -1,9 +1,9 @@
 var config = {
-   apiKey: "AIzaSyCnuAZzFvkT-FSRxB5Vk67JM6FU9wZLYMQ",
-   authDomain: "share-b7589.firebaseapp.com",
-   databaseURL: "https://share-b7589.firebaseio.com",
-   projectId: "share-b7589",
-   storageBucket: "share-b7589.appspot.com",
-   messagingSenderId: "323469467975"
+	apiKey: "AIzaSyBP1AdMjTWdba-hH_136OPeFODfurH3ENc",
+    authDomain: "mcultc4.firebaseapp.com",
+    databaseURL: "https://mcultc4.firebaseio.com",
+    projectId: "mcultc4",
+    storageBucket: "",
+    messagingSenderId: "284533224750"
  };
  firebase.initializeApp(config); 
