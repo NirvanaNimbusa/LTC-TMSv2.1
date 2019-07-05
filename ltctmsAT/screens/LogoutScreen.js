@@ -18,13 +18,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { DrawerNavigator, DrawerItems} from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { Button, ThemeProvider } from 'react-native-elements';
 import styles from '../styles/styles';
-import{Icon,Container,Header,Content,Left} from'native-base'
-import Ionicons from 'react-native-vector-icons/Ionicons'
- 
+
 class LogoutScreen extends React.Component {
 
   constructor(props) {
@@ -87,16 +85,14 @@ class LogoutScreen extends React.Component {
   }
 
   static navigationOptions=({navigation,screenProps}) => {
-    
     const { params ={} }= navigation.state;
     const headerRight = ( 
       <TouchableOpacity onPress={()=>navigation.state.params.navigatePress()}>
-        <Text style={styles.itemPortfolio}>Logout</Text>
+        <Text>Logout</Text>
       </TouchableOpacity>
     );
-    return { title: navigation.getParam('otherParam', 'UserPortfolio') ,
+    return { title: navigation.getParam('otherParam', 'UserPortfolio'),
       headerRight,
-      
       };
   };
 
@@ -120,6 +116,7 @@ class LogoutScreen extends React.Component {
   render() {
     const user = this.state.userInfo;
     return (
+
       <View style={styles.container}>
          <ScrollView style={styles2.container}>
           <Text style={styles.itemPortfolio}>Name: {this.state.name}</Text>
@@ -136,15 +133,22 @@ class LogoutScreen extends React.Component {
           <Text style={styles.itemPortfolio}>Admission Reason: {this.state.admissionReason}</Text>
           <Text style={styles.itemPortfolio}>Medical Records: {this.state.medicalRecord}</Text>
           </ScrollView>
+
         </View>
- 
+
+
     );
+  
+ 
   }
+
+
   // handler to clear the locally stored user info (logout) and navigate to the
   // sign in screen
+ 
+
+
 }
-
-
 const styles2 = StyleSheet.create({
   container: {
     backgroundColor: '#e6f3ff',
@@ -156,4 +160,4 @@ const styles2 = StyleSheet.create({
 });
 
 
-export default LogoutScreen 
+export default LogoutScreen;

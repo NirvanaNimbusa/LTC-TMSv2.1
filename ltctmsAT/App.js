@@ -17,7 +17,7 @@ import {
   Alert
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { DrawerNavigator,createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import firebase from 'react-native-firebase';
 //import SplashScreen from 'react-native-splash-screen';
 import AppContainer from './config/navigationConfig';

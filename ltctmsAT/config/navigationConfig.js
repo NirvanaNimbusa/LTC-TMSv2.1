@@ -25,7 +25,7 @@ import { Button, ThemeProvider } from 'react-native-elements';
 import SignInScreen from '../screens/SignInScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
-import RecordScreen from '../screens/RecordScreen';
+import PortfolioScreen from '../screens/PortfolioScreen';
 import CenterInfoScreen from '../screens/CenterInfoScreen';
 import TaskScreen from '../screens/TaskScreen';
 import AiStatusReadScreen from '../screens/AiStatusReadScreen';
@@ -66,14 +66,14 @@ const AppLeftStack = createStackNavigator({
 
 // middle navigation container in tabular navigation bar
 const AppMiddleStack = createStackNavigator({
-  Record: RecordScreen,
+  Portfolio: PortfolioScreen,
   DailyStatusRead: DailyStatusReadScreen,
   DailyStatusAdd: DailyStatusAddScreen,
   AiStatusRead: AiStatusReadScreen,
   VitalStatusRead: VitalStatusReadScreen,
   VitalStatusAdd: VitalStatusAddScreen,
 }, {
-    initialRouteKey: 'Record'
+    initialRouteKey: 'Portfolio'
   });
 
 //Changed Task to Library
@@ -84,9 +84,9 @@ const AppTaskStack = createStackNavigator({
   });
 
 const AppRightStack = createStackNavigator({
-  Portfolio: LogoutScreen
+  Logout: LogoutScreen
 }, {
-    initialRouteKey: 'Portfolio'
+    initialRouteKey: 'Logout'
   });
 
 // update: Change schedule to Center information 
@@ -112,14 +112,14 @@ const getTabBarIcon = (navigation, tintColor) => {
   let entypo = Entypo;
   if (routeName === 'Home') {
     iconName = `ios-home`;
-  } else if (routeName === 'Record') {
-    iconName = `ios-create`;
+  } else if (routeName === 'Portfolio') {
+    iconName = `ios-person`;
   } else if (routeName === 'Library') {
     iconName = `ios-book`;
   } else if (routeName === 'Center Info') {
     iconName = `ios-information-circle`;
   } else {
-    iconName = `ios-person`;
+    iconName = `ios-log-out`;
   }
 
   return <IconComponent name={iconName} size={30} color={tintColor} />;
@@ -131,11 +131,11 @@ const getTabBarIcon = (navigation, tintColor) => {
 // Changed task to Library
 const AppBottomTabNavigation = createBottomTabNavigator({
   Home: AppLeftStack,
-  Record: AppMiddleStack,
+  Portfolio: AppMiddleStack,
   Library: AppTaskStack,
   //CenterInfo: AppScheduleStack,
   'Center Info': AppScheduleStack,
-  Portfolio: AppRightStack,
+  Logout: AppRightStack,
 
 },
   { //call defaultNavigation for icon
