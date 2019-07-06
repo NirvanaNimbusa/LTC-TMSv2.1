@@ -97,6 +97,7 @@
                 <div class="bar"><!-- PlaceHolder for top bar -->
                     
                     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default"><!-- Bootstrap navigation bar -->
+
                         <div class="container-fluid">
 
                             <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
@@ -114,25 +115,59 @@
                                     <span class="white-text title"> LTC-TMS</span>
                                 </a>
 
-                            </div>
+                            </div> <!--end div class="navbar-header"-->
                             <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
                                 <li class="dropdown">
                                     <a href="javascript:void(0)" class="dropbtn"><span class="glyphicon glyphicon-cog white-text"></span></a>
                                     <div class="dropdown-content">
+
+                                            <!-- Start of Account profile -->
+                                            
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
+                                                    <p></p>
+                                                    
+                                                    <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                                        <span style = "font-size: 12pt"> Name : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
+                                                        <span class="hidden" style = "font-size: 12pt">UserID : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
+                                                        <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                        <span style = "font-size: 12pt"> Role : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
+                                                    </p>
+                                                    <!-- End of Account profile -->
+                                            </div>
+                                        <a href="#">English</a>
+                                        <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
+                                    </div> <!--end div class="dropdown-content"-->
+
                                         <a href="/../Frontend/01Aboutus2.html">English</a>
                                         <a href="#">Chinese</a>
                                         <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">Logout</a>
                                     </div>
+
                                 </li>
                             </ul>
-                        </div>
+                        </div> <!--end div class="container-fluid"-->
                     </nav>
-                </div>
+                </div><!--end div class="bar"-->
                 <!-- TOP BAR ENDS-->
                 <!-- Place Holder for header-->
                 <div class="user-info">
                     <!--BACKGROUND PANEL IMAGE-->
                     <div class="container-fluid">
+
+
+                        <div class="container" style="transform:translateY(-8.5ex)">
+                            <!-- CIRCLE IMAGE THING-->
+                           
+                            <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
+                            <div class="user-account">
+                                <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
+                                
+                            </div> <!--end div class="user-account"-->
+                        </div> <!--end div class="container" -->
+                    </div> <!--end div class="container-fluid"-->
+                </div> <!--end div class="user-info"-->
 
                         <img class="panelimg img-responsive" style="background-color: #fff5ee" />
 
@@ -159,6 +194,7 @@
                         </div>
                     </div>
                 </div>
+
             </div> <!-- END OF THE TWO HEADER!! -->
 
             <div class="main container-fluid wrapper">
