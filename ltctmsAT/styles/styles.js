@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     height: verticalScale(35),
     color: 'black',
     marginBottom: 5,
-    width: WIDTH - 55,
+    width: WIDTH - 50,
   },
   statusToggle:
   {

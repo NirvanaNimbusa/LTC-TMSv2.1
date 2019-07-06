@@ -49,7 +49,6 @@ class SignInScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, backgroundColor: '#e6f3ff' }}>
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
-          <Text style={styles.signInHeader}>Sign In</Text>
           <TextInput
             style={styles.loginForm}
             placeholder="Username"
