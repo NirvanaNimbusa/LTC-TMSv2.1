@@ -27,14 +27,19 @@ class SignInScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.toggleSwitch = this.toggleSwitch.bind(this);
     // required state variables to handle user input correctly
     this.state = {
       cnaSwitch: false,
       username: '',
-      password: ''
+      password: '',
+      showPassword: true,
     };
   };
+
+  toggleSwitch() {
+    this.setState({ showPassword: !this.state.showPassword });
+  }
 // uncomment header:null to disable header on signin screen
   static navigationOptions = {
     //header: null,
@@ -59,12 +64,16 @@ class SignInScreen extends React.Component {
           />
           <TextInput
             style={styles.loginForm}
-            secureTextEntry={true}
+            secureTextEntry={this.state.showPassword}
             placeholder="Password"
             placeholderTextColor='black'
             returnKeyType = {"go"}
             ref={(input)=>this.secondTextInput = input}
             onChangeText={(password) => this.setState({ password })}
+          />
+          <Switch
+            onValueChange = {this.toggleSwitch}
+            value = {!this.state.showPassword}
           />
           <Button
             onPress={this._signIn}
