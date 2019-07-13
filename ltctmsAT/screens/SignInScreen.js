@@ -18,6 +18,7 @@ import {
   Switch,
   TouchableOpacity,
   KeyboardAvoidingView,
+  TouchableHighlight,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
@@ -54,32 +55,38 @@ class SignInScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, backgroundColor: '#e6f3ff' }}>
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
-          <TextInput
-            style={styles.loginForm}
-            placeholder="Username"
-            placeholderTextColor='black'
-            returnKeyType={"next"}
-            onSubmitEditing={()=>this.secondTextInput.focus()}
-            onChangeText={(username) => this.setState({ username })}
-          />
-          <TextInput
-            style={styles.loginForm}
-            secureTextEntry={this.state.showPassword}
-            placeholder="Password"
-            placeholderTextColor='black'
-            returnKeyType = {"go"}
-            ref={(input)=>this.secondTextInput = input}
-            onChangeText={(password) => this.setState({ password })}
-          />
+          <View style={styles_2.inputContainer}>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+            <TextInput
+              style={styles_2.inputs}
+              placeholder="Username"
+              placeholderTextColor='black'
+              returnKeyType={"next"}
+              onSubmitEditing={()=>this.secondTextInput.focus()}
+              onChangeText={(username) => this.setState({ username })}
+            />
+          </View>
+          <View style={styles_2.inputContainer}>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+            <TextInput
+              style={styles_2.inputs}
+              secureTextEntry={this.state.showPassword}
+              placeholder="Password"
+              placeholderTextColor='black'
+              returnKeyType = {"go"}
+              ref={(input)=>this.secondTextInput = input}
+              onChangeText={(password) => this.setState({ password })}
+            />
+          </View>
+          <Text>Password Visibility</Text>
           <Switch
             onValueChange = {this.toggleSwitch}
             value = {!this.state.showPassword}
+            style = {{marginBottom: 10}}
           />
-          <Button
-            onPress={this._signIn}
-            title="Login"
-            type='outline'
-          />
+          <TouchableHighlight style={[styles_2.buttonContainer, styles_2.loginButton]} onPress={this._signIn}>
+            <Text style={styles_2.loginText}>Login</Text>
+          </TouchableHighlight>
           <Text style={styles.userToggle}>Toggle User Login</Text>
           <Text style={styles.userToggle}> {this.state.cnaSwitch ? 'CNA' : 'Family'}</Text>
           <Switch
@@ -141,5 +148,52 @@ class SignInScreen extends React.Component {
     this.props.navigation.navigate('App');
   }
 }
+const styles_2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
+  },
+  inputContainer: {
+      borderBottomColor: '#F5FCFF',
+      backgroundColor: '#FFFFFF',
+      borderRadius:30,
+      borderBottomWidth: 1,
+      width:320,
+      height:45,
+      marginBottom:10,
+      flexDirection: 'row',
+      alignItems:'center'
+  },
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
+  },
+  inputIcon:{
+    width:30,
+    height:30,
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    marginLeft: 20,
+    width:285,
+    borderRadius:7,
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
+  }
+});
 
 export default SignInScreen;
