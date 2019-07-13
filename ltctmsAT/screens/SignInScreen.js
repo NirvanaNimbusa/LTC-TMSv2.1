@@ -19,11 +19,15 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableHighlight,
+  Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
 import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import styles from '../styles/styles';
+
+const { width: WIDTH} = Dimensions.get('window')
+
 class SignInScreen extends React.Component {
 
   constructor(props) {
@@ -78,11 +82,12 @@ class SignInScreen extends React.Component {
               onChangeText={(password) => this.setState({ password })}
             />
           </View>
-          <Text>Password Visibility</Text>
+          <Text style = {styles_2.simpleText}>Password Visibility</Text>
           <Switch
             onValueChange = {this.toggleSwitch}
             value = {!this.state.showPassword}
-            style = {{marginBottom: 10}}
+            style = {{marginBottom: 10, alignSelf: 'flex-start'} }
+            trackColor={{ true: 'green', false: 'red' }}
           />
           <TouchableHighlight style={[styles_2.buttonContainer, styles_2.loginButton]} onPress={this._signIn}>
             <Text style={styles_2.loginText}>Login</Text>
@@ -160,7 +165,7 @@ const styles_2 = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       borderRadius:30,
       borderBottomWidth: 1,
-      width:320,
+      width:WIDTH - 50,
       height:45,
       marginBottom:10,
       flexDirection: 'row',
@@ -171,6 +176,7 @@ const styles_2 = StyleSheet.create({
       marginLeft:16,
       borderBottomColor: '#FFFFFF',
       flex:1,
+      color: 'black',
   },
   inputIcon:{
     width:30,
@@ -184,8 +190,8 @@ const styles_2 = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    marginLeft: 20,
-    width:285,
+    marginLeft: 40,
+    width:WIDTH - 120,
     borderRadius:7,
   },
   loginButton: {
@@ -193,7 +199,10 @@ const styles_2 = StyleSheet.create({
   },
   loginText: {
     color: 'white',
-  }
+  },
+  simpleText: {
+    color: 'black',
+  },
 });
 
 export default SignInScreen;
