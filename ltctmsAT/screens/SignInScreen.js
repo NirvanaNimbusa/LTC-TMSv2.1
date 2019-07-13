@@ -92,14 +92,6 @@ class SignInScreen extends React.Component {
           <TouchableHighlight style={[styles_2.buttonContainer, styles_2.loginButton]} onPress={this._signIn}>
             <Text style={styles_2.loginText}>Login</Text>
           </TouchableHighlight>
-          <Text style={styles.userToggle}>Toggle User Login</Text>
-          <Text style={styles.userToggle}> {this.state.cnaSwitch ? 'CNA' : 'Family'}</Text>
-          <Switch
-            onValueChange={(value) => this.setState({ cnaSwitch: value })}
-            style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-            value={this.state.cnaSwitch}
-            trackColor={{ true: 'green', false: 'blue' }}
-          />
         </View>
       </KeyboardAvoidingView>
     );
@@ -114,33 +106,27 @@ class SignInScreen extends React.Component {
   }
   // Updated 2-14-2019: for both types of sign-ins, there will be an alert prompt if credentials are incorrect
   _signIn = () => {
-    if (this.state.cnaSwitch == true) {
-      const userCredentials = firebase.database().ref(`CNA/${this.state.username}/Portfolio/`).once('value').then((snap) => {
-        const userInfo = snap.val();
-        if (snap.val().Password === this.state.password) {
-          this._setUserInfo(userInfo);
-        } else {
-          Alert.alert('Username/Password incorrect.');
-        }
-        //catch is added to prompt incorrect credentials
-      }).catch(() => {
-        Alert.alert('Username/Password incorrect.');
-      });
-    } else {
-      const userCredentials = firebase.database().ref(`Patient/${this.state.username}/Portfolio/`).once('value').then((snap) => {
-        const userInfo = snap.val();
+    userCredentials = firebase.database().ref(`CNA/${this.state.username}/Portfolio/`).once('value').then((snap) => {
+      userInfo = snap.val();
+      if (snap.val().Password === this.state.password) {
+        this._setUserInfo(userInfo);
+      } 
+      else { 
+      Alert.alert('Username/Password incorrect.');
+      }
+    }).catch(() => {
+      userCredentials = firebase.database().ref(`Patient/${this.state.username}/Portfolio/`).once('value').then((snap) => {
+        userInfo = snap.val();
         console.log(snap.val());
         if (snap.val().Password === this.state.password) {
           this._setUserInfo(userInfo);
         } else {
           Alert.alert('Username/Password incorrect.');
         }
-        //catch is added to prompt incorrect credentials  
       }).catch(() => {
         Alert.alert('Username/Password incorrect.');
       });
-
-    }
+    }); //catch is added to prompt incorrect credentials
   };
 
   // helper function to set user information in local storage.
