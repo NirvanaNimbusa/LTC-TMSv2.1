@@ -9,6 +9,9 @@
 import { StyleSheet, Platform } from 'react-native';
 //scale methods used will adjust to display height and width automatically. 
 import { scale, verticalScale, moderateScale } from './scaling';
+import {Dimensions} from 'react-native'
+
+const { width: WIDTH} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
 
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     height: verticalScale(35),
     color: 'black',
     marginBottom: 5,
-    width: 362,
+    width: WIDTH - 50,
   },
   statusToggle:
   {
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
   logo: {
     // Logo will be aligned with display
     alignSelf: 'center',
+    marginBottom: 30,
   },
 
   separator: {
