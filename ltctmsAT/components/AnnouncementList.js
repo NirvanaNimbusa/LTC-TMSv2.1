@@ -113,7 +113,7 @@ export default class AnnouncementList extends Component {
   renderHeader() {
     return (
       <View>
-        <Text style={styles.headerText}>Announcements</Text>
+        <Text style={styles.headerText}>This is Announcements</Text>
       </View>
     )
   }

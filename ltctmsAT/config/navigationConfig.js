@@ -113,13 +113,13 @@ const getTabBarIcon = (navigation, tintColor) => {
   if (routeName === 'Home') {
     iconName = `ios-home`;
   } else if (routeName === 'Portfolio') {
-    iconName = `ios-person`;
+    iconName = `ios-create`;
   } else if (routeName === 'Library') {
     iconName = `ios-book`;
   } else if (routeName === 'Center Info') {
     iconName = `ios-information-circle`;
   } else {
-    iconName = `ios-log-out`;
+    iconName = `ios-person`;
   }
 
   return <IconComponent name={iconName} size={30} color={tintColor} />;
@@ -131,11 +131,11 @@ const getTabBarIcon = (navigation, tintColor) => {
 // Changed task to Library
 const AppBottomTabNavigation = createBottomTabNavigator({
   Home: AppLeftStack,
-  Portfolio: AppMiddleStack,
+  Record: AppMiddleStack,
   Library: AppTaskStack,
   //CenterInfo: AppScheduleStack,
   'Center Info': AppScheduleStack,
-  Logout: AppRightStack,
+  Portfolio: AppRightStack,
 
 },
   { //call defaultNavigation for icon
