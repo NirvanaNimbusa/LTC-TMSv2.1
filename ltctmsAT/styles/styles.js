@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
   logo: {
     // Logo will be aligned with display
     alignSelf: 'center',
+    marginBottom: 30,
   },
 
   separator: {
