@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
 
   announce: {
     // content for each announcement retrieved from AnnouncementList.js and displayed in HomeScreen.js
-    padding: 20,
-    fontSize: scale(14),
+    padding: 35,
+    fontSize: scale(18),
     justifyContent: 'space-evenly',
-    fontFamily: 'SFNS Text',
-    textAlign: 'center',
-    color: 'black',
+    fontFamily: 'SFNS Text Italic',
+    textAlign: 'left',
+    color: 'blue',
 
   },
   header: {

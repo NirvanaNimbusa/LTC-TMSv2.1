@@ -16,6 +16,8 @@ import * as Animatable from 'react-native-animatable';
 
 //Import styles.js to use style sheet from central location
 import styles from '../styles/styles';
+//import Swipeout from 'react-native-swipeout'; 
+
 export default class AnnouncementList extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +115,7 @@ export default class AnnouncementList extends Component {
   renderHeader() {
     return (
       <View>
-        <Text style={styles.headerText}>These are announcements</Text>
+        <Text style={styles.headerText}>These are Announcements</Text>
       </View>
     )
   }
