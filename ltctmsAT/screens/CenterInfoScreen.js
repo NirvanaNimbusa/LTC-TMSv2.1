@@ -271,7 +271,7 @@ class CenterInfo extends React.Component {
   _renderItem = ({ item }) => {
     return (
       <View>
-        <Text style={styles.item}> {item.id} : {item.value}</Text>
+        <Text style={styles2.item}> {item.id} : {item.value}</Text>
 
       </View>
 
@@ -312,29 +312,29 @@ class CenterInfo extends React.Component {
             extraData={this.state.selectedDate}
           />
           <Text></Text>
+          <View style={{flexDirection: 'column'}}>
+            <View style={{marginTop: 50, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
+              <Button
+              onPress={() => {
+                this.props.navigation.navigate('Feedback')
+              }}
+              title="Submit Feedback"
+              type="solid"
+              />
+            </View>
+            <View style={{marginTop: 10, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
+              <Button
+                onPress={() => {
+                  Linking.openURL(`tel:2027621401`);
+                }}
+                title="Call Center"
+                type="solid"
+                buttonStyle= {{}}
+              />
+            </View>
+          </View>
         </ScrollView>
-        <Button
-          onPress={() => {
-            this.props.navigation.navigate('Feedback')
-          }}
-          title="Submit Feedback"
-          type="outline"
-          style={{ padding: 5 }}
-        />
-
-        <Button
-          onPress={() => {
-            Linking.openURL(`tel:2027621401`);
-          }}
-          title="Call Center"
-          type="outline"
-          style={{ padding: 5 }}
-        />
-
-
       </View>
-
-
     );
   } s
 }
@@ -372,18 +372,21 @@ class IconWithBadge extends React.Component {
 const styles2 = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    marginTop: 15,
+    padding: 5,
+    marginTop: 10,
   },
   picker: {
+    flex: 1,
     color: 'black',
     fontWeight: 'bold',
   },
   item: {
     padding: 4,
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: 'bold',
-    flex: 1
+    flex: 1,
+    textAlign: 'left',
+    color: 'black',
   },
   announce: {
     padding: 1,
@@ -398,7 +401,7 @@ const styles2 = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left', /*select week*/
   },
   headerText: {
     textAlign: 'center',
