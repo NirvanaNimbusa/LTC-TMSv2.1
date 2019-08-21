@@ -17,8 +17,10 @@ const styles = StyleSheet.create({
 
   basicView: {
     //style component for views that only require the background color and flex. Used in HomeScreen.js
-    flex: 1,
-    backgroundColor: '#e6f3ff',
+    flex: 6,
+    backgroundColor: '#9aceff',
+  
+      
   },
 
   pickerStyle: {
@@ -100,8 +102,8 @@ const styles = StyleSheet.create({
 
   item: {
     // titles for each announcement retrieved from AnnouncementList.js displayed in HomeScreen.js
-    padding: 10,
-    fontSize: scale(20),
+    padding: 5,
+    fontSize: scale(25),
     fontWeight: 'bold',
     textAlign: 'center',
     fontFamily: 'SFNS Display',
@@ -119,12 +121,12 @@ const styles = StyleSheet.create({
 
   announce: {
     // content for each announcement retrieved from AnnouncementList.js and displayed in HomeScreen.js
-    padding: 35,
-    fontSize: scale(18),
+    padding: 13,
+    fontSize: scale(20),
     justifyContent: 'space-evenly',
-    fontFamily: 'SFNS Text Italic',
+    fontFamily: 'SFNS Text',
     textAlign: 'left',
-    color: 'blue',
+    color: 'black',
 
   },
   header: {
@@ -169,21 +171,21 @@ const styles = StyleSheet.create({
 
   separator: {
     // Divider for each announcement on HomeScreen.js
-    height: 1,
+    height: 5,
     width: scale(1000),
     backgroundColor: "black",
   },
-  /*
-    itemSchedule: {
+  
+    /*itemSchedule: {
       //
       padding: 10,
       fontSize: scale(20),
-      textAlign:'center',
+      textAlign:'left',
       fontFamily: 'SFNS Display',
       color: 'black',
-    }
+    }*/
   
-    */
+    
 });
 
 export default styles;

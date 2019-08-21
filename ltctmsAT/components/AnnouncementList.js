@@ -16,8 +16,6 @@ import * as Animatable from 'react-native-animatable';
 
 //Import styles.js to use style sheet from central location
 import styles from '../styles/styles';
-//import Swipeout from 'react-native-swipeout'; 
-
 export default class AnnouncementList extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +82,6 @@ export default class AnnouncementList extends Component {
     return (
       <View style={styles.separator}
       />
-
     );
   }
 
@@ -111,11 +108,17 @@ export default class AnnouncementList extends Component {
     this.setState({ collapsed: item });
   }
 
+  rendertest() 
+  {
+    <View>
+    <Text style={styles.headerText}>Announcements Testing</Text>
+  </View>
+  }
   // handler for rendering the header for the FlatList UI component in use
   renderHeader() {
     return (
       <View>
-        <Text style={styles.headerText}>These are Announcements</Text>
+        <Text style={styles.headerText}>Announcements Testing</Text>
       </View>
     )
   }
