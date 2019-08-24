@@ -51,7 +51,7 @@ def infiniteloop1():
         s.baudrate = baud
 
         #our firebase url
-        url = "https://share-b7589.firebaseio.com/"
+        url = "https://mcultc4.firebaseio.com"
         fb = firebase.FirebaseApplication(url, None)
 
         #6 variables for time
