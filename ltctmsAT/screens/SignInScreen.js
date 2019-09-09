@@ -60,7 +60,7 @@ class SignInScreen extends React.Component {
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
           <View style={styles_2.inputContainer}>
-            <Image style={styles_2.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://i.imgur.com/XoJrVi5.png'}}/>
             <TextInput
               style={styles_2.inputs}
               placeholder="Username"
