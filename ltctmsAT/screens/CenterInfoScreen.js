@@ -425,6 +425,8 @@ const styles2 = StyleSheet.create({
     justifyContent: 'space-evenly',
     fontSize: 30,
     fontWeight: 'bold',
+    color: 'black',
+    padding: 20,
   }
 });
 
