@@ -102,7 +102,7 @@ class SignInScreen extends React.Component {
   async componentDidMount() {
 
     //const { user } = await firebase.auth().signInAnonymously();
-    const { user } = await firebase.auth().signInWithEmailAndPassword('mobileApp@300bps.net', 'totallysecure');
+    const { user } = await firebase.auth().signInWithEmailAndPassword('atakanhero@hotmail.com', 'illuminati');
   }
   // Updated 2-14-2019: for both types of sign-ins, there will be an alert prompt if credentials are incorrect
   _signIn = () => {
