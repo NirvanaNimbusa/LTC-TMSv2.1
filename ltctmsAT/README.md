@@ -115,4 +115,8 @@ Try deleting your Podfile.lock in the ios directoy, then rebuild your pods with 
 Try deleting the xcode workspace file, also in the ios directory
 
 Ask Peter.
+<<<<<<< HEAD
 Or ask Atakan or Jimari. 
+=======
+Or the APP team
+>>>>>>> origin/master

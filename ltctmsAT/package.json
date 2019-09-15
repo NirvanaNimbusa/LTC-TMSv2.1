@@ -24,6 +24,8 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.3.3",
+    "accordion-collapse-react-native": "^0.1.11",
+    "antd-mobile": "^2.2.14",
     "native-base": "2.12.1",
     "react": "16.6.3",
     "react-native": "^0.59.8",

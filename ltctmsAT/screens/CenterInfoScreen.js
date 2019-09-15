@@ -21,7 +21,9 @@ import {
   Image,
   Linking,
   Picker,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  SafeAreaView
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
@@ -31,6 +33,8 @@ import styles from '../styles/styles';
 import Ioicons from 'react-native-vector-icons/Ionicons';
 import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import { ListItem } from 'native-base';
+
+const{height}=Dimensions.get("window");
 
 class CenterInfo extends React.Component {
   static navigationOptions = {
@@ -45,8 +49,13 @@ class CenterInfo extends React.Component {
       selectedDate: '',
       centerSchedule: [],
       dateKeys: [],
+      screenHeight:0,
     }
   }
+  onContentSizeChange=(contentWidth,contentHeight)=>{
+    this.setState({screenHeight:contentHeight});
+
+  };
 /*************************************************************************/
   /* */
   /* Function name: componentWillMount */
@@ -271,24 +280,32 @@ class CenterInfo extends React.Component {
   _renderItem = ({ item }) => {
     return (
       <View>
-        <Text style={styles.item}> {item.id} : {item.value}</Text>
+        <Text style={styles2.item}> {item.id} : {item.value}</Text>
 
       </View>
 
     )
 
   }
+
+
   
   render() {
     console.log("this state datessdasd")
     console.log(this.state.dates);
-
-
+    const scrollEnabled=this.state.screenHeight>height;
     return (
       //center schedule and contact center
-      <View style={styles.container}>
-        <ScrollView style={styles2.container}>
-          <Text style={styles.headerText}>Hours of Operation</Text>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+        <View style={styles2.container}
+          contentContainerStyle={styles.ScrollView}
+          scrollEnabled={scrollEnabled}
+          onContentSizeChange={this.onContentSizeChange}
+        >
+        
+      
+          <Text style={styles2.headerText}>Hours of Operation</Text>
           <View>
           <Text style={styles2.text}>Select Week:</Text>
             <Picker
@@ -296,7 +313,6 @@ class CenterInfo extends React.Component {
               selectedValue={this.state.selectedDate}
               style={styles2.picker}
               onValueChange={this.updateWeek}
-
             >
               
               {this.state.dates.map((item, index) => {
@@ -312,34 +328,35 @@ class CenterInfo extends React.Component {
             extraData={this.state.selectedDate}
           />
           <Text></Text>
+          <View style={{flexDirection: 'column'}}>
+            <View style={{marginTop: 50, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
+              <Button
+              onPress={() => {
+                this.props.navigation.navigate('Feedback')
+              }}
+              title="Submit Feedback"
+              type="solid"
+              />
+            </View>
+            <View style={{marginTop: 10, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
+              <Button
+                onPress={() => {
+                  Linking.openURL(`tel:2027621401`);
+                }}
+                title="Call Center"
+                type="solid"
+                buttonStyle= {{}}
+              />
+            </View>
+          </View>
+          </View>
         </ScrollView>
-        <Button
-          onPress={() => {
-            this.props.navigation.navigate('Feedback')
-          }}
-          title="Submit Feedback"
-          type="outline"
-          style={{ padding: 5 }}
-        />
-
-        <Button
-          onPress={() => {
-            Linking.openURL(`tel:2027621401`);
-          }}
-          title="Call Center"
-          type="outline"
-          style={{ padding: 5 }}
-        />
-
-
-      </View>
-
-
+      </SafeAreaView>
     );
-  } s
+  } 
 }
 //change property of iconss
-class IconWithBadge extends React.Component {
+/*class IconWithBadge extends React.Component {
   render() {
     const { name, badgeCount, color, size } = this.props;
     return (
@@ -367,29 +384,32 @@ class IconWithBadge extends React.Component {
       </View>
     );
   }
-}
+}*/
 
 const styles2 = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    marginTop: 15,
+    padding: 50,
+    marginTop: 1,
   },
   picker: {
+    flex: 1,
     color: 'black',
     fontWeight: 'bold',
   },
   item: {
-    padding: 4,
-    fontSize: 14,
+    padding: 1,
+    fontSize: 20,
     fontWeight: 'bold',
-    flex: 1
+    flex: 1,
+    textAlign: 'left',
+    color: 'black',
   },
   announce: {
     padding: 1,
-    fontSize: 14,
+    fontSize: 18,
     flex: 1,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-between'
   },
   header: {
     padding: 1
@@ -398,13 +418,15 @@ const styles2 = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left', /*select week*/
   },
   headerText: {
     textAlign: 'center',
     justifyContent: 'space-evenly',
-    fontSize: 18,
+    fontSize: 30,
     fontWeight: 'bold',
+    color: 'black',
+    padding: 20,
   }
 });
 

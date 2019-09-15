@@ -60,7 +60,7 @@ class SignInScreen extends React.Component {
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
           <View style={styles_2.inputContainer}>
-            <Image style={styles_2.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://i.imgur.com/XoJrVi5.png'}}/>
             <TextInput
               style={styles_2.inputs}
               placeholder="Username"
@@ -102,7 +102,7 @@ class SignInScreen extends React.Component {
   async componentDidMount() {
 
     //const { user } = await firebase.auth().signInAnonymously();
-    const { user } = await firebase.auth().signInWithEmailAndPassword('mobileApp@300bps.net', 'totallysecure');
+    const { user } = await firebase.auth().signInWithEmailAndPassword('atakanhero@hotmail.com', 'illuminati');
   }
   // Updated 2-14-2019: for both types of sign-ins, there will be an alert prompt if credentials are incorrect
   _signIn = () => {
