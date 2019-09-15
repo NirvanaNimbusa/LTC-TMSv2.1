@@ -30,7 +30,7 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style ={{flex: 6, backgroundColor: '#9aceff'}}>
+      <View style ={{flex: 6, backgroundColor: '#a3eaff'}}>
         <AnnouncementList /> 
       </View>
     );
