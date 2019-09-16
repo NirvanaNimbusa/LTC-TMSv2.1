@@ -26,6 +26,9 @@ import { Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
+import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
+import { Thumbnail } from 'native-base';
+
 class DailyStatusAddScreen extends React.Component {
   static navigationOptions = {
     title: 'Daily Status Add',
@@ -91,7 +94,46 @@ class DailyStatusAddScreen extends React.Component {
               })}
             </Picker>
           </View>
-
+          <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#E6E6E6'}}>
+              <View style={{width:'25%',alignItems:'center'}}>
+                <Thumbnail source={{uri: 'https://www.biography.com/.image/t_share/MTQ3NjYxMzk4NjkwNzY4NDkz/muhammad_ali_photo_by_stanley_weston_archive_photos_getty_482857506.jpg'}} />
+              </View>
+              <View style={{width:'60%'}}>
+                <Text>Name : Mohammed Ali Kley</Text>
+                <Text>Profession: Boxer</Text>
+              </View>
+            </CollapseHeader>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',backgroundColor:'#EDEDED'}}>
+              <Collapse style={{flexDirection:'row'}}>
+                <CollapseHeader>
+                  <Thumbnail source={{uri: 'https://cdn3.iconfinder.com/data/icons/trico-circles-solid/24/Circle-Solid-Phone-512.png'}} />
+                </CollapseHeader>
+                <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
+                  <Text>+1 310 346 0018</Text>
+                </CollapseBody>
+              </Collapse>
+              <Collapse style={{flexDirection:'row'}}>
+                <CollapseHeader>
+                  <View style={{ paddingTop: 10 }}>
+                    <Text style={styles.statusToggle}>Shower</Text>
+                  </View>
+                </CollapseHeader>
+                <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
+                  <View style={{ paddingTop: 10, alignItems:'center' }}>
+                    <Text style={styles.statusToggle}>Shower Time</Text>
+                    <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#b2d1f1', borderWidth: 2, color:'black' }}
+                      onChangeText={(urinate) => this.setState({ urinate })}
+                      value={this.state.urinate}
+                    />
+                  </View>
+                </CollapseBody>
+              </Collapse>
+            </CollapseBody>
+          </Collapse>
           <View style={{ paddingTop: 10 }}>
             <Text style={styles.statusToggle}>Showered AM</Text>
             <Text style={styles.statusToggle}> {this.state.showeredAM ? 'Yes' : 'No'}</Text>
