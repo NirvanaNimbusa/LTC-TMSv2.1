@@ -60,7 +60,7 @@ class SignInScreen extends React.Component {
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
           <View style={styles_2.inputContainer}>
-            <Image style={styles_2.inputIcon} source={{uri: 'https://i.imgur.com/XoJrVi5.png'}}/>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://imgur.com/a01Jwvn.png'}}/>
             <TextInput
               style={styles_2.inputs}
               placeholder="Username"
@@ -71,7 +71,7 @@ class SignInScreen extends React.Component {
             />
           </View>
           <View style={styles_2.inputContainer}>
-            <Image style={styles_2.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+            <Image style={styles_2.inputIcon} source={{uri: 'https://imgur.com/PyFVFqt.png'}}/>
             <TextInput
               style={styles_2.inputs}
               secureTextEntry={this.state.showPassword}
