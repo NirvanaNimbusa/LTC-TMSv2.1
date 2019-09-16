@@ -108,12 +108,6 @@ export default class AnnouncementList extends Component {
     this.setState({ collapsed: item });
   }
 
-  rendertest() 
-  {
-    <View>
-    <Text style={styles.headerText}>Announcements Testing</Text>
-  </View>
-  }
   // handler for rendering the header for the FlatList UI component in use
   renderHeader() {
     return (
