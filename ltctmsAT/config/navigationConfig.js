@@ -122,7 +122,7 @@ const getTabBarIcon = (navigation, tintColor) => {
     iconName = `ios-person`;
   }
 
-  return <IconComponent name={iconName} size={30} color={tintColor} />;
+  return <IconComponent name={iconName} size={32} color={tintColor} />;
 };
 
 
@@ -138,6 +138,7 @@ const AppBottomTabNavigation = createBottomTabNavigator({
   Portfolio: AppRightStack,
 
 },
+
   { //call defaultNavigation for icon
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) =>
@@ -146,14 +147,14 @@ const AppBottomTabNavigation = createBottomTabNavigator({
     }),
     //change color of the icon when it is clicked
     tabBarOptions: {
-      activeTintColor: '#E95736',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#0a17b8',
+      inactiveTintColor: 'black',
       labelStyle: {
         fontSize: 15,
         //fontFamily: ''
       },
       style: {
-        backgroundColor: '#FAF8F8',
+        backgroundColor: '#d0ebfe',
         borderTopWidth: 0.5
       },
     },
