@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   statusToggle:
   {
     // style for Yes/No toggles for DailyStatusAddScreen.js
-    fontSize: scale(14),
+    fontSize: scale(16),
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
   logo: {
     // Logo will be aligned with display
     alignSelf: 'center',
+    marginBottom: 30,
   },
 
   separator: {
