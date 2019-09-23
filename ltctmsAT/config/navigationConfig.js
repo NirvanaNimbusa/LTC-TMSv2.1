@@ -136,6 +136,7 @@ const AppBottomTabNavigation = createBottomTabNavigator({
   //CenterInfo: AppScheduleStack,
   'Center Info': AppScheduleStack,
   Portfolio: AppRightStack,
+  Logout:AppRightStack
 
 },
 
