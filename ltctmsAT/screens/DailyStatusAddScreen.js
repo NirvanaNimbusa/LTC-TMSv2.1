@@ -131,7 +131,7 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Shower</Text>
                   </View>
              </CollapseHeader>
-              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
                   <TextInput
                       placeholder="Enter Time (format example 13:50)"
@@ -158,7 +158,7 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Ate</Text>
                   </View>
              </CollapseHeader>
-              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
                   <TextInput
                       placeholder="Enter Time (format example 13:50)"
@@ -210,11 +210,11 @@ class DailyStatusAddScreen extends React.Component {
                  <Text style={styles.statusToggle}>Poop Time</Text>
               </View>
             </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',padding:4}}>
               
               <Collapse style={{flexDirection:'row'}}>
                 <CollapseHeader>
-                <View style={{ paddingTop: 0, alignItems:'center' }}> 
+                <View style={{ paddingTop: 10, alignItems:'center' }}> 
               
                     <TextInput
                     placeholder="Enter Time (format example 13:00)"
@@ -244,11 +244,11 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Urinate Time</Text>
               </View>
             </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',padding:4}}>
               
               <Collapse style={{flexDirection:'row'}}>
                 <CollapseHeader>
-                <View style={{ paddingTop: 0, alignItems:'center' }}>
+                <View style={{ paddingTop: 10, alignItems:'center' }}>
                     
                     <TextInput
                       placeholder="Enter Time (format example 13:50)"
