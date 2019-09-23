@@ -50,8 +50,8 @@ class DailyStatusAddScreen extends React.Component {
       poop: '',
       urinate: '',
       shower:'',
-      brushTeethAM: false,
-      brushTeethPM: false,
+      ate:'',
+      brushTeeth:'',
       userInfo: null,
       today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       checked: {}, 
@@ -75,10 +75,7 @@ class DailyStatusAddScreen extends React.Component {
   }
 
 
-  league= [
-    { time: 'AM' },
-    { time: 'PM' },
-  ]
+ 
   checkBoxChanged(id, value) {
 
     this.setState({
@@ -104,8 +101,8 @@ class DailyStatusAddScreen extends React.Component {
     
     
     return (
-      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#E6E3D5', flex:1}}>
-      <View style={{backgroundColor:'#E6E3D5'}}>
+      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#FFFFFF', flex:1}}>
+      <View style={{backgroundColor:'#FFFFFF'}}>
         <ScrollView >
           <View>
             <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
@@ -123,7 +120,7 @@ class DailyStatusAddScreen extends React.Component {
           </View>
           <View style={{ paddingTop: 0 }}>
             <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#CAA47A'}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
               <View style={{width:'30%',alignItems:'center'}}>
                 <Icon 
                 name='shower'
@@ -134,7 +131,7 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Shower</Text>
                   </View>
              </CollapseHeader>
-              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10,backgroundColor:'#CAA47A'}}>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
                   <TextInput
                       placeholder="Enter Time (format example 13:50)"
@@ -151,7 +148,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0}}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#E6E3D5'}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#D7E6FA'}}>
               <View style={{width:'30%',alignItems:'center'}}>
               <MaterialCommunityIcons 
                 name='food-variant'
@@ -163,23 +160,13 @@ class DailyStatusAddScreen extends React.Component {
              </CollapseHeader>
               <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
-                  {this.league === null ? '' : this.league.map(
-                  (v, i) => (
-                    <View key={v.time}>
-                      <Checkbox
-                        label={v.time}
-                        onChange={() => this.setState({
-                          checked: {
-                            ...this.state.checked,
-                            [v.time]: !this.state.checked[v.time]
-                          }
-                        })}
-                        checked={this.state.checked[v.time]}
-                      />
-                    
-                    </View>
-                  )
-                )}
+                  <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                      onChangeText={(ate) => this.setState({ ate })}
+                      value={this.state.ate}
+                    />     
                   </View>
               </CollapseBody>
             </Collapse>
@@ -187,7 +174,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0 }}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#CAA47A'}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
               <View style={{width:'30%',alignItems:'center'}}>
                 <Icon
                 name='check-circle'
@@ -197,25 +184,15 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Brush Teeth</Text>
                   </View>
              </CollapseHeader>
-              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4,backgroundColor:'#CAA47A'}}>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
-                  {this.league === null ? '' : this.league.map(
-                  (v, i) => (
-                    <View key={v.time}>
-                      <Checkbox
-                        label={v.time}
-                        onChange={() => this.setState({
-                          checked: {
-                            ...this.state.checked,
-                            [v.time]: !this.state.checked[v.time]
-                          }
-                        })}
-                        checked={this.state.checked[v.time]}
-                      />
-                    
-                    </View>
-                  )
-                )}
+                  <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                      onChangeText={(brushTeeth) => this.setState({ brushTeeth })}
+                      value={this.state.brushTeeth}
+                    />     
                   </View>
               </CollapseBody>
             </Collapse>
@@ -223,7 +200,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0 }}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#E6E3D5'}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#D7E6FA'}}>
               <View style={{width:'30%',alignItems:'center'}}>
               <MaterialCommunityIcons 
                 name='emoticon-poop'
@@ -233,7 +210,7 @@ class DailyStatusAddScreen extends React.Component {
                  <Text style={styles.statusToggle}>Poop Time</Text>
               </View>
             </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',backgroundColor:'#E6E3D5'}}>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
               
               <Collapse style={{flexDirection:'row'}}>
                 <CollapseHeader>
@@ -257,7 +234,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0}}>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#CAA47A'}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
               <View style={{width:'30%',alignItems:'center'}}>
               <Icon
                 name='check-circle-o'
@@ -267,7 +244,7 @@ class DailyStatusAddScreen extends React.Component {
                     <Text style={styles.statusToggle}>Urinate Time</Text>
               </View>
             </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',backgroundColor:'#CAA47A'}}>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
               
               <Collapse style={{flexDirection:'row'}}>
                 <CollapseHeader>
@@ -330,10 +307,8 @@ class DailyStatusAddScreen extends React.Component {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       submittedBy: user.ID,
       shower: this.state.shower,
-      ateAM: this.state.ateAM,
-      atePM: this.state.atePM,
-      brushTeethAM: this.state.brushTeethAM,
-      brushTeethPM: this.state.brushTeethPM,
+      ate:this.state.ate,
+      brushTeeth:this.state.brushTeeth,
       poop: this.state.poop,
       urinate: this.state.urinate
     });

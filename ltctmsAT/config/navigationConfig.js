@@ -154,7 +154,7 @@ const AppBottomTabNavigation = createBottomTabNavigator({
         //fontFamily: ''
       },
       style: {
-        backgroundColor: '#d0ebfe',
+        backgroundColor: '#FFFFFF',
         borderTopWidth: 0.5
       },
     },

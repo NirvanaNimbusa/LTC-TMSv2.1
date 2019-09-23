@@ -63,6 +63,7 @@ class PortfolioScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        
         <ScrollView style={styles2.container}>
           
           {(this.state.position == "CNA") ? 
@@ -83,6 +84,7 @@ class PortfolioScreen extends React.Component {
           <Text></Text>
           <Text></Text>
         </ScrollView>
+        
       </View>
     );
   }
@@ -118,7 +120,7 @@ class PortfolioScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#FFFFFF',
     flex: 1,
     padding: 20,
     marginTop: 15,
