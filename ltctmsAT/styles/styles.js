@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   statusToggle:
   {
     // style for Yes/No toggles for DailyStatusAddScreen.js
-    fontSize: scale(14),
+    fontSize: scale(16),
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
