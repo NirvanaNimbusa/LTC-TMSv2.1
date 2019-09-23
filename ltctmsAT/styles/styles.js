@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   basicView: {
     //style component for views that only require the background color and flex. Used in HomeScreen.js
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#e6f3ff',
   },
 
   pickerStyle: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#e6f3ff'
   },
 
   containerAnnounce: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   containerSignIn: {
     // Container for SignInScreen.js  
     padding: scale(20),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#BAE7FF',
   },
 
   userToggle:

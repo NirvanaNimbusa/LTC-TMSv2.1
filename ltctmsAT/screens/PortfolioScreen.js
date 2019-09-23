@@ -120,7 +120,7 @@ class PortfolioScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#e6f3ff',
     flex: 1,
     padding: 20,
     marginTop: 15,

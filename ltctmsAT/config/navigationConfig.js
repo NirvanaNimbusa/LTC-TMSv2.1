@@ -147,8 +147,8 @@ const AppBottomTabNavigation = createBottomTabNavigator({
     }),
     //change color of the icon when it is clicked
     tabBarOptions: {
-      activeTintColor: '#0a17b8',
-      inactiveTintColor: 'black',
+      activeTintColor: 'black',
+      inactiveTintColor: '#949494',
       labelStyle: {
         fontSize: 15,
         //fontFamily: ''

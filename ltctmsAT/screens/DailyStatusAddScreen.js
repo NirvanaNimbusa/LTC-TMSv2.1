@@ -101,23 +101,9 @@ class DailyStatusAddScreen extends React.Component {
     
     
     return (
-      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#FFFFFF', flex:1}}>
-      <View style={{backgroundColor:'#FFFFFF'}}>
+      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
+      <View style={{backgroundColor:'#e6f3ff'}}>
         <ScrollView >
-          <View>
-            <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
-            <Picker
-              mode='anchor'
-              style={styles2.picker}
-              selectedValue={this.state.patient}
-              onValueChange={this.updatePatient}
-            >
-              <Picker.Item label="Select Patient" value="patient"/>
-              {this.state.patientList.map((item, index) => {
-                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-              })}
-            </Picker>
-          </View>
           <View style={{ paddingTop: 0 }}>
             <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
               <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
@@ -148,7 +134,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0}}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#D7E6FA'}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
               <View style={{width:'30%',alignItems:'center'}}>
               <MaterialCommunityIcons 
                 name='food-variant'
@@ -200,7 +186,7 @@ class DailyStatusAddScreen extends React.Component {
 
           <View style={{ paddingTop: 0 }}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
-            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#D7E6FA'}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
               <View style={{width:'30%',alignItems:'center'}}>
               <MaterialCommunityIcons 
                 name='emoticon-poop'
@@ -265,11 +251,11 @@ class DailyStatusAddScreen extends React.Component {
        
           </View>
         
-          <View style={{padding:10}}>
+          <View style={{marginTop: 10, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
             <Button
               onPress={this._submitDailyStatus}
               title="Submit"
-              type="outline"
+              type="solid"
             />
           </View>
         </ScrollView>
