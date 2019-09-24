@@ -329,7 +329,7 @@ class CenterInfo extends React.Component {
           />
           <Text></Text>
           <View style={{flexDirection: 'column'}}>
-            <View style={{marginTop: 50, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
+            <View style={{marginTop: 20, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
               <Button
               onPress={() => {
                 this.props.navigation.navigate('Feedback')
@@ -389,7 +389,7 @@ class CenterInfo extends React.Component {
 const styles2 = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+   
     marginTop: 1,
   },
   picker: {

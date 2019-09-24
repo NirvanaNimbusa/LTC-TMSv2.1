@@ -15,9 +15,11 @@ import {
   Text,
   TextInput,
   Alert,
+  Picker,
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import firebase from 'react-native-firebase';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import { Button, ThemeProvider, Icon } from 'react-native-elements';
 
@@ -30,15 +32,30 @@ class PortfolioScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      patientList: [],
+      patient: '',
       position: 'sadf',
       userID: 'afsdaasfd',
       buttonArray: [],
+      user_position:''
     };
+  }
+  
+  
+  async _fetchUserInfo() {
+    const userInfo = await AsyncStorage.getItem("userInfo");
+    this.setState({
+      userInfo: JSON.parse(userInfo)
+    });
+  }
+ 
+  updatePatient = (patient) => {
+    this.setState({ patient: patient })
   }
 
   // This pulls the current logged in users data that was saved in asyncstorage into state
 
-  componentWillMount() {
+  async componentWillMount() {
     AsyncStorage.getItem("userInfo").then((value) => {
       const data = JSON.parse(value);
       this.state.userID = data.ID;
@@ -57,7 +74,12 @@ class PortfolioScreen extends React.Component {
 
       this.forceUpdate();
     })
+
+    await this._fetchUserInfo();
+    this._fetchPatients();
   }
+
+  
 
   // render content
   render() {
@@ -65,7 +87,28 @@ class PortfolioScreen extends React.Component {
       <View style={styles.container}>
         
         <ScrollView style={styles2.container}>
-          
+        <View>
+            <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
+            <Picker
+              mode='anchor'
+              style={styles2.picker}
+              selectedValue={this.state.patient}
+              onValueChange={this.updatePatient}
+            >
+              <Picker.Item label="Select Patient" value="patient"/>
+              {this.state.patientList.map((item, index) => {
+                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
+              })}
+            </Picker>
+          </View>
+          <Text>
+            {this.state.patient}
+          </Text>
+
+          <Text>
+            {this.state.position}
+          </Text>
+
           {(this.state.position == "CNA") ? 
           <View>
                     <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
@@ -81,8 +124,6 @@ class PortfolioScreen extends React.Component {
                     <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
           </View>
           }
-          <Text></Text>
-          <Text></Text>
         </ScrollView>
         
       </View>
@@ -95,7 +136,8 @@ class PortfolioScreen extends React.Component {
   };
 
   _showDailyStatusAdd = () => {
-    this.props.navigation.navigate('DailyStatusAdd');
+    this.props.navigation.navigate('DailyStatusAdd',{patientID:this.state.patient})
+    
   }
 
   _showAiStatusRead = () => {
@@ -107,7 +149,23 @@ class PortfolioScreen extends React.Component {
   }
 
   _showVitalStatusAdd = () => {
+
     this.props.navigation.navigate('VitalStatusAdd');
+  }
+  _fetchPatients() {
+    // fetch content
+    const patientData = [];
+    firebase.database().ref('Patient').once('value').then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        patientData.push({
+          id: childSnapshot.key,
+        })
+      })
+      this.setState({
+        patientList: patientData,
+        patient: patientData[0].id
+      });
+    });
   }
 
   // signout user by deleting locally stored user info and navigate back to sign in screen
