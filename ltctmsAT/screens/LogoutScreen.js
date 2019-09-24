@@ -83,7 +83,8 @@ class LogoutScreen extends React.Component {
       this.state.email = data.Email;
       this.state.admissionReason = data.AdmissionReason;
       this.state.medicalRecord = data.MedicalRecord;
-
+      this.state.profile_Pic = data.profilePic;
+      
       this.forceUpdate();
     })
   }
@@ -129,7 +130,7 @@ class LogoutScreen extends React.Component {
          <Collapse style={{borderBottomWidth:1,borderTopWidth:0}}>
             <CollapseHeader style={{flexDirection:'column',alignItems:'center',paddingBottom:50}}>
               <View style={{width:'100%',alignItems:'center',height:'15%'}}>
-                <Thumbnail style={{width:110,height:110,borderRadius:110/2}} source={{uri: 'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg' }} />
+                <Thumbnail style={{width:110,height:110,borderRadius:110/2}} source={{uri:  this.state.profile_Pic}} />
               </View>             
             </CollapseHeader>
            

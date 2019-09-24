@@ -79,10 +79,6 @@ class DailyStatusAddScreen extends React.Component {
       <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
       <View style={{backgroundColor:'#e6f3ff'}}>
         <ScrollView >
-        <Text>
-        {this.props.navigation.getParam('patientID','0')}
- 
-        </Text>
           <View style={{ paddingTop: 0 }}>
             <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
               <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>

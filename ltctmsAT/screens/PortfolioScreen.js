@@ -34,10 +34,11 @@ class PortfolioScreen extends React.Component {
     this.state = {
       patientList: [],
       patient: '',
+      patientPic: '',
       position: 'sadf',
       userID: 'afsdaasfd',
       buttonArray: [],
-      user_position:''
+      user_position:'',
     };
   }
   
@@ -49,10 +50,6 @@ class PortfolioScreen extends React.Component {
     });
   }
  
-  updatePatient = (patient) => {
-    this.setState({ patient: patient })
-  }
-
   // This pulls the current logged in users data that was saved in asyncstorage into state
 
   async componentWillMount() {
@@ -79,21 +76,32 @@ class PortfolioScreen extends React.Component {
     this._fetchPatients();
   }
 
-  
+  /* rip dreams...
+  forceUpdateHandler(){
+    firebase.database().ref(`/Patient/${this.state.patient}/`).once('value').then((snapshot) => {
+      const data = snapshot.toJSON();
+    this.setState({patientPic: data.Portfolio.Name})
+    this.forceUpdate();
+    });
+  <Text style={{color:'black', fontSize: 15,fontWeight: 'bold',paddingTop:5}}>{this.state.patientPic}</Text> 
+  };
+  */
+
 
   // render content
   render() {
     return (
-      <View style={styles.container}>
-        
+      <View style={styles2.container}>
         <ScrollView style={styles2.container}>
         <View>
-            <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
+            <Text style={styles2.headerText}>Patient Status</Text>
+            <Text style={styles2.text}>Select Patient:</Text>
             <Picker
+
               mode='anchor'
-              style={styles2.picker}
+              style={styles2.picker, {color:'black'}}
               selectedValue={this.state.patient}
-              onValueChange={this.updatePatient}
+              onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
             >
               <Picker.Item label="Select Patient" value="patient"/>
               {this.state.patientList.map((item, index) => {
@@ -101,14 +109,6 @@ class PortfolioScreen extends React.Component {
               })}
             </Picker>
           </View>
-          <Text>
-            {this.state.patient}
-          </Text>
-
-          <Text>
-            {this.state.position}
-          </Text>
-
           {(this.state.position == "CNA") ? 
           <View>
                     <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
@@ -181,7 +181,21 @@ const styles2 = StyleSheet.create({
     backgroundColor: '#e6f3ff',
     flex: 1,
     padding: 20,
-    marginTop: 15,
+    marginTop: 1,
+  },
+  headerText: {
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'left', /*select week*/
   },
   /*
   item: {
@@ -199,12 +213,6 @@ const styles2 = StyleSheet.create({
   header: {
     padding: 10
   },
-  headerText: {
-    textAlign: 'center',
-    justifyContent: 'space-evenly',
-    fontSize: 18,
-    fontWeight: 'bold',
-  }
 
   */
 });
