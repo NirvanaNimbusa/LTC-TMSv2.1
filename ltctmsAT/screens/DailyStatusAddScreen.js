@@ -28,9 +28,10 @@ import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
 import {Collapse, CollapseHeader, CollapseBody,AccordionList} from "accordion-collapse-react-native";
 import { Thumbnail } from 'native-base';
-import Checkbox from 'react-native-modest-checkbox';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import PortfolioScreen from '../screens/PortfolioScreen';
+import selectedValue from '../screens/PortfolioScreen';
 
 class DailyStatusAddScreen extends React.Component {
   static navigationOptions = {
@@ -43,10 +44,7 @@ class DailyStatusAddScreen extends React.Component {
     var now = new Date();
 
     this.state = {
-      patientList: [],
-      patient: '',
-      ateAM: false,
-      atePM: false,
+
       poop: '',
       urinate: '',
       shower:'',
@@ -54,7 +52,6 @@ class DailyStatusAddScreen extends React.Component {
       brushTeeth:'',
       userInfo: null,
       today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
-      checked: {}, 
     };
   }
 
@@ -70,29 +67,7 @@ class DailyStatusAddScreen extends React.Component {
     this._fetchPatients();
   }
 
-  updatePatient = (patient) => {
-    this.setState({ patient: patient })
-  }
-
-
  
-  checkBoxChanged(id, value) {
-
-    this.setState({
-      checkBoxChecked: tempCheckValues
-    })
-
-    var tempCheckBoxChecked = this.state.checkBoxChecked;
-    tempCheckBoxChecked[id] = !value;
-
-    this.setState({
-      checkBoxChecked: tempCheckBoxChecked
-    })
-
-  }
-
-  
-
   // render content
   // consists of one picker container to choose patient, with several picker items
   // then a date picker for choosing the date to retrieve data from
@@ -104,6 +79,10 @@ class DailyStatusAddScreen extends React.Component {
       <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
       <View style={{backgroundColor:'#e6f3ff'}}>
         <ScrollView >
+        <Text>
+        {this.props.navigation.getParam('patientID','0')}
+ 
+        </Text>
           <View style={{ paddingTop: 0 }}>
             <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
               <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
@@ -113,6 +92,7 @@ class DailyStatusAddScreen extends React.Component {
                 size= {40}/>
                 
               </View>
+
               <View style={{ paddingTop: 10 }}>
                     <Text style={styles.statusToggle}>Shower</Text>
                   </View>
@@ -283,11 +263,11 @@ class DailyStatusAddScreen extends React.Component {
   }
 
   _submitDailyStatus = async () => {
-    const baseRef = `Activities/${this.state.patient}/${this.state.today}/DailyStatuses/`;
+    const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/DailyStatuses/`;
     const ref = firebase.database().ref(baseRef);
     const user = this.state.userInfo;
     const now = new Date();
-
+    
     await ref.update({
       date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
