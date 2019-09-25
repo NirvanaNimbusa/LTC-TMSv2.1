@@ -124,7 +124,7 @@ class VitalStatusReadScreen extends React.Component {
             />
           </View>
           <View>
-
+          <Text style ={{color:'black'}}>{this.props.navigation.getParam('patientID','0')}</Text>
             <Picker
               mode={'dropdown'}
               selectedValue={this.state.CNA}

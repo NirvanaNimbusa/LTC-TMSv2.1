@@ -132,7 +132,7 @@ class PortfolioScreen extends React.Component {
 
   // handler to navigate to the Portfolio page
   _showDailyStatusRead = () => {
-    this.props.navigation.navigate('DailyStatusRead');
+    this.props.navigation.navigate('DailyStatusRead',{patientID:this.state.patient});
   };
 
   _showDailyStatusAdd = () => {
@@ -141,16 +141,16 @@ class PortfolioScreen extends React.Component {
   }
 
   _showAiStatusRead = () => {
-    this.props.navigation.navigate('AiStatusRead');
+    this.props.navigation.navigate('AiStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusRead = () => {
-    this.props.navigation.navigate('VitalStatusRead');
+    this.props.navigation.navigate('VitalStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusAdd = () => {
 
-    this.props.navigation.navigate('VitalStatusAdd');
+    this.props.navigation.navigate('VitalStatusAdd',{patientID:this.state.patient});
   }
   _fetchPatients() {
     // fetch content

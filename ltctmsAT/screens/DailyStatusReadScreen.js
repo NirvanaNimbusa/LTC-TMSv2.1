@@ -24,6 +24,8 @@ import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
 import { Text } from 'native-base';
 import { Button } from 'react-native-elements';
+import PortfolioScreen from '../screens/PortfolioScreen';
+import selectedValue from '../screens/PortfolioScreen';
 class DailyStatusReadScreen extends React.Component {
   static navigationOptions = {
     title: 'Daily Status Read',
@@ -133,6 +135,7 @@ class DailyStatusReadScreen extends React.Component {
 
           <View style={styles.container}>
             <Text style={styles.item}>Patient Daily Status</Text>
+            <Text style ={{color:'black'}}>{this.props.navigation.getParam('patientID','0')}</Text>
             <Text style={styles.item}>Showered AM: {this.state.showeredAM}</Text>
             <Text style={styles.item}>Showered PM: {this.state.showeredPM}</Text>
             <Text style={styles.item}>Ate AM: {this.state.ateAM}</Text>

@@ -78,20 +78,6 @@ class VitalStatusAddScreen extends React.Component {
             <View style={{backgroundColor:'#e6f3ff'}}>
                 <ScrollView style={styles2.container}>
                     <View>
-                        <Text style={styles.item}>Select Patient ID to update status</Text>
-                        <Picker
-                            mode={'dropdown'}
-                            style={styles2.picker}
-                            selectedValue={this.state.patient}
-                            onValueChange={this.updatePatient}
-                            
-                            
-                        >
-                            <Picker.Item label="Select Patient" value="patient" />
-                            {this.state.patientList.map((item, index) => {
-                                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-                            })}
-                        </Picker>
                     
                         <View style={{alignItems:'center'}}>
                         <Text style={styles.itemPortfolio}>Patient Vital Status</Text>
@@ -137,7 +123,7 @@ class VitalStatusAddScreen extends React.Component {
                             type="outline"
                             style={{ padding: 10 }}
                         />
-                        <Text></Text>
+                        <Text style ={{color:'black'}}>{this.props.navigation.getParam('patientID','0')}</Text>
                         <Text></Text>
                     </View>
 
@@ -150,7 +136,7 @@ class VitalStatusAddScreen extends React.Component {
 
     // submits patient vital status to the firebase database, fires an alert if successful
     _submitStatus = async () => {
-        if (this.state.patient == null){
+        if (this.props.navigation.getParam('patientID','0') == null){
             Alert.alert("Please select a patient")
         } else {
         const systolic = this.state.systolic
@@ -159,7 +145,7 @@ class VitalStatusAddScreen extends React.Component {
         heart = systolic + "~" + diastolic;
         const temperature = this.state.temperature
         const CNA = this.state.userInfo.ID;
-        const baseRef = `Activities/${this.state.patient}/${this.state.today}/${CNA}/vital_status/`;
+        const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/${CNA}/vital_status/`;
         const ref = firebase.database().ref(baseRef);
         const user = this.state.userInfo;
         const now = new Date();
