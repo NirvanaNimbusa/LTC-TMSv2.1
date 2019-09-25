@@ -98,7 +98,7 @@ class LogoutScreen extends React.Component {
         <Text style={styles.itemPortfolio}>Logout</Text>
       </TouchableOpacity>
     );
-    return { title: navigation.getParam('otherParam', 'UserPortfolio') ,
+    return { title: navigation.getParam('otherParam', 'User Portfolio') ,
       headerRight,
       
       };

@@ -39,14 +39,11 @@ class DailyStatusReadScreen extends React.Component {
     this.state = {
       patientList: [],
       patient: '',
-      showeredAM: '',
-      showeredPM: '',
-      ateAM: '',
-      atePM: '',
       poop: '',
       urinate: '',
-      brushTeethAM: '',
-      brushTeethPM: '',
+      shower:'',
+      ate:'',
+      brushTeeth:'',
       today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       status: [],
@@ -79,26 +76,7 @@ class DailyStatusReadScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles2.container}>
-          {(this.state.position == "Patient") ?
-            <View>
-              <Text style={styles.item}>Select Date to View Daily Status</Text>
-            </View>
-            :
-            <View>
-              <Text style={styles.item}>Select Patient ID to view a Daily Status</Text>
-              <Picker
-                mode={'dropdown'}
-                selectedValue={this.state.patient}
-                style={styles2.picker}
-                onValueChange={this.updatePatient}
-              >
-                <Picker.Item label="Select Patient" value="patient" />
-                {this.state.patientList.map((item, index) => {
-                  return (<Picker.Item label={item.id} value={item.id} key={index} />)
-                })}
-              </Picker>
-            </View>
-          }
+          <Text style={styles.item}>Select Date to View Daily Status</Text>
           <View style={styles.pickerView}>
             <DatePicker
               style={styles.pickerStyle}
@@ -135,15 +113,11 @@ class DailyStatusReadScreen extends React.Component {
 
           <View style={styles.container}>
             <Text style={styles.item}>Patient Daily Status</Text>
-            <Text style ={{color:'black'}}>{this.props.navigation.getParam('patientID','0')}</Text>
-            <Text style={styles.item}>Showered AM: {this.state.showeredAM}</Text>
-            <Text style={styles.item}>Showered PM: {this.state.showeredPM}</Text>
-            <Text style={styles.item}>Ate AM: {this.state.ateAM}</Text>
-            <Text style={styles.item}>Ate PM: {this.state.atePM}</Text>
-            <Text style={styles.item}>Poop time: {this.state.poop}</Text>
-            <Text style={styles.item}>Urinate time: {this.state.urinate}</Text>
-            <Text style={styles.item}>Brush Teeth AM: {this.state.brushTeethAM}</Text>
-            <Text style={styles.item}>Brush Teeth PM: {this.state.brushTeethPM}</Text>
+            <Text style={styles.item}>Shower: {this.state.shower}</Text>
+            <Text style={styles.item}>Ate: {this.state.ate}</Text>
+            <Text style={styles.item}>Poop: {this.state.poop}</Text>
+            <Text style={styles.item}>Urinate: {this.state.urinate}</Text>
+            <Text style={styles.item}>Brush Teeth: {this.state.brushTeeth}</Text>
             <Text></Text>
           </View>
         </ScrollView>
@@ -160,26 +134,20 @@ class DailyStatusReadScreen extends React.Component {
     }
     const patientStatus = [];
     console.log("Patient : ", this.state.patient);
-    firebase.database().ref(`Activities/${patient}/${this.state.date}/DailyStatuses/`).once('value').then((snapshot) => {
+    firebase.database().ref(`Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.date}/DailyStatuses/`).once('value').then((snapshot) => {
       var status = snapshot.toJSON();
-      var showeredAM = status.showeredAM ? 'Yes' : 'No';
-      var showeredPM = status.showeredPM ? 'Yes' : 'No';
-      var ateAM = status.ateAM ? 'Yes' : 'No';
-      var atePM = status.atePM ? 'Yes' : 'No';
+      var shower = status.shower;
+      var ate = status.ate;
       var poop = status.poop;
       var urinate = status.urinate;
-      var brushTeethAM = status.brushTeethAM ? 'Yes' : 'No';
-      var brushTeethPM = status.brushTeethPM ? 'Yes' : 'No';
+      var brushTeeth = status.brushTeeth;
 
       this.setState({
-        showeredAM,
-        showeredPM,
-        ateAM,
-        atePM,
+        shower,
+        ate,
         poop,
         urinate,
-        brushTeethAM,
-        brushTeethPM
+        brushTeeth,
       })
     }).catch((err) => {
       Alert.alert('Unable to find data for the specified date and patient combination. Please try another one.');

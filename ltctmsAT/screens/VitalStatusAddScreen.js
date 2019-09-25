@@ -116,15 +116,12 @@ class VitalStatusAddScreen extends React.Component {
                         </View>
 
                     </View>
-                    <View>
-                        <Button
+                    <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+                        <Button style={{width: 30}}
                             onPress={this._submitStatus}
                             title="Submit"
-                            type="outline"
-                            style={{ padding: 10 }}
+                            type="solid"
                         />
-                        <Text style ={{color:'black'}}>{this.props.navigation.getParam('patientID','0')}</Text>
-                        <Text></Text>
                     </View>
 
                 </ScrollView>
@@ -146,6 +143,7 @@ class VitalStatusAddScreen extends React.Component {
         const temperature = this.state.temperature
         const CNA = this.state.userInfo.ID;
         const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/${CNA}/vital_status/`;
+        console.log(baseref)
         const ref = firebase.database().ref(baseRef);
         const user = this.state.userInfo;
         const now = new Date();

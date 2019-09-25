@@ -27,7 +27,7 @@ import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
   static navigationOptions = {
-    title: 'Portfolio',
+    title: 'Patient Records',
   };
   constructor() {
     super();
@@ -93,35 +93,50 @@ class PortfolioScreen extends React.Component {
     return (
       <View style={styles2.container}>
         <ScrollView style={styles2.container}>
-        <View>
-            <Text style={styles2.headerText}>Patient Status</Text>
-            <Text style={styles2.text}>Select Patient:</Text>
-            <Picker
-
-              mode='anchor'
-              style={styles2.picker, {color:'black'}}
-              selectedValue={this.state.patient}
-              onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
-            >
-              <Picker.Item label="Select Patient" value="patient"/>
-              {this.state.patientList.map((item, index) => {
-                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-              })}
-            </Picker>
-          </View>
           {(this.state.position == "CNA") ? 
           <View>
-                    <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
-                    <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
-          <Button title="Add Vital Status" type='outline' onPress={this._showVitalStatusAdd} style="padding: 5" />
+            <View>
+              <Text style={styles2.headerText}>Patient Status</Text>
+              <Text style={styles2.text}>Select Patient:</Text>
+              <Picker
+                mode='anchor'
+                style={styles2.picker, {color:'black'}}
+                selectedValue={this.state.patient}
+                onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
+              >
+                <Picker.Item label="Select Patient" value="patient"/>
+                {this.state.patientList.map((item, index) => {
+                  return (<Picker.Item label={item.id} value={item.id} key={index}/>)
+                })}
+              </Picker>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Daily Status" type='solid' onPress={this._showDailyStatusAdd}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Vital Status" type='solid' onPress={this._showVitalStatusAdd} />
+            </View>
           </View>
           : 
           <View>
-          <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
           </View>
           }
         </ScrollView>
