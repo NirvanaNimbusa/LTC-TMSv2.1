@@ -22,10 +22,9 @@ import { StackNavigator } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { Button, ThemeProvider } from 'react-native-elements';
 import styles from '../styles/styles';
-import { Icon } from 'react-native-elements';
-import {DrawerItems} from 'react-navigation';
-import navigationConfig from '../config/navigationConfig';
-import { createDrawerNavigator } from 'react-navigation';
+import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
+import { Thumbnail } from 'native-base';
+
 class LogoutScreen extends React.Component {
 
   constructor(props) {
@@ -84,7 +83,8 @@ class LogoutScreen extends React.Component {
       this.state.email = data.Email;
       this.state.admissionReason = data.AdmissionReason;
       this.state.medicalRecord = data.MedicalRecord;
-
+      this.state.profile_Pic = data.profilePic;
+      
       this.forceUpdate();
     })
   }
@@ -98,7 +98,7 @@ class LogoutScreen extends React.Component {
         <Text style={styles.itemPortfolio}>Logout</Text>
       </TouchableOpacity>
     );
-    return { title: navigation.getParam('otherParam', 'UserPortfolio') ,
+    return { title: navigation.getParam('otherParam', 'User Portfolio') ,
       headerRight,
       
       };
@@ -127,6 +127,14 @@ class LogoutScreen extends React.Component {
     return (
       <View style={styles.container}>
          <ScrollView style={styles2.container}>
+         <Collapse style={{borderBottomWidth:1,borderTopWidth:0}}>
+            <CollapseHeader style={{flexDirection:'column',alignItems:'center',paddingBottom:50}}>
+              <View style={{width:'100%',alignItems:'center',height:'15%'}}>
+                <Thumbnail style={{width:110,height:110,borderRadius:110/2}} source={{uri:  this.state.profile_Pic}} />
+              </View>             
+            </CollapseHeader>
+           
+          </Collapse>
           <Text style={styles.itemPortfolio}>Name: {this.state.name}</Text>
           <Text style={styles.itemPortfolio}>User ID: {this.state.userID}</Text>
           <Text style={styles.itemPortfolio}>Position: {this.state.position}</Text>
@@ -142,6 +150,7 @@ class LogoutScreen extends React.Component {
           <Text style={styles.itemPortfolio}>Medical Records: {this.state.medicalRecord}</Text>
           </ScrollView>
         </View>      
+        
     );
   }
   // handler to clear the locally stored user info (logout) and navigate to the
@@ -153,7 +162,7 @@ const styles2 = StyleSheet.create({
   container: {
     backgroundColor: '#e6f3ff',
     flex: 1,
-    padding: 20,
+    padding: 10,
     marginTop: 15,
   },
 

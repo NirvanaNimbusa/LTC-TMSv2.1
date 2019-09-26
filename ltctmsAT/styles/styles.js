@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   containerSignIn: {
     // Container for SignInScreen.js  
     padding: scale(20),
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#BAE7FF',
   },
 
   userToggle:
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   statusToggle:
   {
     // style for Yes/No toggles for DailyStatusAddScreen.js
-    fontSize: scale(14),
+    fontSize: scale(16),
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',

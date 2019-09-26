@@ -15,9 +15,11 @@ import {
   Text,
   TextInput,
   Alert,
+  Picker,
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import firebase from 'react-native-firebase';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import { Button, ThemeProvider, Icon } from 'react-native-elements';
 
@@ -25,20 +27,32 @@ import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
   static navigationOptions = {
-    title: 'Portfolio',
+    title: 'Patient Records',
   };
   constructor() {
     super();
     this.state = {
+      patientList: [],
+      patient: '',
+      patientPic: '',
       position: 'sadf',
       userID: 'afsdaasfd',
       buttonArray: [],
+      user_position:'',
     };
   }
-
+  
+  
+  async _fetchUserInfo() {
+    const userInfo = await AsyncStorage.getItem("userInfo");
+    this.setState({
+      userInfo: JSON.parse(userInfo)
+    });
+  }
+ 
   // This pulls the current logged in users data that was saved in asyncstorage into state
 
-  componentWillMount() {
+  async componentWillMount() {
     AsyncStorage.getItem("userInfo").then((value) => {
       const data = JSON.parse(value);
       this.state.userID = data.ID;
@@ -57,55 +71,116 @@ class PortfolioScreen extends React.Component {
 
       this.forceUpdate();
     })
+
+    await this._fetchUserInfo();
+    this._fetchPatients();
   }
+
+  /* rip dreams...
+  forceUpdateHandler(){
+    firebase.database().ref(`/Patient/${this.state.patient}/`).once('value').then((snapshot) => {
+      const data = snapshot.toJSON();
+    this.setState({patientPic: data.Portfolio.Name})
+    this.forceUpdate();
+    });
+  <Text style={{color:'black', fontSize: 15,fontWeight: 'bold',paddingTop:5}}>{this.state.patientPic}</Text> 
+  };
+  */
+
 
   // render content
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles2.container}>
         <ScrollView style={styles2.container}>
-          
           {(this.state.position == "CNA") ? 
           <View>
-                    <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
-                    <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
-          <Button title="Add Vital Status" type='outline' onPress={this._showVitalStatusAdd} style="padding: 5" />
+            <View>
+              <Text style={styles2.headerText}>Patient Status</Text>
+              <Text style={styles2.text}>Select Patient:</Text>
+              <Picker
+                mode='anchor'
+                style={styles2.picker, {color:'black'}}
+                selectedValue={this.state.patient}
+                onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
+              >
+                <Picker.Item label="Select Patient" value="patient"/>
+                {this.state.patientList.map((item, index) => {
+                  return (<Picker.Item label={item.id} value={item.id} key={index}/>)
+                })}
+              </Picker>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Daily Status" type='solid' onPress={this._showDailyStatusAdd}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Vital Status" type='solid' onPress={this._showVitalStatusAdd} />
+            </View>
           </View>
           : 
           <View>
-          <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
           </View>
           }
-          <Text></Text>
-          <Text></Text>
         </ScrollView>
+        
       </View>
     );
   }
 
   // handler to navigate to the Portfolio page
   _showDailyStatusRead = () => {
-    this.props.navigation.navigate('DailyStatusRead');
+    this.props.navigation.navigate('DailyStatusRead',{patientID:this.state.patient});
   };
 
   _showDailyStatusAdd = () => {
-    this.props.navigation.navigate('DailyStatusAdd');
+    this.props.navigation.navigate('DailyStatusAdd',{patientID:this.state.patient})
+    
   }
 
   _showAiStatusRead = () => {
-    this.props.navigation.navigate('AiStatusRead');
+    this.props.navigation.navigate('AiStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusRead = () => {
-    this.props.navigation.navigate('VitalStatusRead');
+    this.props.navigation.navigate('VitalStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusAdd = () => {
-    this.props.navigation.navigate('VitalStatusAdd');
+
+    this.props.navigation.navigate('VitalStatusAdd',{patientID:this.state.patient});
+  }
+  _fetchPatients() {
+    // fetch content
+    const patientData = [];
+    firebase.database().ref('Patient').once('value').then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        patientData.push({
+          id: childSnapshot.key,
+        })
+      })
+      this.setState({
+        patientList: patientData,
+        patient: patientData[0].id
+      });
+    });
   }
 
   // signout user by deleting locally stored user info and navigate back to sign in screen
@@ -121,7 +196,21 @@ const styles2 = StyleSheet.create({
     backgroundColor: '#ffdefd',
     flex: 1,
     padding: 20,
-    marginTop: 15,
+    marginTop: 1,
+  },
+  headerText: {
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'left', /*select week*/
   },
   /*
   item: {
@@ -139,12 +228,6 @@ const styles2 = StyleSheet.create({
   header: {
     padding: 10
   },
-  headerText: {
-    textAlign: 'center',
-    justifyContent: 'space-evenly',
-    fontSize: 18,
-    fontWeight: 'bold',
-  }
 
   */
 });

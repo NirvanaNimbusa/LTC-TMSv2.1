@@ -26,8 +26,12 @@ import { Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
-import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
+import {Collapse, CollapseHeader, CollapseBody,AccordionList} from "accordion-collapse-react-native";
 import { Thumbnail } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import PortfolioScreen from '../screens/PortfolioScreen';
+import selectedValue from '../screens/PortfolioScreen';
 
 class DailyStatusAddScreen extends React.Component {
   static navigationOptions = {
@@ -40,18 +44,14 @@ class DailyStatusAddScreen extends React.Component {
     var now = new Date();
 
     this.state = {
-      patientList: [],
-      patient: '',
-      showeredAM: false,
-      showeredPM: false,
-      ateAM: false,
-      atePM: false,
+
       poop: '',
       urinate: '',
-      brushTeethAM: false,
-      brushTeethPM: false,
+      shower:'',
+      ate:'',
+      brushTeeth:'',
       userInfo: null,
-      today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+      today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
     };
   }
 
@@ -67,165 +67,171 @@ class DailyStatusAddScreen extends React.Component {
     this._fetchPatients();
   }
 
-  updatePatient = (patient) => {
-    this.setState({ patient: patient })
-  }
-
+ 
   // render content
   // consists of one picker container to choose patient, with several picker items
   // then a date picker for choosing the date to retrieve data from
   // a button is used to trigger data retrieval, and text elements to present the data
   render() {
+    
+    
     return (
       <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
       <View style={{backgroundColor:'#e6f3ff'}}>
         <ScrollView >
-          <View>
-            <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
-            <Picker
-              mode='anchor'
-              style={styles2.picker}
-              selectedValue={this.state.patient}
-              onValueChange={this.updatePatient}
-            >
-              <Picker.Item label="Select Patient" value="patient"/>
-              {this.state.patientList.map((item, index) => {
-                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-              })}
-            </Picker>
-          </View>
-          <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#E6E6E6'}}>
-              <View style={{width:'25%',alignItems:'center'}}>
-                <Thumbnail source={{uri: 'https://www.biography.com/.image/t_share/MTQ3NjYxMzk4NjkwNzY4NDkz/muhammad_ali_photo_by_stanley_weston_archive_photos_getty_482857506.jpg'}} />
+          <View style={{ paddingTop: 0 }}>
+            <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
+              <View style={{width:'30%',alignItems:'center'}}>
+                <Icon 
+                name='shower'
+                size= {40}/>
+                
               </View>
-              <View style={{width:'60%'}}>
-                <Text>Name : Mohammed Ali Kley</Text>
-                <Text>Profession: Boxer</Text>
-              </View>
-            </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',backgroundColor:'#EDEDED'}}>
-              <Collapse style={{flexDirection:'row'}}>
-                <CollapseHeader>
-                  <Thumbnail source={{uri: 'https://cdn3.iconfinder.com/data/icons/trico-circles-solid/24/Circle-Solid-Phone-512.png'}} />
-                </CollapseHeader>
-                <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
-                  <Text>+1 310 346 0018</Text>
-                </CollapseBody>
-              </Collapse>
-              <Collapse style={{flexDirection:'row'}}>
-                <CollapseHeader>
-                  <View style={{ paddingTop: 10 }}>
+
+              <View style={{ paddingTop: 10 }}>
                     <Text style={styles.statusToggle}>Shower</Text>
                   </View>
-                </CollapseHeader>
-                <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
+             </CollapseHeader>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
                   <View style={{ paddingTop: 10, alignItems:'center' }}>
-                    <Text style={styles.statusToggle}>Shower Time</Text>
+                  <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                      onChangeText={(shower) => this.setState({ shower })}
+                      value={this.state.shower}
+                    />             
+                  </View>
+              </CollapseBody>
+            </Collapse>
+          </View>
+          
+
+          <View style={{ paddingTop: 0}}>
+          <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
+              <View style={{width:'30%',alignItems:'center'}}>
+              <MaterialCommunityIcons 
+                name='food-variant'
+                size= {40}/>
+              </View>
+              <View style={{ paddingTop: 10 }}>
+                    <Text style={styles.statusToggle}>Ate</Text>
+                  </View>
+             </CollapseHeader>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
+                  <View style={{ paddingTop: 10, alignItems:'center' }}>
+                  <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                      onChangeText={(ate) => this.setState({ ate })}
+                      value={this.state.ate}
+                    />     
+                  </View>
+              </CollapseBody>
+            </Collapse>
+          </View>
+
+          <View style={{ paddingTop: 0 }}>
+          <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
+              <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
+              <View style={{width:'30%',alignItems:'center'}}>
+                <Icon
+                name='check-circle'
+                size= {40}/>
+              </View>
+              <View style={{ paddingTop: 10 }}>
+                    <Text style={styles.statusToggle}>Brush Teeth</Text>
+                  </View>
+             </CollapseHeader>
+              <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:4}}>
+                  <View style={{ paddingTop: 10, alignItems:'center' }}>
+                  <TextInput
+                      placeholder="Enter Time (format example 13:50)"
+                      placeholderTextColor='black'
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                      onChangeText={(brushTeeth) => this.setState({ brushTeeth })}
+                      value={this.state.brushTeeth}
+                    />     
+                  </View>
+              </CollapseBody>
+            </Collapse>
+          </View>
+
+          <View style={{ paddingTop: 0 }}>
+          <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
+              <View style={{width:'30%',alignItems:'center'}}>
+              <MaterialCommunityIcons 
+                name='emoticon-poop'
+                size= {40}/>
+              </View>
+              <View style={{ paddingTop: 10 }}>
+                 <Text style={styles.statusToggle}>Poop Time</Text>
+              </View>
+            </CollapseHeader>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',padding:4}}>
+              
+              <Collapse style={{flexDirection:'row'}}>
+                <CollapseHeader>
+                <View style={{ paddingTop: 10, alignItems:'center' }}> 
+              
+                    <TextInput
+                    placeholder="Enter Time (format example 13:00)"
+                    placeholderTextColor='black'
+                    style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
+                   onChangeText={(poop) => this.setState({ poop })}
+                   value={this.state.poop}
+                 />
+                  </View>
+                </CollapseHeader>
+              </Collapse>
+            </CollapseBody>
+          </Collapse>
+            
+            
+          </View>
+
+          <View style={{ paddingTop: 0}}>
+          <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
+            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
+              <View style={{width:'30%',alignItems:'center'}}>
+              <Icon
+                name='check-circle-o'
+                size= {40}/>
+              </View>
+              <View style={{ paddingTop: 10 }}>
+                    <Text style={styles.statusToggle}>Urinate Time</Text>
+              </View>
+            </CollapseHeader>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'row',padding:4}}>
+              
+              <Collapse style={{flexDirection:'row'}}>
+                <CollapseHeader>
+                <View style={{ paddingTop: 10, alignItems:'center' }}>
+                    
                     <TextInput
                       placeholder="Enter Time (format example 13:50)"
                       placeholderTextColor='black'
-                      style={{ height: 40, width: 300, borderColor: '#b2d1f1', borderWidth: 2, color:'black' }}
+                      style={{ height: 40, width: 300, borderColor: '#A1D3D1', borderWidth: 4, color:'black' }}
                       onChangeText={(urinate) => this.setState({ urinate })}
                       value={this.state.urinate}
                     />
                   </View>
-                </CollapseBody>
+                </CollapseHeader>
               </Collapse>
             </CollapseBody>
           </Collapse>
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Showered AM</Text>
-            <Text style={styles.statusToggle}> {this.state.showeredAM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ showeredAM: value })}
-              style={{ marginTop: 10, marginBottom: 10, alignSelf: 'center' }}
-              value={this.state.showeredAM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Showered PM</Text>
-            <Text style={styles.statusToggle}> {this.state.showeredPM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ showeredPM: value })}
-              style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-              value={this.state.showeredPM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Ate AM</Text>
-            <Text style={styles.statusToggle}> {this.state.ateAM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ ateAM: value })}
-              style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-              value={this.state.ateAM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Ate PM</Text>
-            <Text style={styles.statusToggle}> {this.state.atePM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ atePM: value })}
-              style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-              value={this.state.atePM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Brush Teeth AM</Text>
-            <Text style={styles.statusToggle}> {this.state.brushTeethAM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ brushTeethAM: value })}
-              style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-              value={this.state.brushTeethAM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10 }}>
-            <Text style={styles.statusToggle}>Brush Teeth PM</Text>
-            <Text style={styles.statusToggle}> {this.state.brushTeethPM ? 'Yes' : 'No'}</Text>
-            <Switch
-              onValueChange={(value) => this.setState({ brushTeethPM: value })}
-              style={{ marginBottom: 10, marginTop: 10, alignSelf: 'center' }}
-              value={this.state.brushTeethPM}
-              trackColor={{ true: 'green', false: 'blue' }}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10, alignItems:'center' }}>
-            <Text style={styles.statusToggle}>Poop Time</Text>
-            <TextInput
-              placeholder="Enter Time (format example 13:00)"
-              placeholderTextColor='black'
-              style={{ height: 40, width: 300, borderColor: '#b2d1f1', borderWidth: 2, color:'black' }}
-              onChangeText={(poop) => this.setState({ poop })}
-              value={this.state.poop}
-            />
-          </View>
-
-          <View style={{ paddingTop: 10, alignItems:'center' }}>
-            <Text style={styles.statusToggle}>Urinate Time</Text>
-            <TextInput
-              placeholder="Enter Time (format example 13:50)"
-              placeholderTextColor='black'
-              style={{ height: 40, width: 300, borderColor: '#b2d1f1', borderWidth: 2, color:'black' }}
-              onChangeText={(urinate) => this.setState({ urinate })}
-              value={this.state.urinate}
-            />
+       
           </View>
         
-          <View style={{padding:10}}>
+          <View style={{marginTop: 10, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
             <Button
               onPress={this._submitDailyStatus}
               title="Submit"
-              type="outline"
+              type="solid"
             />
           </View>
         </ScrollView>
@@ -253,21 +259,18 @@ class DailyStatusAddScreen extends React.Component {
   }
 
   _submitDailyStatus = async () => {
-    const baseRef = `Activities/${this.state.patient}/${this.state.today}/DailyStatuses/`;
+    const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/DailyStatuses/`;
     const ref = firebase.database().ref(baseRef);
     const user = this.state.userInfo;
     const now = new Date();
-
+    
     await ref.update({
       date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       submittedBy: user.ID,
-      showeredAM: this.state.showeredAM,
-      showeredPM: this.state.showeredPM,
-      ateAM: this.state.ateAM,
-      atePM: this.state.atePM,
-      brushTeethAM: this.state.brushTeethAM,
-      brushTeethPM: this.state.brushTeethPM,
+      shower: this.state.shower,
+      ate:this.state.ate,
+      brushTeeth:this.state.brushTeeth,
       poop: this.state.poop,
       urinate: this.state.urinate
     });
