@@ -76,8 +76,8 @@ class DailyStatusAddScreen extends React.Component {
     
     
     return (
-      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
-      <View style={{backgroundColor:'#e6f3ff'}}>
+      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#a1c7ff', flex:1}}>
+      <View style={{backgroundColor:'#a1c7ff'}}>
         <ScrollView >
           <View style={{ paddingTop: 0 }}>
             <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
@@ -288,7 +288,7 @@ class DailyStatusAddScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#d1ddff',
+    backgroundColor: '#a1c7ff',
     flex: 1,
     padding: 20,
     marginTop: 15,

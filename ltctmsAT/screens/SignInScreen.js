@@ -144,11 +144,11 @@ const styles_2 = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#a1c7ff',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
+      borderBottomColor: '#a1c7ff',
+      backgroundColor: '#a1c7ff',
       borderRadius:30,
       borderBottomWidth: 1,
       width:WIDTH - 50,
@@ -160,7 +160,7 @@ const styles_2 = StyleSheet.create({
   inputs:{
       height:45,
       marginLeft:16,
-      borderBottomColor: '#FFFFFF',
+      borderBottomColor: '#a1c7ff',
       flex:1,
       color: 'black',
   },

@@ -257,7 +257,7 @@ class TaskScreen extends React.Component {
   // renders the flatlist and passes the data elements from state into _renderItem
   render() {
     return (
-      <ScrollView style={{ backgroundColor: '#ffdefd' }}>
+      <ScrollView style={{ backgroundColor: '#a1c7ff' }}>
         
         <View style={{ flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}

@@ -160,7 +160,7 @@ class LogoutScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#a1c7ff',
     flex: 1,
     padding: 10,
     marginTop: 15,

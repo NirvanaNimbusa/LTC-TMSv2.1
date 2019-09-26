@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e6f3ff'
+    backgroundColor: '#a1c7ff'
   },
 
   containerAnnounce: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   containerSignIn: {
     // Container for SignInScreen.js  
     padding: scale(20),
-    backgroundColor: '#BAE7FF',
+    backgroundColor: '#a1c7ff',
   },
 
   userToggle:
