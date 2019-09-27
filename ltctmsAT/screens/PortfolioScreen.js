@@ -26,9 +26,6 @@ import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Patient Records',
-  };
   constructor() {
     super();
     this.state = {
@@ -75,17 +72,6 @@ class PortfolioScreen extends React.Component {
     await this._fetchUserInfo();
     this._fetchPatients();
   }
-
-  /* rip dreams...
-  forceUpdateHandler(){
-    firebase.database().ref(`/Patient/${this.state.patient}/`).once('value').then((snapshot) => {
-      const data = snapshot.toJSON();
-    this.setState({patientPic: data.Portfolio.Name})
-    this.forceUpdate();
-    });
-  <Text style={{color:'black', fontSize: 15,fontWeight: 'bold',paddingTop:5}}>{this.state.patientPic}</Text> 
-  };
-  */
 
 
   // render content
@@ -189,11 +175,17 @@ class PortfolioScreen extends React.Component {
     this.props.navigation.navigate('Auth');
   };
 }
-
+const theme = {
+  Button: {
+    titleStyle: {
+      color: 'red',
+    },
+  },
+};
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#FFFFFF',
     flex: 1,
     padding: 20,
     marginTop: 1,
