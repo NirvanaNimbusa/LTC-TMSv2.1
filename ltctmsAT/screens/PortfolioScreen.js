@@ -26,9 +26,15 @@ import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Portfolio',
-  };
+  static navigationOptions = ({ navigation }) => {
+    return {
+       title: 'Screen Title',
+       headerTintColor: '#FFF',
+       headerStyle: {
+          backgroundColor: '#2D4C8E'
+       }
+    }
+ };
   constructor() {
     super();
     this.state = {
@@ -79,6 +85,7 @@ class PortfolioScreen extends React.Component {
     this._fetchPatients();
   }
 
+
   
 
   // render content
@@ -111,7 +118,11 @@ class PortfolioScreen extends React.Component {
 
           {(this.state.position == "CNA") ? 
           <View>
-                    <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
+            <ThemeProvider theme={theme}>
+              <Button title="Add Daily Status"  onPress={this._showDailyStatusAdd} style="padding: 5"titleStyle={{ color: 'pink' }} />
+
+            </ThemeProvider>
+                    
                     <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
                     <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
                     <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
@@ -174,11 +185,17 @@ class PortfolioScreen extends React.Component {
     this.props.navigation.navigate('Auth');
   };
 }
-
+const theme = {
+  Button: {
+    titleStyle: {
+      color: 'red',
+    },
+  },
+};
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#FFFFFF',
     flex: 1,
     padding: 20,
     marginTop: 15,
