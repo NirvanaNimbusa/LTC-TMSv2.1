@@ -26,6 +26,9 @@ import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Patient Records',
+  };
   constructor() {
     super();
     this.state = {
@@ -185,7 +188,7 @@ const theme = {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#e6f3ff',
     flex: 1,
     padding: 20,
     marginTop: 1,

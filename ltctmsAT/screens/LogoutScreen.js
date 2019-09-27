@@ -184,7 +184,7 @@ const styles2 = StyleSheet.create({
     alignItems: 'center',
     marginTop:-50,
     padding:50,
-    marginHorizontal:140
+    marginHorizontal:160
     
     
   },
@@ -201,7 +201,8 @@ const styles2 = StyleSheet.create({
     color: "#696969",
     fontWeight: "700",
     alignSelf: "center",
-    paddingHorizontal:20,
+    paddingHorizontal:25,
+    color: 'black'
     
   },
   info:{
@@ -209,7 +210,7 @@ const styles2 = StyleSheet.create({
     color: "#00BFFF",
     marginTop:10,
     alignSelf:"center",
-    paddingHorizontal:20,
+    paddingHorizontal:25,
   },
   description:{
     fontSize:14,
@@ -217,7 +218,8 @@ const styles2 = StyleSheet.create({
     marginTop:10,
     textAlign: 'left',
     alignItems:'flex-start',
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
+    color: 'black'
   },
   buttonContainer: {
     marginTop:10,

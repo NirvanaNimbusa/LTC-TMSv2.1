@@ -76,7 +76,7 @@ class DailyStatusAddScreen extends React.Component {
     
     
     return (
-      <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}}>
+      <KeyboardAvoidingView behavior='padding' style={{backgroundColor:'#e6f3ff', flex:1}}>
       <View style={{backgroundColor:'#e6f3ff'}}>
         <ScrollView >
           <View style={{ paddingTop: 0 }}>
@@ -86,9 +86,7 @@ class DailyStatusAddScreen extends React.Component {
                 <Icon 
                 name='shower'
                 size= {40}/>
-                
               </View>
-
               <View style={{ paddingTop: 10 }}>
                     <Text style={styles.statusToggle}>Shower</Text>
                   </View>
@@ -106,8 +104,6 @@ class DailyStatusAddScreen extends React.Component {
               </CollapseBody>
             </Collapse>
           </View>
-          
-
           <View style={{ paddingTop: 0}}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
               <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
@@ -133,7 +129,6 @@ class DailyStatusAddScreen extends React.Component {
               </CollapseBody>
             </Collapse>
           </View>
-
           <View style={{ paddingTop: 0 }}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
               <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
@@ -159,7 +154,6 @@ class DailyStatusAddScreen extends React.Component {
               </CollapseBody>
             </Collapse>
           </View>
-
           <View style={{ paddingTop: 0 }}>
           <Collapse style={{borderBottomWidth:0,borderTopWidth:1}}>
             <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#A9D3FF'}}>
@@ -190,10 +184,7 @@ class DailyStatusAddScreen extends React.Component {
               </Collapse>
             </CollapseBody>
           </Collapse>
-            
-            
           </View>
-
           <View style={{ paddingTop: 0}}>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
             <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:6,backgroundColor:'#78B0FA'}}>
