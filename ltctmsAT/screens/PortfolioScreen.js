@@ -26,24 +26,16 @@ import { Button, ThemeProvider, Icon } from 'react-native-elements';
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-       title: 'Screen Title',
-       headerTintColor: '#FFF',
-       headerStyle: {
-          backgroundColor: '#2D4C8E'
-       }
-    }
- };
   constructor() {
     super();
     this.state = {
       patientList: [],
       patient: '',
+      patientPic: '',
       position: 'sadf',
       userID: 'afsdaasfd',
       buttonArray: [],
-      user_position:''
+      user_position:'',
     };
   }
   
@@ -55,10 +47,6 @@ class PortfolioScreen extends React.Component {
     });
   }
  
-  updatePatient = (patient) => {
-    this.setState({ patient: patient })
-  }
-
   // This pulls the current logged in users data that was saved in asyncstorage into state
 
   async componentWillMount() {
@@ -86,53 +74,55 @@ class PortfolioScreen extends React.Component {
   }
 
 
-  
-
   // render content
   render() {
     return (
-      <View style={styles.container}>
-        
+      <View style={styles2.container}>
         <ScrollView style={styles2.container}>
-        <View>
-            <Text style={styles.item}>Select Patient ID to add a Daily Status</Text>
-            <Picker
-              mode='anchor'
-              style={styles2.picker}
-              selectedValue={this.state.patient}
-              onValueChange={this.updatePatient}
-            >
-              <Picker.Item label="Select Patient" value="patient"/>
-              {this.state.patientList.map((item, index) => {
-                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-              })}
-            </Picker>
-          </View>
-          <Text>
-            {this.state.patient}
-          </Text>
-
-          <Text>
-            {this.state.position}
-          </Text>
-
           {(this.state.position == "CNA") ? 
           <View>
-            <ThemeProvider theme={theme}>
-              <Button title="Add Daily Status"  onPress={this._showDailyStatusAdd} style="padding: 5"titleStyle={{ color: 'pink' }} />
-
-            </ThemeProvider>
-                    
-                    <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
-          <Button title="Add Vital Status" type='outline' onPress={this._showVitalStatusAdd} style="padding: 5" />
+            <View>
+              <Text style={styles2.headerText}>Patient Status</Text>
+              <Text style={styles2.text}>Select Patient:</Text>
+              <Picker
+                mode='anchor'
+                style={styles2.picker, {color:'black'}}
+                selectedValue={this.state.patient}
+                onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
+              >
+                <Picker.Item label="Select Patient" value="patient"/>
+                {this.state.patientList.map((item, index) => {
+                  return (<Picker.Item label={item.id} value={item.id} key={index}/>)
+                })}
+              </Picker>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Daily Status" type='solid' onPress={this._showDailyStatusAdd}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Add Vital Status" type='solid' onPress={this._showVitalStatusAdd} />
+            </View>
           </View>
           : 
           <View>
-          <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
+            </View>
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
+            </View >
           </View>
           }
         </ScrollView>
@@ -143,7 +133,7 @@ class PortfolioScreen extends React.Component {
 
   // handler to navigate to the Portfolio page
   _showDailyStatusRead = () => {
-    this.props.navigation.navigate('DailyStatusRead');
+    this.props.navigation.navigate('DailyStatusRead',{patientID:this.state.patient});
   };
 
   _showDailyStatusAdd = () => {
@@ -152,16 +142,16 @@ class PortfolioScreen extends React.Component {
   }
 
   _showAiStatusRead = () => {
-    this.props.navigation.navigate('AiStatusRead');
+    this.props.navigation.navigate('AiStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusRead = () => {
-    this.props.navigation.navigate('VitalStatusRead');
+    this.props.navigation.navigate('VitalStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusAdd = () => {
 
-    this.props.navigation.navigate('VitalStatusAdd');
+    this.props.navigation.navigate('VitalStatusAdd',{patientID:this.state.patient});
   }
   _fetchPatients() {
     // fetch content
@@ -198,7 +188,21 @@ const styles2 = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flex: 1,
     padding: 20,
-    marginTop: 15,
+    marginTop: 1,
+  },
+  headerText: {
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'left', /*select week*/
   },
   /*
   item: {
@@ -216,12 +220,6 @@ const styles2 = StyleSheet.create({
   header: {
     padding: 10
   },
-  headerText: {
-    textAlign: 'center',
-    justifyContent: 'space-evenly',
-    fontSize: 18,
-    fontWeight: 'bold',
-  }
 
   */
 });

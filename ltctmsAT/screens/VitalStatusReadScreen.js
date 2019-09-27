@@ -46,6 +46,7 @@ class VitalStatusReadScreen extends React.Component {
       CNA: '',
       userID: '',
       position: '',
+      header: '',
     };
   }
 
@@ -78,26 +79,9 @@ class VitalStatusReadScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles2.container}>
-          {(this.state.position == "Patient") ?
-            <View>
-              <Text style={styles.item}>Select Date/CNA ID to view Vital Status</Text>
-            </View>
-            :
-            <View>
-              <Text style={styles.item}>Select Patient ID/Date/CNA ID to view Vital Status</Text>
-              <Picker
-                mode={'dropdown'}
-                selectedValue={this.state.patient}
-                style={styles2.picker}
-                onValueChange={this.updatePatient}
-              >
-                <Picker.Item label="Select Patient" value="patient" />
-                {this.state.patientList.map((item, index) => {
-                  return (<Picker.Item label={item.id} value={item.id} key={index} />)
-                })}
-              </Picker>
-            </View>
-          }
+          <View>
+            <Text style={styles.item}>Select Date/CNA ID to view Vital Status</Text>
+          </View>
           <View style={styles.pickerView}>
             <DatePicker
               style={styles.pickerStyle}
@@ -124,7 +108,6 @@ class VitalStatusReadScreen extends React.Component {
             />
           </View>
           <View>
-
             <Picker
               mode={'dropdown'}
               selectedValue={this.state.CNA}
@@ -137,16 +120,15 @@ class VitalStatusReadScreen extends React.Component {
               })}
             </Picker>
           </View>
-          <View>
+          <View style={{marginTop: 5, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
             <Button
               onPress={this._fetchStatus}
               title="Submit"
-              type="outline"
-              style={{ padding: 10 }}
+              type="solid"
             />
           </View>
           <View style={styles.container}>
-            <Text style={styles.itemPortfolio}>Patient Vital Status</Text>
+            <Text style={style={fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 5}}>{this.state.header}</Text>
             <Text style={styles.itemPortfolio}>{this.state.status}</Text>
           </View>
         </ScrollView>
@@ -160,12 +142,13 @@ class VitalStatusReadScreen extends React.Component {
     JSONitem = JSON.stringify(item)
     str = item.key
     var res = str.split("_")
+    console.log(res)
     if (res[0] == "BloodPressure") {
       heart = JSONitem.split('~')
       status.push('\u2764' + "Blood Pressure \n"
         + "Time : " + res[1] + '\n'
         + "Systolic : " + heart[0].slice(1) + '\n'
-        + "Diastolic : " + heart[1].slice(0, -1) + '\n'
+        + "Diastolic : " + heart[1].slice(0, -1) + '\n\n'
       );
     } else if (res[0] == "Temperature") {
       status.push('\uD83C\uDF21' + "Temperature \n"
@@ -193,7 +176,7 @@ class VitalStatusReadScreen extends React.Component {
       patient = this.state.patient;
     }
     console.log(`Activities/${patient}/${this.state.date}/${this.state.CNA}/vital_status`)
-    firebase.database().ref(`Activities/${patient}/${this.state.date}/${this.state.CNA}/vital_status`).once('value').then((snapshot) => {
+    firebase.database().ref(`Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.date}/${this.state.CNA}/vital_status`).once('value').then((snapshot) => {
       console.log("snapshot" + snapshot.val())
       snapshot.forEach((childSnapshot) => {
         if (childSnapshot.val() == null) {
@@ -203,6 +186,9 @@ class VitalStatusReadScreen extends React.Component {
         }
       }
       )
+    })
+    this.setState({
+      header: "Patient Vital Status"
     })
     this.forceUpdate();
 
