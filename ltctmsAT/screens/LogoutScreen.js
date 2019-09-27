@@ -16,6 +16,7 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { StackNavigator } from 'react-navigation';
@@ -33,7 +34,7 @@ class LogoutScreen extends React.Component {
     this.state = {
       userInfo: '',
       position: 'sadf',
-      userID: 'afsdaasfd',
+      userID: 'afsdaasfd'
     };
 
   }
@@ -127,29 +128,35 @@ class LogoutScreen extends React.Component {
     return (
       <View style={styles.container}>
          <ScrollView style={styles2.container}>
-         <Collapse style={{borderBottomWidth:1,borderTopWidth:0}}>
-            <CollapseHeader style={{flexDirection:'column',alignItems:'center',paddingBottom:50}}>
-              <View style={{width:'100%',alignItems:'center',height:'15%'}}>
-                <Thumbnail style={{width:110,height:110,borderRadius:110/2}} source={{uri:  this.state.profile_Pic}} />
-              </View>             
-            </CollapseHeader>
-           
-          </Collapse>
-          <Text style={styles.itemPortfolio}>Name: {this.state.name}</Text>
-          <Text style={styles.itemPortfolio}>User ID: {this.state.userID}</Text>
-          <Text style={styles.itemPortfolio}>Position: {this.state.position}</Text>
-          <Text style={styles.itemPortfolio}>Address: {this.state.address}</Text>
-          <Text style={styles.itemPortfolio}>Room #: {this.state.room}</Text>
-          <Text style={styles.itemPortfolio}>Nationality: {this.state.nationality}</Text>
-          <Text style={styles.itemPortfolio}>National ID: {this.state.nationalID}</Text>
-          <Text style={styles.itemPortfolio}>Gender: {this.state.gender}</Text>
-          <Text style={styles.itemPortfolio}>Brief Description: {this.state.description}</Text>
-          <Text style={styles.itemPortfolio}>Date of Birth: {this.state.DOB}</Text>
-          <Text style={styles.itemPortfolio}>E-mail Address: {this.state.email}</Text>
-          <Text style={styles.itemPortfolio}>Admission Reason: {this.state.admissionReason}</Text>
-          <Text style={styles.itemPortfolio}>Medical Records: {this.state.medicalRecord}</Text>
-          </ScrollView>
-        </View>      
+        <View>
+        <View style={styles2.header}></View>
+        <Thumbnail style={{width:130,height:130,borderRadius:130/2,alignSelf:'center',position: 'absolute',marginTop:70,borderColor: "white",borderWidth: 4}} source={{uri:this.state.profile_Pic}} />
+        <View style={styles2.body}>
+          <View style={styles2.bodyContent2}></View>
+            <Text style={styles2.name}>{this.state.name}</Text>
+            <Text style={styles2.info}>User ID: {this.state.userID}</Text>
+            <Text style={styles2.description}>Position: {this.state.position}</Text>
+            <Text style={styles2.description}>Address: {this.state.address}</Text>
+            <Text style={styles2.description}>Room #: {this.state.room}</Text>
+            <Text style={styles2.description}>Nationality: {this.state.nationality}</Text>
+            <Text style={styles2.description}>Gender: {this.state.gender}</Text>
+            <Text style={styles2.description}>Brief Description: {this.state.description}</Text>
+            <Text style={styles2.description}>Date of Birth: {this.state.DOB}</Text>
+            <Text style={styles2.description}>E-mail: {this.state.email}</Text>
+            <Text style={styles2.description}>Admission Reason: {this.state.admissionReason}</Text>
+            <Text style={styles2.description}>Medical Records: {this.state.medicalRecord}</Text>
+            <TouchableOpacity style={styles2.description}>
+              <Text style={{color: 'black'}}>Language</Text>  
+            </TouchableOpacity>              
+            <TouchableOpacity style={styles2.description}>
+              <Text style={{color: 'black'}}>Settings</Text> 
+            </TouchableOpacity>
+        </View>
+    </View> 
+
+    </ScrollView>
+    </View>      
+
         
     );
   }
@@ -159,15 +166,73 @@ class LogoutScreen extends React.Component {
 
 
 const styles2 = StyleSheet.create({
-  container: {
-    backgroundColor: '#e6f3ff',
-    flex: 1,
-    padding: 10,
-    marginTop: 15,
+  container:{
+    flex:1,
   },
+  header:{
+    backgroundColor: "#00BFFF",
+    height:150,
+    
+  },
+  body:{
+    marginTop:20,
+    
+  },
+  bodyContent2: {
+    flex: 1,
 
+    alignItems: 'center',
+    marginTop:-50,
+    padding:50,
+    marginHorizontal:140
+    
+    
+  },
+  bodyContent: {
+    flex: 1,
+    alignItems: 'flex-start',
+    marginTop:-50,
+    padding:50,
+    marginHorizontal:30,
+    
+  },
+  name:{
+    fontSize:25,
+    color: "#696969",
+    fontWeight: "700",
+    alignSelf: "center",
+    paddingHorizontal:20,
+    
+  },
+  info:{
+    fontSize:16,
+    color: "#00BFFF",
+    marginTop:10,
+    alignSelf:"center",
+    paddingHorizontal:20,
+  },
+  description:{
+    fontSize:14,
+    color: "#696969",
+    marginTop:10,
+    textAlign: 'left',
+    alignItems:'flex-start',
+    paddingHorizontal: 20,
+  },
+  buttonContainer: {
+    marginTop:10,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+    backgroundColor: "#00BFFF",
+    paddingTop:50
+  },
 });
-
+ 
 
 
 export default LogoutScreen

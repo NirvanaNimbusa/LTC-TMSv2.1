@@ -116,8 +116,8 @@ class VitalStatusAddScreen extends React.Component {
                         </View>
 
                     </View>
-                    <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-                        <Button style={{width: 30}}
+                    <View style={{marginTop: 5, alignSelf: 'center', flex: 1, fontSize: 10, width: 250}}>
+                        <Button
                             onPress={this._submitStatus}
                             title="Submit"
                             type="solid"
