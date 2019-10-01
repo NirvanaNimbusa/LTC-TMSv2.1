@@ -74,8 +74,8 @@ class VitalStatusAddScreen extends React.Component {
 
         return (
 
-            <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}} >
-            <View style={{backgroundColor:'#e6f3ff'}}>
+            <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#fff', flex:1}} >
+            <View style={{backgroundColor:'#fff'}}>
                 <ScrollView style={styles2.container}>
                     <View>
                     
@@ -121,6 +121,8 @@ class VitalStatusAddScreen extends React.Component {
                             onPress={this._submitStatus}
                             title="Submit"
                             type="solid"
+                            buttonStyle={{
+                             backgroundColor:'#3f9fff'}}
                         />
                     </View>
 

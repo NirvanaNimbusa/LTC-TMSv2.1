@@ -125,6 +125,8 @@ class VitalStatusReadScreen extends React.Component {
               onPress={this._fetchStatus}
               title="Submit"
               type="solid"
+              buttonStyle={{
+                backgroundColor:'#3f9fff'}}
             />
           </View>
           <View style={styles.container}>
