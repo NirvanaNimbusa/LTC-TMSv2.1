@@ -106,8 +106,10 @@ class AiStatusReadScreen extends React.Component {
             <Button
               onPress={this._fetchAiStatus}
               title="Submit"
-              type="outline"
               style={{ padding: 10 }}
+              type="solid"
+              buttonStyle={{
+                backgroundColor:'#3f9fff'}}
             />
           </View>
           <View>

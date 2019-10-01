@@ -39,6 +39,13 @@ const{height}=Dimensions.get("window");
 class CenterInfo extends React.Component {
   static navigationOptions = {
     title: 'Center Info',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
   
 
@@ -336,6 +343,8 @@ class CenterInfo extends React.Component {
               }}
               title="Submit Feedback"
               type="solid"
+              buttonStyle={{
+                backgroundColor:'#3f9fff'}}
               />
             </View>
             <View style={{marginTop: 10, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
@@ -345,7 +354,8 @@ class CenterInfo extends React.Component {
                 }}
                 title="Call Center"
                 type="solid"
-                buttonStyle= {{}}
+                buttonStyle={{
+                  backgroundColor:'#3f9fff'}}
               />
             </View>
           </View>

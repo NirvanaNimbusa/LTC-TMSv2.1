@@ -34,6 +34,13 @@ import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
 class TaskScreen extends React.Component {
   static navigationOptions = {
     title: 'Task Library',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
   };
 
   state = {
@@ -257,7 +264,7 @@ class TaskScreen extends React.Component {
   // renders the flatlist and passes the data elements from state into _renderItem
   render() {
     return (
-      <ScrollView style={{ backgroundColor: '#e6f3ff' }}>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
         <View style={{ flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}
         >

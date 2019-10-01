@@ -106,8 +106,10 @@ class DailyStatusReadScreen extends React.Component {
             <Button
               onPress={this._fetchStatus}
               title="Submit"
-              type="outline"
               style={{ padding: 10 }}
+              type="solid"
+              buttonStyle={{
+                backgroundColor:'#3f9fff'}}
             />
           </View>
 

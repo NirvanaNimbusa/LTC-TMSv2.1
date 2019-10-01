@@ -23,10 +23,12 @@ import { StackNavigator } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { Button, ThemeProvider } from 'react-native-elements';
 import styles from '../styles/styles';
-import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
 import { Thumbnail } from 'native-base';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 class LogoutScreen extends React.Component {
+
+ 
 
   constructor(props) {
     super(props);
@@ -92,15 +94,24 @@ class LogoutScreen extends React.Component {
 
   
   static navigationOptions=({navigation,screenProps}) => {
-    
     const { params ={} }= navigation.state;
     const headerRight = ( 
       <TouchableOpacity onPress={()=>navigation.state.params.navigatePress()}>
-        <Text style={styles.itemPortfolio}>Logout</Text>
+        <View style={styles2.iconstyle}>
+        <Icon 
+            name='logout'
+            size= {20}
+            color='#FFF'
+            />
+       </View>
       </TouchableOpacity>
     );
     return { title: navigation.getParam('otherParam', 'User Portfolio') ,
       headerRight,
+      headerStyle: {
+        backgroundColor: '#3f9fff',
+      },
+      headerTintColor: '#fff',
       
       };
   };
@@ -130,7 +141,7 @@ class LogoutScreen extends React.Component {
          <ScrollView style={styles2.container}>
         <View>
         <View style={styles2.header}></View>
-        <Thumbnail style={{width:130,height:130,borderRadius:130/2,alignSelf:'center',position: 'absolute',marginTop:70,borderColor: "white",borderWidth: 4}} source={{uri:this.state.profile_Pic}} />
+        <Thumbnail style={{width:130,height:130,borderRadius:130/2,alignSelf:'center',position: 'absolute',marginTop:50,borderColor: "white",borderWidth: 4}} source={{uri:this.state.profile_Pic}} />
         <View style={styles2.body}>
           <View style={styles2.bodyContent2}></View>
             <Text style={styles2.name}>{this.state.name}</Text>
@@ -145,12 +156,18 @@ class LogoutScreen extends React.Component {
             <Text style={styles2.description}>E-mail: {this.state.email}</Text>
             <Text style={styles2.description}>Admission Reason: {this.state.admissionReason}</Text>
             <Text style={styles2.description}>Medical Records: {this.state.medicalRecord}</Text>
-            <TouchableOpacity style={styles2.description}>
-              <Text style={{color: 'black'}}>Language</Text>  
-            </TouchableOpacity>              
-            <TouchableOpacity style={styles2.description}>
-              <Text style={{color: 'black'}}>Settings</Text> 
-            </TouchableOpacity>
+           
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
+            <Button title="Language" type='solid' onPress={this._showDailyStatusAdd} 
+              buttonStyle={{
+              backgroundColor:'#3f9fff'}}/>
+              </View>
+
+            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>                       
+            <Button title="Settings" type='solid' onPress={this._showDailyStatusAdd} 
+              buttonStyle={{
+              backgroundColor:'#3f9fff'}}/>          
+            </View>
         </View>
     </View> 
 
@@ -169,22 +186,23 @@ const styles2 = StyleSheet.create({
   container:{
     flex:1,
   },
+  iconstyle:{
+    paddingRight:20
+
+  },
   header:{
-    backgroundColor: "#00BFFF",
-    height:150,
-    
+    height:130,
+    backgroundColor: '#C2CFDB',   
   },
   body:{
-    marginTop:20,
-    
+    marginTop:20, 
   },
   bodyContent2: {
     flex: 1,
-
     alignItems: 'center',
     marginTop:-50,
     padding:50,
-    marginHorizontal:160
+    marginHorizontal:140
     
     
   },
@@ -220,6 +238,16 @@ const styles2 = StyleSheet.create({
     alignItems:'flex-start',
     paddingHorizontal: 25,
     color: 'black'
+  },
+  description2:{
+    fontSize:14,
+    color: "#696969",
+    marginTop:10,
+    textAlign: 'left',
+    alignItems:'center',
+    paddingHorizontal: 25,
+    color: 'black',
+    paddingTop:10
   },
   buttonContainer: {
     marginTop:10,
