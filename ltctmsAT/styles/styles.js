@@ -108,6 +108,16 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
+  itemCategory: {
+    // titles for each task library retrieved from category in firebase.js
+    padding: 10,
+    fontSize: scale(25),
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'SFNS Display',
+    color: '#054380',
+  },
+
   itemPortfolio: {
     // content for each item in the PortfolioScreen.js
     padding: 5,
