@@ -22,9 +22,9 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Button, ThemeProvider } from 'react-native-elements';
 import Icon2 from 'react-native-vector-icons/Foundation';
 import{Container,Header,Title,Content,Icon,Card,CardItem,Text,Left,Right,Body}from'native-base';
+import { Thumbnail } from 'native-base';
 
 
 import styles from '../styles/styles';
@@ -45,6 +45,7 @@ class PortfolioScreen extends React.Component {
     this.state = {
       patientList: [],
       patient: '',
+      patientRoomNo:'',
       patientPic: '',
       position: 'sadf',
       userID: 'afsdaasfd',
@@ -79,11 +80,11 @@ class PortfolioScreen extends React.Component {
       this.state.email = data.Email;
       this.state.admissionReason = data.AdmissionReason;
       this.state.medicalRecord = data.MedicalRecord;
+      this.state.profile_Pic = data.profilePic;
 
       this.forceUpdate();
     })
 
-    await this._fetchUserInfo();
     this._fetchPatients();
   }
 
@@ -109,7 +110,13 @@ class PortfolioScreen extends React.Component {
                 })}
               </Picker>
             </View >
-            
+            <Text>
+              {this.setState.patientRoomNo}
+              {this.state.patient}
+            </Text>
+            <View >
+            <Thumbnail style={{width:100,height:100,alignSelf:'center',position: 'absolute',borderColor: "white",borderWidth: 4}} source={{uri:this.state.patientpic}} />
+            </View>
         <Content padder>
           <Card style={styles.mb}>
             <CardItem header bordered>
@@ -189,12 +196,10 @@ class PortfolioScreen extends React.Component {
                 <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
               </Right>
               
-            </CardItem>
+              </CardItem>
             
-          </Card>
-        </Content>
-      
-    
+              </Card>
+            </Content>  
           </View>
           
           : 
@@ -204,7 +209,7 @@ class PortfolioScreen extends React.Component {
             <CardItem header bordered>
               <Text>Patient Satus</Text>
             </CardItem>
-                     
+
             <CardItem>        
               <Left><Icon2
                   active
@@ -256,8 +261,7 @@ class PortfolioScreen extends React.Component {
             
           </View>
           }
-        </ScrollView>
-        
+        </ScrollView>      
       </View>
     );
   }
@@ -295,10 +299,13 @@ class PortfolioScreen extends React.Component {
       })
       this.setState({
         patientList: patientData,
-        patient: patientData[0].id
+        patient: patientData[0].id,
+        profile_Pic: patientData[0].profile_Pic,
+        patientRoomNo: patientData[0].patientRoomNo
       });
     });
   }
+
 
   // signout user by deleting locally stored user info and navigate back to sign in screen
   _signOutAsync = async () => {
