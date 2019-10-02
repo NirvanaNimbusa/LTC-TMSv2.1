@@ -12,22 +12,33 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  Text,
   TextInput,
   Alert,
   Picker,
   ScrollView,
+  TouchableHighlight,
+  
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Button, ThemeProvider, Icon } from 'react-native-elements';
+import { Button, ThemeProvider } from 'react-native-elements';
+import Icon2 from 'react-native-vector-icons/Foundation';
+import{Container,Header,Title,Content,Icon,Card,CardItem,Text,Left,Right,Body}from'native-base';
+
 
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
   static navigationOptions = {
     title: 'Patient Records',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
   constructor() {
     super();
@@ -76,17 +87,6 @@ class PortfolioScreen extends React.Component {
     this._fetchPatients();
   }
 
-  /* rip dreams...
-  forceUpdateHandler(){
-    firebase.database().ref(`/Patient/${this.state.patient}/`).once('value').then((snapshot) => {
-      const data = snapshot.toJSON();
-    this.setState({patientPic: data.Portfolio.Name})
-    this.forceUpdate();
-    });
-  <Text style={{color:'black', fontSize: 15,fontWeight: 'bold',paddingTop:5}}>{this.state.patientPic}</Text> 
-  };
-  */
-
 
   // render content
   render() {
@@ -95,8 +95,7 @@ class PortfolioScreen extends React.Component {
         <ScrollView style={styles2.container}>
           {(this.state.position == "CNA") ? 
           <View>
-            <View>
-              <Text style={styles2.headerText}>Patient Status</Text>
+            <View>             
               <Text style={styles2.text}>Select Patient:</Text>
               <Picker
                 mode='anchor'
@@ -104,39 +103,157 @@ class PortfolioScreen extends React.Component {
                 selectedValue={this.state.patient}
                 onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
               >
-                <Picker.Item label="Select Patient" value="patient"/>
+                <Picker.Item  value="patient"/>
                 {this.state.patientList.map((item, index) => {
                   return (<Picker.Item label={item.id} value={item.id} key={index}/>)
                 })}
               </Picker>
             </View >
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Add Daily Status" type='solid' onPress={this._showDailyStatusAdd}/>
-            </View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
-            </View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
-            </View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
-            </View >
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Add Vital Status" type='solid' onPress={this._showVitalStatusAdd} />
-            </View>
+            
+        <Content padder>
+          <Card style={styles.mb}>
+            <CardItem header bordered>
+              <Text>Patient Satus</Text>
+            </CardItem>
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="clipboard-pencil"
+                  style={{ color: "#DD5044" }}
+                  size= {40}
+                />
+                <Text>Add Daily Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showDailyStatusAdd} />
+              </Right>             
+            </CardItem>
+            <CardItem>        
+              <Left><Icon2
+                  active
+                  name="clipboard-notes"
+                  style={{ color: "#3B579D" }}
+                  size= {45}
+                />
+                <Text> Check Daily Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+              </Right>
+              
+            </CardItem>
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="heart"
+                  style={{ color: "#D62727" }}
+                  size= {40}
+                />
+                <Text>Check AI Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+              </Right>
+              
+            </CardItem>
+
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="pencil"
+                  style={{ color: "#55ACEE" }}
+                  size= {40}
+                />
+                <Text>Add Vital Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showVitalStatusAdd} />
+              </Right>
+              
+            </CardItem>
+
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="page"
+                  style={{ color: "#DD5044" }}
+                  size= {45}
+                />
+                <Text> Check Vital Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+              </Right>
+              
+            </CardItem>
+            
+          </Card>
+        </Content>
+      
+    
           </View>
+          
           : 
           <View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check Daily Status" type='solid' onPress={this._showDailyStatusRead}/>
-            </View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check AI Status" type='solid' onPress={this._showAiStatusRead}/>
-            </View>
-            <View style={{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', fontSize: 10, width: 250}}>
-              <Button title="Check Vital Status" type='solid' onPress={this._showVitalStatusRead}/>
-            </View >
+            <Content padder>
+          <Card style={styles.mb}>
+            <CardItem header bordered>
+              <Text>Patient Satus</Text>
+            </CardItem>
+                     
+            <CardItem>        
+              <Left><Icon2
+                  active
+                  name="clipboard-notes"
+                  style={{ color: "#3B579D" }}
+                  size= {45}
+                />
+                <Text> Check Daily Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+              </Right>
+              
+            </CardItem>
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="heart"
+                  style={{ color: "#D62727" }}
+                  size= {40}
+                />
+                <Text>Check AI Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+              </Right>
+              
+            </CardItem>
+
+            <CardItem>        
+              <Left>
+                <Icon2
+                  active
+                  name="page"
+                  style={{ color: "#DD5044" }}
+                  size= {45}
+                />
+                <Text> Check Vital Status</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+              </Right>
+              
+            </CardItem>
+            
+          </Card>
+        </Content>
+            
           </View>
           }
         </ScrollView>
@@ -193,18 +310,19 @@ class PortfolioScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#fff',
     flex: 1,
-    padding: 20,
+    padding: 10,
     marginTop: 1,
   },
   headerText: {
     textAlign: 'center',
     justifyContent: 'space-evenly',
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
-    padding: 20,
+    padding: 20
+ 
   },
   text: {
     fontSize: 18,
@@ -212,6 +330,13 @@ const styles2 = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left', /*select week*/
   },
+  
+  mb: {
+    marginBottom: 15
+  },
+  picker:{
+    paddingTop:-10
+  }
   /*
   item: {
     padding: 4,

@@ -26,6 +26,13 @@ import AnnouncementList from '../components/AnnouncementList';
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   render() {

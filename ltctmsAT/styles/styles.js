@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   basicView: {
     //style component for views that only require the background color and flex. Used in HomeScreen.js
     flex: 1,
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#fff',
   },
 
   pickerStyle: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e6f3ff'
+    backgroundColor: '#fff'
   },
 
   containerAnnounce: {
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'SFNS Display',
     color: 'black',
+    
   },
 
   announce: {
