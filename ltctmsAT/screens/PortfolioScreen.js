@@ -110,10 +110,7 @@ class PortfolioScreen extends React.Component {
                 })}
               </Picker>
             </View >
-            <Text>
-              {this.setState.patientRoomNo}
-              {this.state.patient}
-            </Text>
+            
             <View >
             <Thumbnail style={{width:100,height:100,alignSelf:'center',position: 'absolute',borderColor: "white",borderWidth: 4}} source={{uri:this.state.patientpic}} />
             </View>
@@ -300,8 +297,7 @@ class PortfolioScreen extends React.Component {
       this.setState({
         patientList: patientData,
         patient: patientData[0].id,
-        profile_Pic: patientData[0].profile_Pic,
-        patientRoomNo: patientData[0].patientRoomNo
+        
       });
     });
   }
