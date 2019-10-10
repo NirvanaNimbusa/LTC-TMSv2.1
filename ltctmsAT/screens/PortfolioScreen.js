@@ -69,6 +69,7 @@ class PortfolioScreen extends React.Component {
       const data = JSON.parse(value);
       this.state.userID = data.ID;
       this.state.position = data.Position;
+      console.log(this.state.position)
       this.state.address = data.Address;
       this.state.name = data.Name;
       this.state.room = data.patientRoomNo;
@@ -104,158 +105,152 @@ class PortfolioScreen extends React.Component {
                 selectedValue={this.state.patient}
                 onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
               >
-                <Picker.Item  value="patient"/>
+                <Picker.Item  label = "Select Patient" value="patient"/>
                 {this.state.patientList.map((item, index) => {
                   return (<Picker.Item label={item.id} value={item.id} key={index}/>)
                 })}
               </Picker>
             </View >
-            
-            <View >
-            <Thumbnail style={{width:100,height:100,alignSelf:'center',position: 'absolute',borderColor: "white",borderWidth: 4}} source={{uri:this.state.patientpic}} />
+            <View>
+              <Content padder>
+                <Card style={styles.mb}>
+                  <CardItem header bordered>
+                    <Text>Patient Satus</Text>
+                  </CardItem>
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="clipboard-pencil"
+                        style={{ color: "#DD5044" }}
+                        size= {40}
+                      />
+                      <Text>Add Daily Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showDailyStatusAdd} />
+                    </Right>             
+                  </CardItem>
+                  <CardItem>        
+                    <Left><Icon2
+                        active
+                        name="clipboard-notes"
+                        style={{ color: "#3B579D" }}
+                        size= {45}
+                      />
+                      <Text> Check Daily Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+                    </Right>
+                    
+                  </CardItem>
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="heart"
+                        style={{ color: "#D62727" }}
+                        size= {40}
+                      />
+                      <Text>Check AI Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+                    </Right>
+                    
+                  </CardItem>
+
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="pencil"
+                        style={{ color: "#55ACEE" }}
+                        size= {40}
+                      />
+                      <Text>Add Vital Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showVitalStatusAdd} />
+                    </Right>
+                    
+                  </CardItem>
+
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="page"
+                        style={{ color: "#DD5044" }}
+                        size= {45}
+                      />
+                      <Text> Check Vital Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+                    </Right>
+                    
+                    </CardItem>
+                  
+                    </Card>
+              </Content>  
             </View>
-        <Content padder>
-          <Card style={styles.mb}>
-            <CardItem header bordered>
-              <Text>Patient Satus</Text>
-            </CardItem>
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="clipboard-pencil"
-                  style={{ color: "#DD5044" }}
-                  size= {40}
-                />
-                <Text>Add Daily Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showDailyStatusAdd} />
-              </Right>             
-            </CardItem>
-            <CardItem>        
-              <Left><Icon2
-                  active
-                  name="clipboard-notes"
-                  style={{ color: "#3B579D" }}
-                  size= {45}
-                />
-                <Text> Check Daily Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
-              </Right>
-              
-            </CardItem>
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="heart"
-                  style={{ color: "#D62727" }}
-                  size= {40}
-                />
-                <Text>Check AI Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
-              </Right>
-              
-            </CardItem>
-
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="pencil"
-                  style={{ color: "#55ACEE" }}
-                  size= {40}
-                />
-                <Text>Add Vital Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showVitalStatusAdd} />
-              </Right>
-              
-            </CardItem>
-
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="page"
-                  style={{ color: "#DD5044" }}
-                  size= {45}
-                />
-                <Text> Check Vital Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
-              </Right>
-              
-              </CardItem>
-            
-              </Card>
-            </Content>  
           </View>
           
           : 
           <View>
             <Content padder>
-          <Card style={styles.mb}>
-            <CardItem header bordered>
-              <Text>Patient Satus</Text>
-            </CardItem>
+              <Card style={styles.mb}>
+                <CardItem header bordered>
+                  <Text>Patient Satus</Text>
+                </CardItem>
 
-            <CardItem>        
-              <Left><Icon2
-                  active
-                  name="clipboard-notes"
-                  style={{ color: "#3B579D" }}
-                  size= {45}
-                />
-                <Text> Check Daily Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
-              </Right>
-              
-            </CardItem>
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="heart"
-                  style={{ color: "#D62727" }}
-                  size= {40}
-                />
-                <Text>Check AI Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
-              </Right>
-              
-            </CardItem>
+                <CardItem>        
+                  <Left><Icon2
+                      active
+                      name="clipboard-notes"
+                      style={{ color: "#3B579D" }}
+                      size= {45}
+                    />
+                    <Text> Check Daily Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+                  </Right>
+                </CardItem>
 
-            <CardItem>        
-              <Left>
-                <Icon2
-                  active
-                  name="page"
-                  style={{ color: "#DD5044" }}
-                  size= {45}
-                />
-                <Text> Check Vital Status</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
-              </Right>
-              
-            </CardItem>
-            
-          </Card>
-        </Content>
-            
+                <CardItem>        
+                  <Left>
+                    <Icon2
+                      active
+                      name="heart"
+                      style={{ color: "#D62727" }}
+                      size= {40}
+                    />
+                    <Text>Check AI Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+                  </Right>
+                </CardItem>
+
+                <CardItem>        
+                  <Left>
+                    <Icon2
+                      active
+                      name="page"
+                      style={{ color: "#DD5044" }}
+                      size= {45}
+                    />
+                    <Text> Check Vital Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+                  </Right>
+                </CardItem>
+              </Card>
+            </Content>
           </View>
           }
         </ScrollView>      
