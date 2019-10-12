@@ -286,9 +286,10 @@ class CenterInfo extends React.Component {
   /*************************************************************************/
   _renderItem = ({ item }) => {
     return (
-      <View>
-        <Text style={styles2.item}> {item.id} : {item.value}</Text>
-
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={styles2.item}> {item.id}</Text>
+        <Text style={styles2.item2}> {item.value}</Text>
+        
       </View>
 
     )
@@ -399,7 +400,7 @@ class CenterInfo extends React.Component {
 const styles2 = StyleSheet.create({
   container: {
     flex: 1,
-   
+    justifyContent: "space-evenly",
     marginTop: 1,
   },
   picker: {
@@ -412,9 +413,20 @@ const styles2 = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     flex: 1,
-    textAlign: 'left',
     color: 'black',
+    flexDirection: 'row',
   },
+  item2: {
+    padding: 1,
+    paddingLeft: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    flex: 1,
+    color: 'black',
+    textAlign: 'center',
+    flexDirection: 'row',
+  },
+  
   announce: {
     padding: 1,
     fontSize: 18,
