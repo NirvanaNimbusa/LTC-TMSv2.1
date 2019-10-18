@@ -1,5 +1,5 @@
-<!--
-  @file 08Helpandsupport2.html
+﻿<!--
+  @file 05Library2.html
   @author  MCU
   @author  Kutztown University
   @license
@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    
     <title>LTC-TMS</title>
     <link rel="icon" type="image/jpg" href="image\logo.jpg">
     <link rel="stylesheet" type="text/css" href="statics/css/iconfont.css" />
@@ -26,19 +25,19 @@
     <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type='text/javascript' src="Config.js"></script>
-    <script type='text/javascript' src='HelpandSupport.js'></script>
+    <script type='text/javascript' src='Library.js'></script>
     <script type='text/javascript' src='Profile.js'></script>
 </head>
 <style>
-    span.hidden{
-        display: none;
-    }
     table, th, td {
         padding: 5px;
         border: 1px solid black;
         width: 400px;
         text-align: center;
         word-wrap: break-word;
+    }
+    span.hidden{
+        display: none;
     }
         table th {
             background-color: #B0C4DE;
@@ -48,178 +47,109 @@
         table td {
             text-shadow: 2px 2px #FFFFFF;
         }
-    <!-- usermessage-- > * {
-        margin: 0px;
-        padding: 0px;
-    }
 
-    .table {
-        width: 965px;
-        height: 100px;
-        border-style: hidden;
-    }
-    .staffTable {
-        width: 965px;
-        height: 100px;
-        border-style: hidden;
-    }
-
-    .familyTable {
-        width: 965px;
-        height: 100px;
-        border-style: hidden;
-    }
-
-    .liuyan {
-        margin: 10px;
-        height: auto;
-        border: 1px solid #EEEEEE;
-        background-color: #EEEEEE;
-        box-shadow: 5px 5px 10px #EEEEEE;
-        padding: 5px;
+    .library_assigntask {
+        background-color: transparent;
+        width: 80px;
+        height: 60px;
+        border: hidden;
+        perspective: 1000px;
         position: relative;
-        top: 0%;
-        width: 91%;
-        display: block;
-        left: 3%;
+        top: -850px;
+        left: 880px;
     }
 
-    .information {
-        margin-top: 50px;
-        height: 500px;
-        border: 1px solid #EEEEEE;
-        background-color: #EEEEEE;
-        box-shadow: 5px 5px 10px #EEEEEE;
-        padding: 5px;
-    }
-
-    .time {
-        display: inline;
-        color: #666666;
-        font-size: 7px;
+    .library_assigntask-inner {
         position: absolute;
-        left: 88%;
-        top: 10%;
-        font-size: 10px;
-    }
-
-    .usermessage {
-        width: 750px;
-    }
-
-    .replyComment {
-        word-wrap: break-word;
-    }
-
-    #nav > li > a {
-        color: white;
-    }
-
-    #user-fa, .user-fa {
-        display: inline-block;
-        width: 36px;
-        height: 36px;
-        border: 1px solid #EEEEEE;
-        background-color: #EEEEEE;
-        box-shadow: 1px 1px 5px;
-        border-radius: 18px;
+        width: 100%;
+        height: 100%;
         text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
     }
 
-        #user-fa > i {
-            font-size: 20px;
-            margin-top: 5px;
-        }
-
-    #user > a {
-        padding-top: 5px;
-        text-decoration: none;
+    .library_assigntask:hover .library_assigntask-inner {
+        transform: rotateY(180deg);
     }
 
-    .edit {
+    .library_assigntask-front, .library_assigntask-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .library_assigntask-front {
+        color: black;
+        font-size: 14px;
+    }
+
+    .library_assigntask-back {
+        color: black;
+        transform: rotateY(180deg);
+    }
+
+    .library_form-popup {
+        display: none;
+        position: absolute;
+        top: 20%;
+        left: 30%;
+        border: 5px solid gray;
         padding: 10px;
-        margin-top: 20px;
-        border-bottom: 1px solid #C7254E;
+        background-color: white;
+        height: 60%;
+        width: 45%;
+        overflow-y: auto;
     }
 
-        .edit > a {
-            color: #000000;
-            margin: 2px;
+        .library_form-popup .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
         }
 
-            .edit > a:hover {
-                color: #999999;
-                background-color: #D9EDF7;
-            }
+        .library_form-popup .cancel {
+            background-color: red;
+        }
 
-    .text-success {
-        display: none;
-        width: 500px;
-        height: 30px;
-        word-wrap: break-word;
-    }
+        .library_form-popup .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
 
-    #message {
-        width: 40%;
-        height: 40px;
-        display: none;
-    }
-
-    .comment {
-        display: block;
-    }
-
-    .replyTime {
-        display: block;
-        position: relative;
-        left: 88%;
-        top: -10px;
-        font-size: 10px;
-    }
-
-    .reply {
-        font-size: 6px;
-        color: blue;
-        display: inline;
-        font-size: 8px;
-    }
-
-    .btn-success {
-        position: relative;
-        left: 10px;
-        display: none;
-        width: 50px;
-    }
-
-    .h4 {
-        width: auto;
-        font-size: 25px;
-    }
-
-    .mess {
-        border: 1px solid #E4B9B9;
-        padding: 15px;
-        box-shadow: 2px 2px 15px #EEEEEE;
-        font-family: "微软雅黑";
-        font-size: medium;
-    }
+        .picPreview{
+            display: flex;
+            max-height: 100px;
+            max-width: 100px;
+            height: auto;
+            width: auto;
+            text-align: center;
+            align-content: center;
+            align-items: center;
+        }
 
     @keyframes bounce {
         0%, 20%, 60%, 100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-    40% {
-        -webkit-transform: translateY(-5px);
-        transform: translateY(-5px);
-    }
-    80% {
-        -webkit-transform: translateY(-3px);
-        transform: translateY(-3px);
-    }
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        40% {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+
+        80% {
+            -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+        }
     }
 </style>
-<body style="height:900px;">
+<body>
     <div class="wrapper">
         <!-- Contain EVERYTHING THING IN WRAPPER CLASS -->
         <nav id="sidebar">
@@ -256,7 +186,7 @@
                         報告
                     </a>
                 </li>
-                <li>
+                <li class="current">
                     <a href="../Frontend-Chinese/05Library2.html">
                         <i class="glyphicon glyphicon-book"></i>
                         全部任務
@@ -274,7 +204,7 @@
                         個人資料
                     </a>
                 </li>
-                <li class="current">
+                <li >
                     <a href="../Frontend-Chinese/08Helpandsupport2.html">
                         <i class="glyphicon glyphicon-question-sign"></i>
                         問題與協助
@@ -296,14 +226,14 @@
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 3ex;padding-top:1.5ex;padding-bottom:1.5ex; background-color:green;outline-color:darkgreen">
                                 <i class="fas fa-align-left"></i>
                                 <span id="toggleSide">隱藏列表</span>
                             </button>
 
                             <div class="navbar-header">
 
-                                <a href="../-Chinese/01Aboutus2.html">
+                                <a href="../Frontend-Chinese/01Aboutus2.html" style="padding-left:4px">
                                     <img src="statics/images/v2ltctmslogo.png" height="50" width="60" />
                                 </a>
 
@@ -368,106 +298,68 @@
 
             <div class="main container-fluid wrapper">
                 <!-- START OF MIDDLE CONTENT-->
-                <div class="right" style="width:800ex; transform:translateY(-9ex)">
-                        <div class="tap">
+                <div class="right" style="transform:translateY(-9ex)">
+
+                    <div id="menu" style="display:none;position:fixed;top:6%;left:74%;background-color:white;height:100px;width:200px;">
+                        <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">語言</div>
+                        <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;">&nbsp English<br></p>
+                        <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;" onclick="window.location.href='/../Frontend-Chinese/05Library2.html'">&nbsp 中文<br></p>
+                        <p class="logoutselected" onclick="Logout()">&nbsp<i class="icon iconfont icon-dianyuan" style="margin-right:5px;"></i>登出</p>
+                    </div>
+                    <form>
+                            <select class="library_filter" id="filterCategory" onchange="filter_Category()">
+                                <option>類別</option>
+                            </select>
                             
-                            <span id="stafffeedbackspan" onclick="showsf()" style="opacity:1;cursor:pointer;">員工意見</span>
-
-                            <span id="patientfeedbackspan" onclick="showpf()" style="opacity:.8;cursor:pointer;">家屬意見</span>
-                        </div>
-                        <div id="container" class="container" style="overflow-y:scroll;overflow-x:scroll;">
-                            <table style="width:100%;border-style:hidden;" id="staffFeedback" class="staffTable" >
-                                
-                                <tr>
-                                    <th style="width:20%" id="email"> 使用者信箱 </th>
-                                    <th style="width:10%" id="id"> 編號 </th>
-                                    <th style="width:35%" id="feedback"> 意見 </th>
-                                    <th style="width:35%" id="reply"> 回覆 </th>
-                                </tr>
-                                <tr>
-                                        <td>使用者信箱(範例)</td>
-                                        <td>編號<br>(範例)</td>
-                                        <td>意見(範例)</td>
-                                        <td>回覆(範例)</td>
-                                </tr>
-                                <tr>
-                                        <td>使用者信箱(範例)</td>
-                                        <td>編號<br>(範例)</td>
-                                        <td>意見(範例)</td>
-                                        <td>回覆(範例)</td>
-                                </tr>
-                                <tr></tr>
-                            
-                            </table>
-
-
-                            <!--usermessag  Please don't delete
-                    <div class="liuyan" >
-                        <span id="user-fa" ><i class="fa fa-user"><img  class="user-fa" src="statics/images/user_face.jpg"/></i></span>
-                        <div  id="user">
-                           <span href="#" id="usename" >ZengXiaoYa</span>
-                       </div>
-                        <span  id ="comment" ></span>
-                        <span id = "reply" onclick="reply()">Reply</span>
-
-                        <div id="usermessage">
-                            <div class="content">
-                                <input id="message" class="text-success" type="text">
-                                </input>
-                                <button id="btn" class="btn btn-success" ="sendMess()">发表</button>
+                                <input class="library_search" type="text" name="search" placeholder="搜尋" id="searchInput" autocomplete="off">
+                            </form>
+                    <div class="container" id="data1"style="overflow:auto;">
+                        <div class="library_tasktable" >
+                            <br><br>
+                            <div style="overflow:auto;">
+                                <table class="library_tasktable_display" id="assigningTask" style="border-style:hidden;width:100%;">
+                                    <tr>
+                                        <th style="width:25%" onclick="sortingTask(0)" class="library_table_firstbox"> 類別 </th>
+                                        <th style="width:55%" onclick="sortingTask(1)" class="library_table_secondbox"> 任務名稱  </th>
+                                        <th style="width:10%"></th>
+                                        <th style="width:10%"><input type="checkbox" id="all_checked" onclick="toggleTask(this)"></th>
+                                    </tr>
+                                </table>
+                        
                             </div>
                         </div>
                     </div>
-                -->
-                        </div>
-                        <div id="container1" class="container" style="display:none;overflow-y:scroll;">
-                            <table id="familyTable" class="familyTable" border="1">
-                                <tr>
-                                    <th style="width:20%" class="library_table_firstbox"> 使用者信箱 </th>
-                                    <th style="width:10%" class="library_table_firstbox"> 編號 </th>
-                                    <th style="width:70%" class="library_table_firstbox"> 回覆 </th>
-                                </tr>
-                                <tr>
-                                    <td>使用者信箱(範例)</td>
-                                    <td>編號<br>(範例)</td>
-                                    <td>回覆(範例)</td>
-                                </tr>
-                                <tr>
-                                    <td>使用者信箱(範例)</td>
-                                    <td>編號<br>(範例)</td>
-                                    <td>回覆(範例)</td>
-                                </tr>
-                                <tr></tr>
-                            </table>
+                    <button id ="library_requestCopy" type="button" onclick="createTaskCopy()">複製</button>
+
+                    <div class="container" id="data2" style="display:none;">
+                        <br>
+                        <select class="library_historyfiltername" id="filterNameList" onchange="filterNameList()" style="position:relative;left:2%;">
+                            <option>姓名</option>
+                        </select>
+                        <select class="library_historyfiltertask" id="filterTaskList" onchange="filterTaskList()" style="position:relative;left:2%;">
+                            <option>任務名稱</option>
+                        </select>
+                        <input class="library_historysearch" type="text" name="search" placeholder="Search" id="searchKeyword" style="position:relative;left:2%;">
+                        <div class="library_historyoverflow">
+                            <br>
+                            <div style="overflow:auto;height:300px;">
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div style="position:absolute;left:40px;bottom:0;">
-                        <p style="position:relative;font-size:10px;">*請聯繫開發團隊獲取進一步的幫助</p>
-                        <table id="Contact_information" style="width:80%">
-                            <tr>
-                                <th colspan="4"> <h3 style="padding:10px 10px;"><i>開發團隊聯絡資訊</i></h3></th>
-                            </tr>
-                            <tr>
-                                <th style="padding:6px 6px;">姓名 </th>
-                                <!--<td style="padding:6px 6px;">Ming Chuan AC IV </td>-->
-                                <td style="padding:6px 6px;">銘傳大學 </td>
-                                <th style="padding:6px 6px;">電子信箱 </th>
-                                <td style="padding:6px 6px;">mcultcver4@gmail.com </td>
-                        </tr>
-                        <tr>
-                                <th style="padding:6px 6px;">連絡電話 </th>
-                                <!--<td style="padding:6px 6px;">+886911223344 </td>-->
-                                <td style="padding:6px 6px;">(03)3507001 </td>
-                                <th style="padding:6px 6px;">地址 </th>
-                                <!--<td style="padding:6px 6px;">No. 5, Deming Road, Guishan District, Taoyuan City, 333 </td>-->
-                                <td style="padding:6px 6px;">桃園市龜山區大同里德明路 5 號 </td>
-                        </tr>
-                        </table>
             </div>
         </div>
-    </div>
-    <!-- START COPY FOR SIDEBAR JAVASCRIPT -->
+        <div class="library_form-popup" id="form1">
+            <div id="taskHeader"> 
+            </div>
+            <div class="sortableContainer" id="sortableContainer">
+                <div class="sortable" id="sort"></div>
+                <div class = "taskEditorContent" id="taskFooter" style = "display: none"> </div>
+            </div>
+        </div>
+
+        <!-- START COPY FOR SIDEBAR JAVASCRIPT -->
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
