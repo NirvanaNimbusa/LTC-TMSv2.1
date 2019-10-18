@@ -144,8 +144,8 @@ class VitalStatusAddScreen extends React.Component {
         heart = systolic + "~" + diastolic;
         const temperature = this.state.temperature
         const CNA = this.state.userInfo.ID;
-        const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/${CNA}/vital_status/`;
-        console.log(baseref)
+        const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/vital_status/`;
+        console.log(baseRef)
         const ref = firebase.database().ref(baseRef);
         const user = this.state.userInfo;
         const now = new Date();
