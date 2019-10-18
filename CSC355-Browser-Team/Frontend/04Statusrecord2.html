@@ -309,7 +309,7 @@
                                                     <!-- End of Account profile -->
                                             </div>
                                         <a href="#">English</a>
-                                        <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
+                                        <a href="../Frontend-Chinese/07E-portfolio2.html">中文</a>
                                         <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
                                     </div> <!--end div class="dropdown-content"-->
                                 </li>
@@ -345,9 +345,6 @@
                         <span id="aisspan" onclick="showais()" style="opacity:.8;cursor:pointer;">AI Status</span>
                         <span id="scspan" onclick="showsc()" style="opacity:.8;cursor:pointer;">Special Care</span>
                         <span id="ecspan" onclick="showec()" style="opacity:.8;cursor:pointer;">Env. Condition</span>
-                    </div>
-                    <span class="placeholderFont">This is a placeholder! Implementation of this feature will be added on in the future!</span>
-                    <div class="placeholder">
                     </div>
                     <div id="menu" style="display:none;position:fixed;top:6%;left:74%;background-color:white;height:100px;width:200px;z-index:5;">
                         <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">Language</div>
@@ -461,9 +458,9 @@
                             <select id="selectPAT" onclick="clearBox()" onchange="selectPatient()">
                                 <option>Patient ID</option>
                             </select>
-                            <select id="selectCNA" style="width:70px;">
-                                <option>CNA ID</option>
-                            </select>
+                            <div id="selectCNA" style="width:70px;">
+                              <!--  <option>CNA ID</option>     -->
+                            </div>
                             <br><br><br>
                         </div>
                         <br><br>
