@@ -20,6 +20,7 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  Dimensions,
   
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -135,6 +136,14 @@ class TaskScreen extends React.Component {
       });
     });
 
+  }
+
+  seperatorStyle = function(screenWidth) {
+    return {
+      height:2,
+      backgroundColor: '#C2CFDB',
+      width: screenWidth,
+    }
   }
 
   // toggles the collapse state for categories of tasks
@@ -258,7 +267,7 @@ class TaskScreen extends React.Component {
           onPress={this.toggleCollapse.bind(this, item)}
         >
           <Text style={styles.itemCategory}>{item.category}</Text>
-          <Text style={styles.textRegister}> ───────────────────────────────────</Text>
+          <Text style={this.seperatorStyle(Math.round(Dimensions.get('window').width))}> ─</Text>
         </TouchableOpacity>
         {item.collapsed ?
           <View /> :
