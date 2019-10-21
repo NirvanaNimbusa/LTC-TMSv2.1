@@ -237,7 +237,7 @@ class TaskScreen extends React.Component {
 
   createDetailText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black' }}>     Detailed Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black', paddingLeft: 10}}>   Detailed Step {step} : {text}</Text></View>
     );
   }
 
