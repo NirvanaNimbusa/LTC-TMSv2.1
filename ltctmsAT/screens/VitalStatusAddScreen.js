@@ -74,24 +74,10 @@ class VitalStatusAddScreen extends React.Component {
 
         return (
 
-            <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#e6f3ff', flex:1}} >
-            <View style={{backgroundColor:'#e6f3ff'}}>
+            <KeyboardAvoidingView behavior='position' style={{backgroundColor:'#fff', flex:1}} >
+            <View style={{backgroundColor:'#fff'}}>
                 <ScrollView style={styles2.container}>
                     <View>
-                        <Text style={styles.item}>Select Patient ID to update status</Text>
-                        <Picker
-                            mode={'dropdown'}
-                            style={styles2.picker}
-                            selectedValue={this.state.patient}
-                            onValueChange={this.updatePatient}
-                            
-                            
-                        >
-                            <Picker.Item label="Select Patient" value="patient" />
-                            {this.state.patientList.map((item, index) => {
-                                return (<Picker.Item label={item.id} value={item.id} key={index}/>)
-                            })}
-                        </Picker>
                     
                         <View style={{alignItems:'center'}}>
                         <Text style={styles.itemPortfolio}>Patient Vital Status</Text>
@@ -130,15 +116,14 @@ class VitalStatusAddScreen extends React.Component {
                         </View>
 
                     </View>
-                    <View>
+                    <View style={{marginTop: 5, alignSelf: 'center', flex: 1, fontSize: 10, width: 250}}>
                         <Button
                             onPress={this._submitStatus}
                             title="Submit"
-                            type="outline"
-                            style={{ padding: 10 }}
+                            type="solid"
+                            buttonStyle={{
+                             backgroundColor:'#3f9fff'}}
                         />
-                        <Text></Text>
-                        <Text></Text>
                     </View>
 
                 </ScrollView>
@@ -150,7 +135,7 @@ class VitalStatusAddScreen extends React.Component {
 
     // submits patient vital status to the firebase database, fires an alert if successful
     _submitStatus = async () => {
-        if (this.state.patient == null){
+        if (this.props.navigation.getParam('patientID','0') == null){
             Alert.alert("Please select a patient")
         } else {
         const systolic = this.state.systolic
@@ -159,7 +144,8 @@ class VitalStatusAddScreen extends React.Component {
         heart = systolic + "~" + diastolic;
         const temperature = this.state.temperature
         const CNA = this.state.userInfo.ID;
-        const baseRef = `Activities/${this.state.patient}/${this.state.today}/${CNA}/vital_status/`;
+        const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/vital_status/`;
+        console.log(baseRef)
         const ref = firebase.database().ref(baseRef);
         const user = this.state.userInfo;
         const now = new Date();

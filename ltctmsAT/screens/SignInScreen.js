@@ -56,7 +56,7 @@ class SignInScreen extends React.Component {
   // toggle, and buttons
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, backgroundColor: '#e6f3ff' }}>
+      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, backgroundColor: '#BAE7FF' }}>
         <View style={styles.containerSignIn}>
           <Image style={styles.logo} source={require('../assets/img/logofinal.png')} />
           <View style={styles_2.inputContainer}>

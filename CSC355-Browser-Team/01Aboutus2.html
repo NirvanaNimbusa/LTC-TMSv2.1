@@ -1,0 +1,285 @@
+﻿﻿<!--
+  @file 01Aboutus2.html
+  @author  MCU
+  @author  Kutztown University
+  @license
+-->
+<!DOCTYPE html>
+<!--#30B400#339933#99CC00#FFFFCC-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LTC-TMS</title>
+    <link rel="icon" type="image/jpg" href="image\logo.jpg">
+    <link rel="stylesheet" type="text/css" href="statics/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/style.css" />
+    <!-- IMPORTING BOOTSTRAP!!-->
+    <!-- Importing BOOTSTRAP!!! -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Our Custom SIDE/TOP BAR CSS -->
+    <link rel="stylesheet" href="statics/css/skeleton.css">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type='text/javascript' src='Config.js'></script>
+    <script type='text/javascript' src='AboutusKU.js'></script>
+    <script type='text/javascript' src='Profile.js'></script>
+</head>
+	<style>
+        span.hidden{
+        display: none;
+    }
+    </style>
+<body>
+    <div class="wrapper"><!-- Contain EVERYTHING THING IN WRAPPER CLASS -->
+        <nav id="sidebar"><!-- SIDEBAR -->
+            <ul class="list-unstyled components">
+                <li class="current">
+                    <a href="../Frontend-Chinese/01Aboutus2.html">
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        關於我們
+                    </a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/02Schedule2.html">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        行事曆</a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/03Memo2.html">
+                        <i class="glyphicon glyphicon-folder-close"></i>
+                        備忘錄</a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/04Statusrecord2.html">
+                        <i class="glyphicon glyphicon-heart-empty"></i>
+                        狀態紀錄</a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/Reports.html">
+                        <i class="glyphicon glyphicon-file"></i>
+                        報告
+                    </a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/05Library2.html">
+                        <i class="glyphicon glyphicon-book"></i>
+                        全部任務</a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/10Mytask2.html">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                        我的任務
+                    </a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/07E-portfolio2.html">
+                        <i class="glyphicon glyphicon-user"></i>
+                        個人資料</a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/08Helpandsupport2.html">
+                        <i class="glyphicon glyphicon-question-sign"></i>
+                        問題與協助</a>
+                </li>
+            </ul>
+        </nav>
+    <!-- End of sidebar !-->
+
+        <div id="content"> <!-- Place everything except the sidebar in content class -->
+            <div class="header"> <!-- DIV CONTAINER OF OUR HEADER-->
+
+                <div class="bar"><!-- PlaceHolder for top bar -->
+                    
+                    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default"><!-- Bootstrap navigation bar -->
+                        <div class="container-fluid">
+
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                                <i class="fas fa-align-left"></i>
+                                <span id="toggleSide">隱藏列表</span>
+                            </button>
+
+                            <div class="navbar-header">
+
+                                <a href="../Frontend/01Aboutus2.html">
+                                    <img src="statics/images/v2ltctmslogo.png" height="50" width="60" />
+                                </a>
+
+                                <a href="#" style=" padding-left:20px">
+                                    <span class="white-text title"> LTC-TMS</span>
+                                </a>
+
+                            </div>
+                            <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropbtn">
+                                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
+                                                    <img src="statics/images/edit.png" id="photoword" 
+                                                         style="position:relative;left:3px; text-align:center;
+                                                    display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
+                                                    <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
+                                                    <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                                </div>
+                                    </a>
+                                    <div class="dropdown-content">
+                                            <!-- Start of Account profile  -->
+                                            
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
+                                                    <p></p>
+                                                    
+                                                    <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                                        <span style = "font-size: 12pt"> 姓名 : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
+                                                        <span class="hidden" style = "font-size: 12pt">編號 : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
+                                                        <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                        <span style = "font-size: 12pt"> 職位 : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
+                                                    </p>
+                                                    <!-- End of Account profile -->
+                                            </div>
+                                        <a href="../Frontend/01Aboutus2.html">English</a>
+                                        <a href="#">中文</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">登出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <!-- TOP BAR ENDS-->
+                <!-- Place Holder for header-->
+                <div class="user-info">
+                    <!--BACKGROUND PANEL IMAGE-->
+                    <div class="container-fluid">
+                        <div class="container" style="transform:translateY(-8.5ex)">
+                            <!-- CIRCLE IMAGE THING-->
+                            <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
+                            <div class="user-account">
+                                <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- END OF THE TWO HEADER!! -->
+
+            <div class="main container-fluid wrapper">
+                <!-- START OF MIDDLE CONTENT-->
+                <div class="right"  style="width:800ex; transform:translateY(-9ex); height:50ex;">
+                    <div class="tap">
+                        <span id="introductionspan" onclick="showintroductionKU()" style="opacity:1;cursor:pointer;">介紹</span>
+                        <span id="centerinfospan" onclick="showcenterinfoKU()" style="opacity:.8;cursor:pointer;">醫院資料</span>
+                    </div>
+                    <div class="container" id="data1" style="position:relative;top:0%; left:0%;">
+                        <table style="height:100%;width:100%;border-style:hidden;">
+                            <tr>
+                                <th style="height:20%;"> 關於我們 <button onclick="aboutus_edit()" style="position:relative;left:40%;height:40%;width:5%;cursor:pointer;">編輯</button></th>
+                            </tr>
+                            <tr>
+                                <td style="border-style:hidden;"><textarea disabled id="aboutus_text" style="position:absolute; top:25%;left:3%; width:93%; height:200px;background-color:#FFF;font-size:18px;"></textarea></td>
+                            </tr>
+                            <button style="display:none; position:absolute; top:76%;left:88%;width:8%; height:8%;cursor:pointer;" id="aboutus_button" onclick="aboutus_submit()">確定</button>
+                        </table>
+                    </div>
+                    
+                    <div class="container" id="data2" style="display:none; position:relative;">
+                        <table id=ContactInfo_table style="width:100%; height:80%;border-style:hidden;">
+                            <tr>
+                                <th colspan="2" style="height:20%;"> 聯絡方式 <button id="CI_edit" onclick="CI_edit()" style="position:relative;left:30%;height:40%;width:5%;cursor:pointer;">編輯</button></th>
+                            </tr>
+                            <tr>
+                                <th style="width:35%"> 名字: </th>
+                                <td id="Name">  </td>
+                                <textarea id="Name1" style=" display:none; position:absolute;; top:17%; left:30%;width:360px;height:11%;"></textarea>
+                            </tr>
+                            <tr>
+                                <th> 電子信箱: </th>
+                                <td id="Email_Address">  </td>
+                                <textarea id="Email_Address1" style=" display:none; position:absolute; top:32%; left:30%;width:360px;height:11%;"></textarea>
+                            </tr>
+                            <tr>
+                                <th> 聯絡電話:</th>
+                                <td id="Contact_No"> </td>
+                                <textarea id="Contact_No1" style="display:none; position:absolute; top:50%; left:30%;width:360px;height:11%;"></textarea>
+                            </tr>
+                            <tr>
+                                <th> 地址:</th>
+                                <td id="Address"> </td>
+                                <textarea id="Address1" style="display:none; position:absolute; top:65%; left:30%;width:500px;height:11%;"></textarea>
+                            </tr>
+                            <button id="CI_button" style="display:none;position:absolute;top:78%; left:89%;width:8%;cursor:pointer;" onclick="CI_submit()">確定</button>
+                        </table>
+                    </div>
+                </div>
+        </div><!-- END OF MAIN DIV CONTAINER CLASS!!! -->
+    </div><!--End OF WRAPPER CLASS!!-->
+
+    <!-- START COPY FOR SIDEBAR JAVASCRIPT -->
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript">
+        /*
+        This is the javascript required for the sidebar to work.
+        */
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+            /*
+            This is the javascript for the sidebar to change.
+            */
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                if(document.getElementById("toggleSide").innerHTML=="隱藏列表"){
+                    document.getElementById("toggleSide").innerHTML = "顯示列表";
+                } else if (document.getElementById("toggleSide").innerHTML == "顯示列表") {
+                    document.getElementById("toggleSide").innerHTML = "隱藏列表";
+                }
+            });
+        });
+        /*************************************************************************/
+        /* Function name: imgBlur */
+        /* Description: Blur the image when the mouse is over the icon image. */
+        /* Parameters: obj - the image  */
+        /* Return Value: none */
+        /*************************************************************************/
+        function imgBlur(obj) {
+            var photoword = document.getElementById("photoword");
+            var Profilepic = document.getElementById("Profilepic");
+            photoword.style.display = "inline";
+            photoword.style.position = "absolute";
+            photoword.style.transform = "translate(2ex,2ex)";
+            photoword.style.zIndex = "2000";
+
+            Profilepic.style.filter = "blur(3px)";
+            Profilepic.style.display = "inline";
+        }
+
+        /*************************************************************************/
+        /* Function name: imgOrg */
+        /* Description: Fix the image post mouse over. */
+        /* Parameters: obj - the image  */
+        /* Return Value: none */
+        /*************************************************************************/
+        function imgOrg(obj) {
+            var photoword = document.getElementById("photoword");
+            var Profilepic = document.getElementById("Profilepic");
+            photoword.style.display = "none";
+            Profilepic.style.display = "inline";
+            Profilepic.style.filter = "blur(0px)";
+        }
+    </script>
+    <!-- END COPY FOR SIDEBAR JAVASCRIPT-->
+</body>
+</html>

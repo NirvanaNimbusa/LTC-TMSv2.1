@@ -66,14 +66,14 @@ const AppLeftStack = createStackNavigator({
 
 // middle navigation container in tabular navigation bar
 const AppMiddleStack = createStackNavigator({
-  Portfolio: PortfolioScreen,
+  Record: PortfolioScreen,
   DailyStatusRead: DailyStatusReadScreen,
   DailyStatusAdd: DailyStatusAddScreen,
   AiStatusRead: AiStatusReadScreen,
   VitalStatusRead: VitalStatusReadScreen,
   VitalStatusAdd: VitalStatusAddScreen,
 }, {
-    initialRouteKey: 'Portfolio'
+    initialRouteKey: 'Record'
   });
 
 //Changed Task to Library
@@ -84,9 +84,9 @@ const AppTaskStack = createStackNavigator({
   });
 
 const AppRightStack = createStackNavigator({
-  Logout: LogoutScreen
+  Portfolio: LogoutScreen
 }, {
-    initialRouteKey: 'Logout'
+    initialRouteKey: 'Portfolio'
   });
 
 // update: Change schedule to Center information 
@@ -112,7 +112,7 @@ const getTabBarIcon = (navigation, tintColor) => {
   let entypo = Entypo;
   if (routeName === 'Home') {
     iconName = `ios-home`;
-  } else if (routeName === 'Portfolio') {
+  } else if (routeName === 'Record') {
     iconName = `ios-create`;
   } else if (routeName === 'Library') {
     iconName = `ios-book`;
@@ -135,8 +135,7 @@ const AppBottomTabNavigation = createBottomTabNavigator({
   Library: AppTaskStack,
   //CenterInfo: AppScheduleStack,
   'Center Info': AppScheduleStack,
-  Portfolio: AppRightStack,
-
+  Portfolio: AppRightStack
 },
 
   { //call defaultNavigation for icon
@@ -147,14 +146,14 @@ const AppBottomTabNavigation = createBottomTabNavigator({
     }),
     //change color of the icon when it is clicked
     tabBarOptions: {
-      activeTintColor: '#0a17b8',
-      inactiveTintColor: 'black',
+      activeTintColor: '#3f9fff',
+      inactiveTintColor: '#949494',
       labelStyle: {
         fontSize: 15,
         //fontFamily: ''
       },
       style: {
-        backgroundColor: '#d0ebfe',
+        backgroundColor: '#FFFFFF',
         borderTopWidth: 0.5
       },
     },

@@ -20,11 +20,11 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
-  Text
+  
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Container, Header, Title, Content, List, Icon, Card, CardItem, Item, Body, Right, Button, Input, Form, Textarea, Left } from 'native-base'
+import {  Text,Content,Container, Header,  Icon, Item, Button, Input} from 'native-base'
 import firebase from 'react-native-firebase';
 import styles from '../styles/styles';
 import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
@@ -34,6 +34,13 @@ import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
 class TaskScreen extends React.Component {
   static navigationOptions = {
     title: 'Task Library',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
   };
 
   state = {
@@ -187,15 +194,16 @@ class TaskScreen extends React.Component {
 
   }
 
+
   createStepText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 20, color: 'grey' }}>Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2'}}>   Step {step} : {text}</Text></View>
     );
   }
 
   createDetailText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 14, color: 'black' }}>Detailed Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black' }}>     Detailed Step {step} : {text}</Text></View>
     );
   }
 
@@ -215,7 +223,7 @@ class TaskScreen extends React.Component {
         <TouchableOpacity
           onPress={this.toggleCollapse.bind(this, item)}
         >
-          <Text style={styles.item}>{item.category}</Text>
+          <Text style={styles.itemCategory}>{item.category}</Text>
         </TouchableOpacity>
         {item.collapsed ?
           <View /> :
@@ -223,26 +231,19 @@ class TaskScreen extends React.Component {
             <TouchableOpacity
               onPress={this.toggleCollapseStep.bind(this, item)}
             >
-              <Text style={styles.itemTask}>{item.name}</Text>
+              <Text style={styles.itemTask, {fontSize: 25, color: '#004dcf', fontWeight: 'bold'}}>  {item.name}</Text>
             </TouchableOpacity>
             {item.collapsedStep ?
               <View /> :
               <View>
-                <TouchableOpacity
-                  onPress={this.toggleCollapse.bind(this, item)}
-                >
-                  <Text style={styles.itemTask}>{item.steps.description}</Text>
-                </TouchableOpacity>
-                {item.collapsed ?
-                  <View /> :
-                  <View>
-                    {stepsArray}
-                  </View>}
+                {stepsArray}
               </View>}
           </View>}
       </View>
     )
   }
+
+  
 
 
   // renders the header
@@ -254,13 +255,26 @@ class TaskScreen extends React.Component {
     )
   }
 
+  
+
   // renders the flatlist and passes the data elements from state into _renderItem
   render() {
     return (
-      <ScrollView style={{ backgroundColor: '#e6f3ff' }}>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
         <View style={{ flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}
         >
+          
+        <Header searchBar rounded>
+          <Item>
+            <Icon active name="search" />
+            <Input placeholder="Search" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
+        </Header>
+
           <FlatList
             style={{ flexGrow: 1 }}
             ref="listRef"

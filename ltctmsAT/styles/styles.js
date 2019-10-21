@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   basicView: {
     //style component for views that only require the background color and flex. Used in HomeScreen.js
     flex: 1,
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#fff',
   },
 
   pickerStyle: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e6f3ff'
+    backgroundColor: '#fff'
   },
 
   containerAnnounce: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   containerSignIn: {
     // Container for SignInScreen.js  
     padding: scale(20),
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#BAE7FF',
   },
 
   userToggle:
@@ -108,6 +108,16 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
+  itemCategory: {
+    // titles for each task library retrieved from category in firebase.js
+    padding: 10,
+    fontSize: scale(25),
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'SFNS Display',
+    color: '#054380',
+  },
+
   itemPortfolio: {
     // content for each item in the PortfolioScreen.js
     padding: 5,
@@ -115,6 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'SFNS Display',
     color: 'black',
+    
   },
 
   announce: {
