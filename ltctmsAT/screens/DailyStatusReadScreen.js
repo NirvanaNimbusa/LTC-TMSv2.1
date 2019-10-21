@@ -17,6 +17,7 @@ import {
   ScrollView,
   Picker,
 } from 'react-native';
+import {Collapse, CollapseHeader, CollapseBody,AccordionList} from "accordion-collapse-react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import firebase from 'react-native-firebase';
@@ -42,8 +43,15 @@ class DailyStatusReadScreen extends React.Component {
       poop: '',
       urinate: '',
       shower:'',
-      ate:'',
+      face:'',
+      breakfast:'',
+      lunch:'',
+      dinner:'',
       brushTeeth:'',
+      shampoo:'',
+      Haircut:'',
+      Shave:'',
+      Turnover:'',
       today: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
       status: [],
@@ -102,26 +110,34 @@ class DailyStatusReadScreen extends React.Component {
               onDateChange={(date) => { this.setState({ date: date }) }}
             />
           </View>
+          <Button
+                  onPress={this._fetchStatus}
+                  title="Submit"
+                  style={{ padding: 10 }}
+                  type="solid"
+                  buttonStyle={{
+                    backgroundColor:'#3f9fff'}}
+                />
           <View>
-            <Button
-              onPress={this._fetchStatus}
-              title="Submit"
-              style={{ padding: 10 }}
-              type="solid"
-              buttonStyle={{
-                backgroundColor:'#3f9fff'}}
-            />
-          </View>
-
           <View style={styles.container}>
-            <Text style={styles.item}>Patient Daily Status</Text>
-            <Text style={styles.item}>Shower: {this.state.shower}</Text>
-            <Text style={styles.item}>Ate: {this.state.ate}</Text>
-            <Text style={styles.item}>Poop: {this.state.poop}</Text>
-            <Text style={styles.item}>Urinate: {this.state.urinate}</Text>
-            <Text style={styles.item}>Brush Teeth: {this.state.brushTeeth}</Text>
-            <Text></Text>
+                    <Text style={styles.item}>Patient Daily Status</Text>
+                    <Text style={styles.item}>Shower: {this.state.shower}</Text>
+                    <Text style={styles.item}>brushTeeth: {this.state.brushTeeth}</Text>
+                    <Text style={styles.item}>face: {this.state.face}</Text>
+                    <Text style={styles.item}>shampoo: {this.state.shampoo}</Text>
+                    <Text style={styles.item}>Haircut: {this.state.Haircut}</Text>
+                    <Text style={styles.item}>breakfast: {this.state.breakfast}</Text>
+                    <Text style={styles.item}>lunch: {this.state.lunch}</Text>
+                    <Text style={styles.item}>dinner: {this.state.dinner}</Text>
+                    <Text style={styles.item}>Poop: {this.state.poop}</Text>
+                    <Text style={styles.item}>Urinate: {this.state.urinate}</Text>
+                    <Text style={styles.item}>Turnover: {this.state.Turnover}</Text>
+                    <Text style={styles.item}>Shave: {this.state.Shave}</Text>
+              </View>
+            
           </View>
+         
+
         </ScrollView>
       </View>
     );

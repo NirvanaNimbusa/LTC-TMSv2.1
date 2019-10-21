@@ -25,6 +25,8 @@ import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
 import { Text } from 'native-base';
 import { Button } from 'react-native-elements';
+import { ListRow,Input } from 'teaset';
+import{Form, Textarea,Card,Content,CardItem}from'native-base'
 
 class VitalStatusAddScreen extends React.Component {
     static navigationOptions = {
@@ -45,6 +47,7 @@ class VitalStatusAddScreen extends React.Component {
             diastolic: '',
             systolic: '',
             temperature: '',
+            specialrecord:'',
             userInfo: null,
         };
     }
@@ -78,45 +81,48 @@ class VitalStatusAddScreen extends React.Component {
             <View style={{backgroundColor:'#fff'}}>
                 <ScrollView style={styles2.container}>
                     <View>
-                    
-                        <View style={{alignItems:'center'}}>
-                        <Text style={styles.itemPortfolio}>Patient Vital Status</Text>
-                        <Text style={styles.itemPortfolio}>{'\u2764'} Blood Pressure</Text>
-                        </View>
-                        <View style={{padding:10, alignItems:'center'}}>
-                        <TextInput
-                            keyboardType='numeric'
-                            placeholder="Enter Systolic Pressure"
-                            placeholderTextColor="black"
-                            style={{ height: 40, width: 200, borderColor: '#b2d1f1', borderWidth: 2, color:'black',}}
+
+                        <ListRow title='Enter Systolic Pressure' style={padding=10}        
+                        detail={
+                            <Input
+                            style={{width: 100,  textAlign: 'right',height: 30,borderColor: '#b2d1f1', borderWidth: 2}}
                             onChangeText={(systolic) => this.setState({ systolic })}
-                            value={this.state.systolic}
+                            value={this.state.systolic}/>                      
+                        }
                         />
-                        </View>
-                        <View style={{padding:10, alignItems:'center'}}>
-                        <TextInput
-                            keyboardType='numeric'
-                            placeholder="Enter Diastolic Pressure"
-                            placeholderTextColor='black'
-                            style={{ height: 40, width: 200, borderColor: '#b2d1f1', borderWidth: 2, color:'black'}}
+                        
+                        <ListRow title='Enter Diastolic Pressure' detail={
+                            <Input
+                            style={{width: 100,  textAlign: 'right',height: 30,borderColor: '#b2d1f1', borderWidth: 2}}
                             onChangeText={(diastolic) => this.setState({ diastolic })}
-                            value={this.state.diastolic}
-                        />
-                        </View>
-                        <View style={{padding:10, alignItems:'center'}}>
-                        <Text style={styles.itemPortfolio}>{'\uD83C\uDF21'}Temperature </Text>
-                        <TextInput
-                            keyboardType='numeric'
-                            placeholder="Enter Temperature in Celcius"
-                            placeholderTextColor='black'
-                            style={{ height: 40, width: 200, borderColor: '#b2d1f1', borderWidth: 2, color:'black' }}
+                            value={this.state.diastolic}/>
+                        }/>
+
+                        <ListRow title='Enter Temperature in Celcius' detail={
+                            <Input
+                            style={{width: 100,  textAlign: 'right',height: 30,borderColor: '#b2d1f1', borderWidth: 2}}
                             onChangeText={(temperature) => this.setState({ temperature })}
-                            value={this.state.temperature}
-                        />
-                        </View>
+                            value={this.state.temperature}/>
+                        }/>
+                    </View>
+                    <View style={{paddingTop:20}}>
+                    <Content padder>
+                        <Card style={styles.mb}>
+                        <CardItem header bordered>
+                            <Text>Special Case Record</Text>
+                        </CardItem>
+                        <CardItem> 
+                        <Form style={{flex:1,flexDirection:"column"}}>
+                                <Textarea rowSpan={10} bordered placeholder="Desciption of Ailment(Ex. Patient today’s poor breath) " onChangeText={(specialrecord) => this.setState({ specialrecord })} 
+                                value={this.state.specialrecorde}/>
+                            </Form>       
+                                            
+                        </CardItem>
+                        </Card>
+                  </Content>
 
                     </View>
-                    <View style={{marginTop: 5, alignSelf: 'center', flex: 1, fontSize: 10, width: 250}}>
+                    <View style={{marginTop: 20, alignSelf: 'center', flex: 1, fontSize: 10, width: 250}}>
                         <Button
                             onPress={this._submitStatus}
                             title="Submit"
@@ -143,6 +149,7 @@ class VitalStatusAddScreen extends React.Component {
         // adding tilde delimiter between systolic and diastolic
         heart = systolic + "~" + diastolic;
         const temperature = this.state.temperature
+        const specialrecord=this.state.specialrecord
         const CNA = this.state.userInfo.ID;
         const baseRef = `Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.today}/vital_status/`;
         console.log(baseRef)
@@ -159,6 +166,7 @@ class VitalStatusAddScreen extends React.Component {
         await ref.update({
             [heartKey]: heart,
             [tempKey]: temperature,
+            specialrecord:specialrecord
         });
 
         Alert.alert('Vital Status Add', 'Successful!');
@@ -196,8 +204,8 @@ _signOutAsync = async () => {
 const styles2 = StyleSheet.create({
     container: {
         //flex: 1,
-        padding: 20,
-        marginTop: 15,
+     
+        marginTop: 5,
     },
     item: {
         padding: 4,
@@ -223,6 +231,9 @@ const styles2 = StyleSheet.create({
     picker: {
         color: 'black',
         fontWeight: 'bold',
+      },
+      mb: {
+        marginBottom: 20
       },
 });
 
