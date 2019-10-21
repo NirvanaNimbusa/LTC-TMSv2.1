@@ -28,7 +28,7 @@ import {  Text,Content,Container, Header,  Icon, Item, Button, Input} from 'nati
 import firebase from 'react-native-firebase';
 import styles from '../styles/styles';
 import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-
+import { SearchBar } from 'react-native-elements';
 
 
 class TaskScreen extends React.Component {
@@ -50,6 +50,12 @@ class TaskScreen extends React.Component {
     fixedTasks: [],
     refreshing: false
   };
+
+  constructor(props) {
+    super(props);
+    //setting default state
+    this.arrayholder = [];
+  }
 
 
 
@@ -195,6 +201,34 @@ class TaskScreen extends React.Component {
   }
 
 
+
+  //search function
+  search = text => {
+    console.log(text);
+  };
+  clear = () => {
+    this.search.clear();
+  };
+
+
+  // search filter container
+  filterlist(text){
+    //getting text inserted in textinput
+    const newData = this.arrayholder.filter(function(item){
+      //applying filter for the inserted text in search bar
+      const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      //setting the filtered newData on datasource
+      //After setting the data it will automatically re-render the view
+      dataSource: newData,
+      search:text,
+    });
+  }
+
+
   createStepText(text, step) {
     return (
       <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2'}}>   Step {step} : {text}</Text></View>
@@ -224,6 +258,7 @@ class TaskScreen extends React.Component {
           onPress={this.toggleCollapse.bind(this, item)}
         >
           <Text style={styles.itemCategory}>{item.category}</Text>
+          <Text style={styles.textRegister}> ───────────────────────────────────</Text>
         </TouchableOpacity>
         {item.collapsed ?
           <View /> :
@@ -265,15 +300,16 @@ class TaskScreen extends React.Component {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           
-        <Header searchBar rounded>
-          <Item>
-            <Icon active name="search" />
-            <Input placeholder="Search" />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
+          <SearchBar
+        // searchbar funuction, icon and style set
+          round
+          containerStyle={{backgroundColor:'transparent'}}
+          searchIcon={{ size: 30 }}
+          placeholder="Tasks instruct Search......"
+          onChangeText={text => this.filterlist(text)}  
+          onPressCancel={text => this.filterlist('')}
+          value={this.state.search}
+        />
 
           <FlatList
             style={{ flexGrow: 1 }}
