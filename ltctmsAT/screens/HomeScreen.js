@@ -15,7 +15,8 @@ import {
   Alert,
   Dimensions,
   Image,
-  ImageBackground
+  ImageBackground,
+  FlatList,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Swiper from 'react-native-swiper';
@@ -54,15 +55,80 @@ class HomeScreen extends React.Component {
       fontWeight: 'bold',
     },
   };
+  constructor(props) {
+    super(props);
+    global.announcementBuilder = [];
+    this.state = {
+      announcements: [],
+      
+    }
+  }
 
+  // begin fetching content (announcements) before the component actually mounts
+  componentWillMount() {
+    this._fetchAnnouncements();
+  }
+
+    // handler for rendering the header for the FlatList UI component in use
+  renderHeader() {
+    return (
+      <View>
+        <Text style={styles.headerText}>This is Announcements</Text>
+      </View>
+    )
+  }
+  // fetch content (announcements)
+  _fetchAnnouncements() {
+    // container to convert the DataSnapshot returned by FireBase into an easily
+    // traversible array
+
+    // fetch content
+    const announcements = firebase.database().ref('Announcements');
+    announcements.once('value').then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        // push each announcement onto array
+
+        // TODO: define limit for number of announcements fetched and display in
+        // DESC order by date
+        const child = childSnapshot.val();
+        child.collapsed = true;
+        announcementBuilder.push(child);
+      });
+    }).finally(() => {
+      this.setState({
+        // set state to the array declared above - if successful, array will have content
+        // otherwise will default to an empty array and nothing will be displayed
+        announcements: announcementBuilder
+      });
+      // force the component to update with new content
+      //this.forceUpdate();
+      console.log(announcementBuilder[0].AnnouncementIOS);
+    });
+  }
+    // render content
   render() {
     return (
-      <View style ={styles.basicView}>
+      <View>
+        <FlatList
+          data={this.state.announcements}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
+          keyExtractor={(item) => item.a_id}
+          renderItem={this._renderItem}
+          scrollEnabled={false}
+          //ListHeaderComponent={this.renderHeader}
+          //extraData={this.state}
+        />
+      </View>
+    );
+  }
+  _renderItem = () => {
+    return (
+      <View style ={styles.basicView} >
           <ImageBackground style={{ flex: 1 }}
           source={{uri: 'https://i.ibb.co/dMgXdR8/DSC-8578.jpg'}}
           opacity={0.5}>
 
-        <Content padder>   
+        <Content padder >   
         
             <CardItem style={{marginHorizontal: 21}} >
               <Left>              
@@ -81,41 +147,30 @@ class HomeScreen extends React.Component {
                   paginationStyle={{bottom: 5}}
                   showsButtons={false} >
                         <View>                         
-                         <Image source={{uri: 'https://i.ibb.co/dMgXdR8/DSC-8578.jpg'}} style={styles2.image}/>                             
+                        <Image source={{uri: 'https://i.ibb.co/dMgXdR8/DSC-8578.jpg'}} style={styles2.image}/>                             
                           <View style={{marginTop:50}}>             
-                                <Text style={styles2.headertext}>Mandatory Attendance for FINAL WEEK 1/1/18</Text>                 
-                                <Text >
-                                1. Although presentations are complete, attendance during the scheduled final time is mandatory.
-                                </Text>
-                                <Text>
-                                2. Be sure to pay your tuition for next semseter              
+                                <Text style={styles2.headertext}>{announcementBuilder[0].ATitleIOS}</Text>                 
+                                <Text style = {{textAlign: 'center'}}>
+                                {announcementBuilder[0].AnnouncementIOS}
                                 </Text>
                             </View>                                   
                         </View>   
                         <View>
                           <Image source={{uri: 'https://i.ibb.co/G0hmyZf/DSC-8575.jpg'}} style={styles2.image}/> 
-                           <View style={{marginTop:50}}>
-                             <Text style={styles2.headertext}>This is Announcements</Text>                 
-                                <Text >
-                                  NativeBase is a free and source framework that enable
-                                  developers to build high-quality mobile apps using React
-                                  Native iOS and Android apps with a fusion of ES6. NativeBase
-                                  builds a layer on top of React Native that provides you with
-                                  basic set of components for mobile application development.
+                          <View style={{marginTop:50}}>
+                            <Text style={styles2.headertext}>{announcementBuilder[1].ATitleIOS}</Text>                 
+                                <Text style = {{textAlign: 'center'}}>
+                                {announcementBuilder[1].AnnouncementIOS}
                                 </Text>
-                             </View>                        
+                            </View>                        
                         </View>   
 
                         <View>
                           <Image source={{uri: 'https://i.ibb.co/T24htTx/DSC-8589.jpg'}} style={styles2.image}/> 
-                           <View style={{marginTop:50}}>
-                             <Text style={styles2.headertext}>This is Announcements</Text>                 
-                                <Text >
-                                  NativeBase is a free and source framework that enable
-                                  developers to build high-quality mobile apps using React
-                                  Native iOS and Android apps with a fusion of ES6. NativeBase
-                                  builds a layer on top of React Native that provides you with
-                                  basic set of components for mobile application development.
+                          <View style={{marginTop:50}}>
+                            <Text style={styles2.headertext}>{announcementBuilder[2].ATitleIOS}</Text>                 
+                                <Text style = {{textAlign: 'center'}}>
+                                {announcementBuilder[2].AnnouncementIOS}
                                 </Text>
                             </View>                        
                           </View>               
@@ -123,7 +178,7 @@ class HomeScreen extends React.Component {
                                     
         </Content>
 
-        <View style={{paddingtop:-500}}> 
+        <View style={{paddingBottom:500}}> 
         
         </View> 
         </ImageBackground >
@@ -161,8 +216,8 @@ const styles2 = StyleSheet.create({
    
   },
   headertext:{  
-    fontSize: scale(30),
-    textAlign: 'left',
+    fontSize: scale(25),
+    textAlign: 'center',
     justifyContent: 'space-evenly', 
     fontWeight: "bold",
     color: 'black',
