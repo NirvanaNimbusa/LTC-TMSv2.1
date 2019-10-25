@@ -148,6 +148,24 @@ class TaskScreen extends React.Component {
     }
   }
 
+  _rendervideo(item) {
+    console.log("\n\n\n\nvideo link is " + item.videolink);
+    if(item.videolink != "null"){
+      return (
+        <View >
+          <TouchableOpacity>
+            <Button
+            title = "Tap to watch video"
+            titleStyle = {{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'center'}}
+            type='solid'
+            buttonStyle={{backgroundColor:'#3f9fff', marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', width: 250}}
+            onPress={() => Linking.openURL(item.videolink)}
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
   // toggles the collapse state for categories of tasks
   toggleCollapse(item) {
     item.collapsed = !item.collapsed;
@@ -266,6 +284,8 @@ class TaskScreen extends React.Component {
       }
     }
 
+  
+    
     return (
       <View>
         <TouchableOpacity
@@ -279,18 +299,10 @@ class TaskScreen extends React.Component {
           <View>
             <Text style={styles.itemTask}># {item.outline}</Text>
             {item.collapsed ?
-              <View /> :
-              <View>
-                <TouchableOpacity>
-                <Button
-                  title = "Tap to watch video"
-                  titleStyle = {{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'center'}}
-                  type='solid'
-                  buttonStyle={{backgroundColor:'#3f9fff', marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', width: 250}}
-                  onPress={() => Linking.openURL(item.videolink)}
-                />
-                </TouchableOpacity>
-                {item.collapsed ?
+              <View/> :
+                <View>
+                  {this._rendervideo(item)}
+                  {item.collapsed ?
                   <View /> :
                   <View>
                   <TouchableOpacity
@@ -307,6 +319,7 @@ class TaskScreen extends React.Component {
                 </View>}
           </View>}
       </View>
+      
     )
   }
 
