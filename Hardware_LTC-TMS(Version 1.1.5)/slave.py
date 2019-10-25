@@ -8,14 +8,10 @@
 # Author  : MCU HardWare Team
 
 from microbit import *
-#import datetime
-#import time
-#import serial
 #send radio
 import radio
 radio.on()
-radio.config(group=123)
-
+radio.config(group =123)
 # Define any functions:
 def log_microbit(message, message_delay=130):
     # message_delay - how many ms to display message for (larger means longer)
@@ -25,15 +21,18 @@ def log_REPL(message):
     print(message)
 
 def summary():
-    return "BPM last {}, average {}.".format(bpm, bpm_avg)
+    return "BPM last {}, average {}.step{}".format(bpm, bpm_avg,step)
+
+
 
 # Configure constants and variables before main loop:
 # Timing settings
 SECONDS_PER_MINUTE = 60
 MILLISECONDS_PER_SECOND = 1000
 MILLISECONDS_PER_MINUTE = SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
-paient_id=55001
-
+paient_id=550001
+fallSatus=0
+callStatus=0
 
 # Sampling rate & interval settings (ms)
 # Caution:
@@ -76,8 +75,7 @@ while True:
         print(step)
 
     if gesture == "freefall":
-        print("danger")
-        radio.send(paient_id+"dan")
+        fallSatus=1
 
     # read signal from input in pin 2 (currently PulseSensor.com)
     # Signal: Original = 0-1000.
@@ -122,6 +120,10 @@ while True:
     if button_a.is_pressed():
         message = summary()
         log_microbit(message, 90)
+    if button_b.is_pressed():
+        callStatus = 1
+        print("calling,{}".format(paient_id))
+        #radio.send("calling {}".format(paient_id))
 
 
 
@@ -130,22 +132,22 @@ while True:
     Signal = 2*Signal - 1000
     # print("({})".format(Signal))
     # print("({}, {}, {})".format(samples_between_beats*10, Signal, bpm*10))
-    print("({}, {})".format(Signal, bpm*10))
+    print("({},{},{},{})".format(Signal, bpm*10,callStatus,fallSatus))
     # if button b pressed, exit forever loop
-    if button_b.is_pressed():
-        send_mess=paient_id
-        print("button b{}".format(paient_id))
-        radio.send(str(paient_id))
     #else:
         #send_mess=Signal
-    radio.send("{}".format(Signal))
-
+    radio.send("{},{},{},{},{}".format(Signal,paient_id,callStatus,fallSatus,step))
+    callStatus = 0
+    fallSatus  = 0
+    step = 0
+    
+    
         #radio.send("{}".format(paient_id))
         #print("{}".format(paient_id))
     #radio.send("{}, {}".format(Signal, bpm*10))
     # pause between samples
     sleep(SAMPLING_INTERVAL)
-
+ 
 # quitting program
 message = "Exit: " + summary()
 log_REPL(message)
