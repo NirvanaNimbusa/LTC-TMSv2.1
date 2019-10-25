@@ -27,11 +27,11 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import {  Text,Content,Container, Header,  Icon, Item, Button, Input} from 'native-base'
+import {  Text,Content,Container, Header,  Icon, Item, Input} from 'native-base'
 import firebase from 'react-native-firebase';
 import styles from '../styles/styles';
 import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 
 
 class TaskScreen extends React.Component {
@@ -281,10 +281,14 @@ class TaskScreen extends React.Component {
             {item.collapsed ?
               <View /> :
               <View>
-                <TouchableOpacity
-                onPress={() => Linking.openURL(item.videolink)}
-                >
-                <Text style={styles.itemVideo}>link to the video</Text>
+                <TouchableOpacity>
+                <Button
+                  title = "Tap to watch video"
+                  titleStyle = {{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'center'}}
+                  type='solid'
+                  buttonStyle={{backgroundColor:'#3f9fff', marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', width: 250}}
+                  onPress={() => Linking.openURL(item.videolink)}
+                />
                 </TouchableOpacity>
                 {item.collapsed ?
                   <View /> :
