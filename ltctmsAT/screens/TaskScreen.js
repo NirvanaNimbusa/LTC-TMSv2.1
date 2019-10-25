@@ -21,15 +21,17 @@ import {
   FlatList,
   RefreshControl,
   Dimensions,
+  Linking,
+  image,
   
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import {  Text,Content,Container, Header,  Icon, Item, Button, Input} from 'native-base'
+import {  Text,Content,Container, Header,  Icon, Item, Input} from 'native-base'
 import firebase from 'react-native-firebase';
 import styles from '../styles/styles';
 import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 
 
 class TaskScreen extends React.Component {
@@ -183,6 +185,7 @@ class TaskScreen extends React.Component {
         var stepsData = {
           description: task[stepF]["MDescriptionIOS"],
           name: task[stepF]["MtitleIOS"],
+          pic: task[stepF]["ImageURL"],
           number: stepF,
           detailedSteps: detailedStepsJSON
         }
@@ -197,7 +200,7 @@ class TaskScreen extends React.Component {
       taskID: task["TaskID"],
       category: task["Info"]["Category"],
       outline: task["Info"]["OutlineIOS"],
-      videoURL: task["Info"]["videoURL"],
+      videolink: task["Info"]["videoURL"],
       note: task["Info"]["NoteIOS"],
       name: task["Info"]["Title"],
       collapsed: task["collapsed"],
@@ -240,22 +243,24 @@ class TaskScreen extends React.Component {
 
   createStepText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2'}}>   Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2', paddingLeft: 5}}>   Step {step} : {text}</Text></View>
     );
   }
 
   createDetailText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black', paddingLeft: 10}}>   Detailed Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black', paddingLeft: 15}}>   Detailed Step {step} : {text}</Text></View>
     );
   }
 
   // renders the individual items into appropriate fields
   _renderItem = ({ item }) => {
     stepsArray = [];
+    imageArray=[];
     detailedStepsArray = [];
     for (var i = 0; i < item.steps.length; i++) {
       stepsArray.push(this.createStepText(item.steps[i].name, [i + 1]));
+      //imageArray.push(this.createStepimage(item.steps[i].pic, [i+1]));
       for (var j = 0; j < item.steps[i].detailedSteps.length; j++) {
         stepsArray.push(this.createDetailText(item.steps[i].detailedSteps[j], [j + 1]));
       }
@@ -267,21 +272,39 @@ class TaskScreen extends React.Component {
           onPress={this.toggleCollapse.bind(this, item)}
         >
           <Text style={styles.itemCategory}>{item.category}</Text>
-          <Text style={this.seperatorStyle(Math.round(Dimensions.get('window').width))}> ─</Text>
+          <Text style={this.seperatorStyle(Math.round(Dimensions.get('window').width))}>─</Text>
         </TouchableOpacity>
         {item.collapsed ?
           <View /> :
           <View>
-            <TouchableOpacity
-              onPress={this.toggleCollapseStep.bind(this, item)}
-            >
-              <Text style={styles.itemTask, {fontSize: 25, color: '#004dcf', fontWeight: 'bold'}}>  {item.name}</Text>
-            </TouchableOpacity>
-            {item.collapsedStep ?
+            <Text style={styles.itemTask}># {item.outline}</Text>
+            {item.collapsed ?
               <View /> :
               <View>
-                {stepsArray}
-              </View>}
+                <TouchableOpacity>
+                <Button
+                  title = "Tap to watch video"
+                  titleStyle = {{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'center'}}
+                  type='solid'
+                  buttonStyle={{backgroundColor:'#3f9fff', marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', width: 250}}
+                  onPress={() => Linking.openURL(item.videolink)}
+                />
+                </TouchableOpacity>
+                {item.collapsed ?
+                  <View /> :
+                  <View>
+                  <TouchableOpacity
+                    onPress={this.toggleCollapseStep.bind(this, item)}
+                  >
+                    <Text style={styles.itemTask, {fontSize: 23, color: '#004dcf', fontWeight: 'bold', paddingLeft: 2}}>  {item.name}</Text>
+                  </TouchableOpacity>
+                  {item.collapsedStep ?
+                    <View /> :
+                    <View>
+                      {stepsArray}
+                    </View>}
+                  </View>}
+                </View>}
           </View>}
       </View>
     )
