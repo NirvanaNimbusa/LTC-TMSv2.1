@@ -21,8 +21,9 @@ import {
   FlatList,
   RefreshControl,
   Dimensions,
+  Image,
   Linking,
-  image,
+  
   
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -203,6 +204,7 @@ class TaskScreen extends React.Component {
       videolink: task["Info"]["videoURL"],
       note: task["Info"]["NoteIOS"],
       name: task["Info"]["Title"],
+      pic: task["Info"]["imageURL2"],
       collapsed: task["collapsed"],
       steps: steps,
     }]
@@ -301,6 +303,10 @@ class TaskScreen extends React.Component {
                   {item.collapsedStep ?
                     <View /> :
                     <View>
+                        <Image 
+                        style={{width:400,height:100,alignSelf: 'center'}}
+                        source={{uri:item.pic}}
+                        />
                       {stepsArray}
                     </View>}
                   </View>}
