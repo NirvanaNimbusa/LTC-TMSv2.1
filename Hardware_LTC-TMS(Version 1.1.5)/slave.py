@@ -76,7 +76,7 @@ while True:
     if gesture == "freefall":
         fallSatus=1
 
-    # read signal from input in pin 2 (currently PulseSensor.com)
+    # read signal from input in pin 2 
     # Signal: Original = 0-1000.
     Signal = pin2.read_analog()
 
