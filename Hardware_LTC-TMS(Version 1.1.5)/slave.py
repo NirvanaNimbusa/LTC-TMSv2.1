@@ -72,7 +72,6 @@ while True:
     gesture = accelerometer.current_gesture()
     if gesture == "3g":
         step+= 1
-        print(step)
 
     if gesture == "freefall":
         fallSatus=1
@@ -123,7 +122,7 @@ while True:
     if button_b.is_pressed():
         callStatus = 1
         print("calling,{}".format(paient_id))
-        #radio.send("calling {}".format(paient_id))
+        radio.send("calling {}".format(paient_id))
 
 
 
@@ -132,19 +131,14 @@ while True:
     Signal = 2*Signal - 1000
     # print("({})".format(Signal))
     # print("({}, {}, {})".format(samples_between_beats*10, Signal, bpm*10))
-    print("({},{},{},{})".format(Signal, bpm*10,callStatus,fallSatus))
+    print("({},{},{},{},{})".format(Signal,paient_id,callStatus,fallSatus,step))
     # if button b pressed, exit forever loop
     #else:
         #send_mess=Signal
     radio.send("{},{},{},{},{}".format(Signal,paient_id,callStatus,fallSatus,step))
     callStatus = 0
     fallSatus  = 0
-    step = 0
     
-    
-        #radio.send("{}".format(paient_id))
-        #print("{}".format(paient_id))
-    #radio.send("{}, {}".format(Signal, bpm*10))
     # pause between samples
     sleep(SAMPLING_INTERVAL)
  
