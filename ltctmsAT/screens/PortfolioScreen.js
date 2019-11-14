@@ -115,7 +115,7 @@ class PortfolioScreen extends React.Component {
               <Content padder>
                 <Card style={styles.mb}>
                   <CardItem header bordered>
-                    <Text>Patient Satus</Text>
+                    <Text>Patient Status</Text>
                   </CardItem>
                   <CardItem>        
                     <Left>
@@ -203,7 +203,7 @@ class PortfolioScreen extends React.Component {
             <Content padder>
               <Card style={styles.mb}>
                 <CardItem header bordered>
-                  <Text>Patient Satus</Text>
+                  <Text>Patient Status</Text>
                 </CardItem>
 
                 <CardItem>        
