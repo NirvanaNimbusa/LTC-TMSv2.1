@@ -32,15 +32,23 @@
     "react-native-animatable": "1.3.1",
     "react-native-collapsible": "1.4.0",
     "react-native-datepicker": "1.7.2",
-    "react-native-elements": "1.0.0",
+    "react-native-elements": "^1.2.6",
+    "react-native-elements-button": "0.0.0",
     "react-native-firebase": "5.2.0",
     "react-native-gesture-handler": "1.0.15",
     "react-native-hide-show-password-input": "^1.1.0",
     "react-native-modest-checkbox": "^3.3.0",
     "react-native-scalable-image": "0.5.0",
     "react-native-vector-icons": "^6.4.2",
+<<<<<<< HEAD
     "react-navigation": "3.1.2",
     "react-navigation-drawer": "1.2.1"
+=======
+    "react-navigation": "^3.1.2",
+    "react-navigation-drawer": "1.2.1",
+    "react-navigation-stack": "^1.9.0",
+    "teaset": "^0.7.0"
+>>>>>>> origin/master
   },
   "rnpm": {
     "assets": [

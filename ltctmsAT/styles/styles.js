@@ -102,7 +102,33 @@ const styles = StyleSheet.create({
 
   item: {
     // titles for each announcement retrieved from AnnouncementList.js displayed in HomeScreen.js
+<<<<<<< HEAD
     padding: 5,
+=======
+    padding: 10,
+    fontSize: scale(20),
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'SFNS Display',
+    color: 'black',
+  },
+
+  itemVideo: {
+    // titles for each announcement retrieved from AnnouncementList.js displayed in HomeScreen.js
+    padding: 10,
+    fontSize: scale(15),
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'SFNS Display',
+    color: '#3c6dba',
+    borderColor:'rgb(60, 186, 183)',
+    borderWidth:5,
+  },
+
+  itemCategory: {
+    // titles for each task library retrieved from category in firebase.js
+    padding: 10,
+>>>>>>> origin/master
     fontSize: scale(25),
     fontWeight: 'bold',
     textAlign: 'center',

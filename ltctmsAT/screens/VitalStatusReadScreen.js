@@ -107,19 +107,6 @@ class VitalStatusReadScreen extends React.Component {
               onDateChange={(date) => { this.setState({ date: date }) }}
             />
           </View>
-          <View>
-            <Picker
-              mode={'dropdown'}
-              selectedValue={this.state.CNA}
-              style={styles2.picker}
-              onValueChange={this.updateCNA}
-            >
-              <Picker.Item label="Select CNA" value="CNA"/>
-              {this.state.CNAList.map((item, index) => {
-                return (<Picker.Item label={item.id} value={item.id} key={index} />)
-              })}
-            </Picker>
-          </View>
           <View style={{marginTop: 5, marginHorizontal: 50, alignSelf: 'auto', flex: 1, justifyContent: 'space-between', fontSize: '10'}}>
             <Button
               onPress={this._fetchStatus}
@@ -175,8 +162,8 @@ class VitalStatusReadScreen extends React.Component {
     } else {
       patient = this.state.patient;
     }
-    console.log(`Activities/${patient}/${this.state.date}/${this.state.CNA}/vital_status`)
-    firebase.database().ref(`Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.date}/${this.state.CNA}/vital_status`).once('value').then((snapshot) => {
+    console.log(`Activities/${patient}/${this.state.date}/vital_status`)
+    firebase.database().ref(`Activities/${this.props.navigation.getParam('patientID','0')}/${this.state.date}/vital_status`).once('value').then((snapshot) => {
       console.log("snapshot" + snapshot.val())
       snapshot.forEach((childSnapshot) => {
         if (childSnapshot.val() == null) {
