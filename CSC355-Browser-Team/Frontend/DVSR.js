@@ -95,7 +95,7 @@ fbPAT.once("value")
                 })
             })
 
-        var fbPAT_DRS = firebase.database().ref("Activities/"+selected_id+"/"+recreated_search+"/"+selected_CNA+"/daily_status");
+        var fbPAT_DRS = firebase.database().ref("Activities/"+selected_id+"/"+recreated_search+"/DailyStatuses");
         fbPAT_DRS.once("value")
             .then(function(snapshot){
                 var index = 0;
@@ -116,7 +116,7 @@ fbPAT.once("value")
                         var SCval = SCrow.insertCell(2);
                         childData = childData.replace(/[*+?^${}()"|]/g,"");
                         SCtime.appendChild(document.createTextNode(a[0]));
-                        SCEvt.appendChild(document.createTextNode(a[1]));
+                      //  SCEvt.appendChild(document.createTextNode(a[1]));
                         SCval.appendChild(document.createTextNode(childData));
                     }
                     if(a[1] == "Steam Used"){
@@ -127,19 +127,20 @@ fbPAT.once("value")
                         var SCval = SCrow.insertCell(2);
                         childData = childData.replace(/[*+?^${}()"|]/g,"");
                         SCtime.appendChild(document.createTextNode(a[0]));
-                        SCEvt.appendChild(document.createTextNode(a[1]));
+                      //  SCEvt.appendChild(document.createTextNode(a[1]));
                         SCval.appendChild(document.createTextNode(childData));
                     }
                     else{
                         time.appendChild(document.createTextNode(a[0]));
-                        Evt.appendChild(document.createTextNode(a[1]));
-                        if(childData == "true"){
+                        val.appendChild(document.createTextNode(childData));
+                       // val.appendChild(document.createTextNode(a[1]));
+                        /*if(childData == "true"){
                             childData = "Yes";
                             val.appendChild(document.createTextNode(childData));
                         }
                         else{
                             val.appendChild(document.createTextNode(childData));
-                        }
+                        }*/
                     }
                 })
             })
@@ -238,7 +239,7 @@ fbPAT.once("value")
                 })
             })
 
-            var fbPAT_VSR = firebase.database().ref("Activities/"+selected_id+"/"+recreated_search+"/"+selected_CNA+"/vital_status");
+            var fbPAT_VSR = firebase.database().ref("Activities/"+selected_id+"/"+recreated_search+"/vital_status");
                 fbPAT_VSR.once("value")
                 .then(function(snapshot){
                     var array = [];
