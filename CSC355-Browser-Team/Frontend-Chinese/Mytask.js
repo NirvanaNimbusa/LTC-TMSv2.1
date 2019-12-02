@@ -208,14 +208,14 @@ function getTaskPathCallback(task){
   var detailButton = document.createElement("button");
   detailButton.setAttribute("id","button_id["+num1+"]");
   detailButton.setAttribute("onclick", "display_Detail("+num1+")");
-  detailButton.innerHTML="Details";
+  detailButton.innerHTML="詳細資料";
   var cellDetailButton= row.insertCell(-1);
   cellDetailButton.appendChild(detailButton);
   
   var editButton = document.createElement("button");
   editButton.setAttribute("id","editButton_id["+num1+"]");
   editButton.setAttribute("onclick", "directTask("+num1+")");
-  editButton.innerHTML="Edit";
+  editButton.innerHTML="編輯";
   var cellEditButton= row.insertCell(-1);
   cellEditButton.appendChild(editButton);
   
@@ -228,14 +228,14 @@ function getTaskPathCallback(task){
   tData.name = tName;
   tData.category = category;
   $(assignButton).click(tData, assignTask);
-  assignButton.innerHTML="Assign";
+  assignButton.innerHTML="分派";
   var cellAssignButton = row.insertCell(-1);
   cellAssignButton.appendChild(assignButton);
 
   var deleteButton = document.createElement("button");
   deleteButton.setAttribute("id","deleteButton_id["+num1+"]");
   deleteButton.setAttribute("onclick", "removeTaskMyList("+num1+")");
-  deleteButton.innerHTML="Remove";
+  deleteButton.innerHTML="移除";
   var cellDeleteButton = row.insertCell(-1);
   cellDeleteButton.appendChild(deleteButton);
 
@@ -374,7 +374,7 @@ function assign(){
 
   }
   c++;
-  var r = alert("Task have been copied!");
+  var r = alert("任務已複製!");
   if(true){
     window.location.reload();
   }
@@ -779,33 +779,33 @@ function injectToDOM(){
   //var $AddToDom = $('<div>Task Name: </div>');
   htmlInjection = "";
 
-  htmlInjection += '<br><div style="text-align:left;"><button type="button" onclick="closeclose_form()">Close Task</button></div><br>';
+  htmlInjection += '<br><div style="text-align:left;"><button type="button" onclick="closeclose_form()">關閉</button></div><br>';
 
   //Task name
-  htmlInjection += '<div style="text-align:left;"> Task Name: '+taskDetails["name"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 任務名稱: '+taskDetails["name"]+'</div>';
   
   //Task Category
-  htmlInjection += '<div style="text-align:left;"> Category: '+taskDetails["category"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 類別: '+taskDetails["category"]+'</div>';
 
   //Task Video
-  htmlInjection += '<div style="text-align:left;"> Video URL: '+taskDetails["videoURL"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 影片連結: '+taskDetails["videoURL"]+'</div>';
 
   //Task outline
-  htmlInjection += '<div style="text-align:left;"> Task Outline: '+taskDetails["outline"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 任務大綱: '+taskDetails["outline"]+'</div>';
   
   //Visibility
   var v = "";
   if(taskDetails["visible"] == true) {v = "Yes";}
   else {v = "No";}
-  htmlInjection += '<div style="text-align:left;"> Visible: '+v+'</div>'; 
+  htmlInjection += '<div style="text-align:left;"> 可見度: '+v+'</div>'; 
 
   //Publication Status
   var p = "";
   if(taskDetails["published"] == true) {p = "Published";}
   else {p = "Draft";}
-  htmlInjection += '<div style="text-align:left;"> Publication Status: '+p+'</div>';  
+  htmlInjection += '<div style="text-align:left;"> 發佈狀態: '+p+'</div>';  
 
-  htmlInjection += '<div style="text-align:left;"> Click <button onClick = "showDetails()" type="button">HERE</button> for more details.</div>';
+  htmlInjection += '<div style="text-align:left;"> 點選 <button onClick = "showDetails()" type="button">這裡</button> 更多資訊.</div>';
 
   $("#taskHeader").html(htmlInjection);
   htmlInjection = "";
@@ -814,17 +814,17 @@ function injectToDOM(){
       //Task steps
       htmlInjection += "<div  class = ''>";
 
-      htmlInjection += '<br><div style="flex:3; align-content:left;">' + 'Task Step ' + (parseInt(i)+1) + '</div>';
+      htmlInjection += '<br><div style="flex:3; align-content:left;">' + '任務步驟 ' + (parseInt(i)+1) + '</div>';
       //htmlInjection += '<div style="flex:15;"></div>';
       htmlInjection += '</div>';
       htmlInjection += "</div>";
       //Task name
       htmlInjection += "<div class='inputField'>";
-      htmlInjection += "<div>Step Name: "+ steps[i].name +"</div>";
+      htmlInjection += "<div>步驟名稱: "+ steps[i].name +"</div>";
       htmlInjection += "</div>";
 
       //Task description
-      htmlInjection += "<div>Step Description: "+ steps[i].description +"</div>";
+      htmlInjection += "<div>步驟描述: "+ steps[i].description +"</div>";
       htmlInjection += '<div class = "stepImageContainer">';
       //Add in image upload button and image preview
       
@@ -889,7 +889,7 @@ function getDetailedStepHTML(steps, stepNum){
             //Right side of detailed step
             detailHTML += '<div class="detailedStepRightContainer" id= "' + i + '">';
             temp = j+1;
-            detailHTML += "<div>Detail Step " + temp +": "+ steps[i]["detailedSteps"][j] +"</div>";
+            detailHTML += "<div>詳細步驟 " + temp +": "+ steps[i]["detailedSteps"][j] +"</div>";
             detailHTML += '</div>';
 
             detailHTML += '</div>'
@@ -1064,7 +1064,7 @@ function createBlankTask(TID){
 
       //location.href ="./06Taskeditor2.html";
   } else {
-      alert("Task failed to save");
+      alert("任務儲存失敗");
   }
   
 }

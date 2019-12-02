@@ -35,7 +35,7 @@ var main = document.getElementById('treemenu2'),
 
           });
         }else{
-          alert("It's already the first step!");
+          alert("這已經是第一步!");
         }
       }
     },
@@ -65,7 +65,7 @@ var main = document.getElementById('treemenu2'),
            swapStep(realid,temp,fbti,stepref,parentId,cat);
           });
         }catch(err){
-          alert("It's already the last step!");
+          alert("這已經是最後一步!");
         }
       }
 
@@ -286,12 +286,12 @@ function TaskSubmit(){
   }
 
   if(Ttitle == "" || Outline == ""){
-    alert("Please enter title and outline")
+    alert("請輸入標題與大綱")
 }else {
   var updates = {};
   updates['TaskInstruction/'+ selectCat + '/' + Ttitle + '/Info' ] = Tdata;
   firebase.database().ref().update(updates);
-  alert('Successfully Created a New Task');
+  alert('成功創建新任務');
 }
 }
 
@@ -354,21 +354,21 @@ function handleuploadfileSubmit(pid,cat,Mtitle,Mtitle2,videoURL,MstepNo,MD,MD2,u
         var fbsearch = firebase.database().ref('TaskInstruction/'+cat).child(pid);
         fbsearch.once('value', function(snapshot){
                 if(snapshot.hasChild('Step'+MstepNo)){
-                    var r = confirm('There is an existing data in Step:'+MstepNo+'!');
+                    var r = confirm('步驟中有一個現有資料:'+MstepNo+'!');
                     if (r == true){
                         updates['TaskInstruction/'+ cat + '/' + pid + '/' +'Step'+ MstepNo] = mdata;
                         firebase.database().ref().update(updates);
-                        alert('Successfully Created a step');
+                        alert('成功創建新步驟');
                     }
                     else{
-                        alert('Please confirm the existing step data!');
+                        alert('請確認現有的步驟資料!');
                     }
                 }
                 else{
                     console.log('qqqq');
                     updates['TaskInstruction/'+ cat + '/' + pid + '/' +'Step'+ MstepNo] = mdata;
                     firebase.database().ref().update(updates);
-                    alert('Successfully Created a step');
+                    alert('成功創建新步驟');
                 }
 
         });
@@ -394,7 +394,7 @@ function MainstepSubmit(j){
   var MD = document.getElementById('MDescription'+j).value;
   var MD2 = 'xdsx'+MD+'xdex';
   if ( Mtitle == "" || MD == ""){
-    alert ("Please enter mainstep title and description")
+    alert ("請輸入主要步驟標題和描述")
   }
   else {
   var updates={};
@@ -416,21 +416,21 @@ function MainstepSubmit(j){
         console.log(MstepNo+'12312312312');
         console.log(snapshot.hasChild('Step'+MstepNo));
             if(snapshot.hasChild('Step'+MstepNo)){
-                var r = confirm('There is an existing data in Step:'+MstepNo+'!');
+                var r = confirm('步驟中有一個現有資料:'+MstepNo+'!');
                 if (r == true){
                     updates['TaskInstruction/'+ cat + '/' + pid + '/' +'Step'+ MstepNo] = mdata;
                     firebase.database().ref().update(updates);
-                    alert('Successfully Created a step');
+                    alert('成功創建新步驟');
                 }
                 else{
-                    alert('Please confirm the existing step data!');
+                    alert('請確認現有的步驟資料!');
                 }
             }
             else{
                 console.log('qqqq');
                 updates['TaskInstruction/'+ cat + '/' + pid + '/' +'Step'+ MstepNo] = mdata;
                 firebase.database().ref().update(updates);
-                alert('Successfully Created a step');
+                alert('成功創建新步驟');
             }
 
     });
@@ -678,10 +678,10 @@ function deleteM(j){
           var storageRef = firebase.storage().ref();
           storageRef.child('Task/'+filename).delete()
             .then(function(){
-                var r = confirm("are you sure of deleting this Mainstep?");
+                var r = confirm("你確定要刪除這個主要步驟嗎?");
                 if (r==true){
                 fbM.child('Step'+ Step).remove();
-                alert("successfully deleting the MainStep!");
+                alert("成功刪除主要步驟!");
                 $('.vtree').html(treeviewhtml);
                 $('#Mtable'+j).remove();
                 }
@@ -701,10 +701,10 @@ function deleteT(){
   var cat = document.getElementById('selectCat').value;
   console.log(cat +'/'+ task);
   var fbT = firebase.database().ref('TaskInstruction/'+cat);
-  var r = confirm("are you sure of deleting the Task?");
+  var r = confirm("你確定要刪除這個任務嗎?");
   if (r==true){
     fbT.child(task).remove();
-    alert("successfully deleted the Task!");
+    alert("成功刪除任務!");
     window.location.reload();
   }else{
 

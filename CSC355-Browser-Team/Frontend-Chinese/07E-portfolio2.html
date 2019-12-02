@@ -28,10 +28,10 @@
 <style>
     .portfolio_display {
         position: relative;
-        top: -130px;
-        left: 12px;
-        width: 100%;
-        height: 415px;
+        top: -4px;
+        left: -20px;
+        width: 104%;
+        height: 388px;
         overflow-x: auto;
         overflow-y: auto;
         background-color: rgba(255, 255, 255, .8);
@@ -64,18 +64,6 @@ span.hidden{
         table td {
             text-shadow: 2px 2px #FFFFFF;
         }
-
-    .portfolio_keyword_search {
-        position: relative;
-        top: 25px;
-        left: 20px;
-    }
-
-    .portfolio_search_position {
-        position: relative;
-        top: 20px;
-        left: 35px;
-    }
 
     .portfolio_search_background {
         background-color: rgba(122, 122, 122,0.40);
@@ -297,12 +285,10 @@ span.hidden{
         from {
             left: -20%;
         }
-
         to {
             left: 0%;
         }
     }
-
     @keyframes portfolio_pop {
         from {
             left: 0%;
@@ -312,18 +298,15 @@ span.hidden{
             left: -20%;
         }
     }
-
     @keyframes bounce {
         0%, 20%, 60%, 100% {
             -webkit-transform: translateY(0);
             transform: translateY(0);
         }
-
         40% {
             -webkit-transform: translateY(-5px);
             transform: translateY(-5px);
         }
-
         80% {
             -webkit-transform: translateY(-3px);
             transform: translateY(-3px);
@@ -339,56 +322,56 @@ span.hidden{
                 <li>
                     <a href="../Frontend-Chinese/01Aboutus2.html">
                         <i class="glyphicon glyphicon-info-sign"></i>
-                        About Us
+                        關於我們
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/02Schedule2.html">
                         <i class="glyphicon glyphicon-calendar"></i>
-                        Schedule
+                        行事曆
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/03Memo2.html">
                         <i class="glyphicon glyphicon-folder-close"></i>
-                        Memo
+                        備忘錄
                     </a>
                 </li>
-                <li>
+                <li >
                     <a href="../Frontend-Chinese/04Statusrecord2.html">
                         <i class="glyphicon glyphicon-heart-empty"></i>
-                        Status Record
+                        狀態紀錄
                     </a>
                 </li>
 
-                <li>
+                <li >
                     <a href="../Frontend-Chinese/Reports.html">
                         <i class="glyphicon glyphicon-file"></i>
-                        Reports
+                        報告
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/05Library2.html">
                         <i class="glyphicon glyphicon-book"></i>
-                        Library
+                        全部任務
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/10Mytask2.html">
                         <i class="glyphicon glyphicon-list-alt"></i>
-                        My Task
+                        我的任務
                     </a>
                 </li>
                 <li class="current">
                     <a href="../Frontend-Chinese/07E-portfolio2.html">
                         <i class="glyphicon glyphicon-user"></i>
-                        E-Portfolio
+                        個人資料
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/08Helpandsupport2.html">
                         <i class="glyphicon glyphicon-question-sign"></i>
-                        Help and Support
+                        問題與協助
                     </a>
                 </li>
             </ul>
@@ -399,22 +382,19 @@ span.hidden{
             <!-- Place everything except the sidebar in content class -->
             <div class="header">
                 <!-- DIV CONTAINER OF OUR HEADER-->
-
                 <div class="bar">
                     <!-- PlaceHolder for top bar -->
-
                     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
-
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
-                                <span id="toggleSide">Hide sidebar</span>
+                                <span id="toggleSide">隱藏列表</span>
                             </button>
 
                             <div class="navbar-header">
 
-                                <a href="../Frontend-Chinese/01Aboutus2.html">
+                                <a href="../Frontend/01Aboutus2.html">
                                     <img src="statics/images/v2ltctmslogo.png" height="50" width="60" />
                                 </a>
 
@@ -422,14 +402,36 @@ span.hidden{
                                     <span class="white-text title"> LTC-TMS</span>
                                 </a>
 
-                            </div>
+                            </div> <!--end div class="navbar-header"-->
                             <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
                                 <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropbtn"><span class="glyphicon glyphicon-cog white-text"></span></a>
+                                    <a href="javascript:void(0)" class="dropbtn">
+                                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
+                                                    <img src="statics/images/edit.png" id="photoword" 
+                                                         style="position:relative;left:3px; text-align:center;
+                                                    display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
+                                                    <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
+                                                    <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                                </div>
+                                    </a>
                                     <div class="dropdown-content">
+                                            <!-- Start of Account profile -->
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
+                                            </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> 姓名 : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">使用者編號 : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> 職稱 : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
                                         <a href="/../Frontend/07E-portfolio2.html">English</a>
-                                        <a href="#">Chinese</a>
-                                        <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">Logout</a>
+                                        <a href="#">中文</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">登出</a>
+                                                </p>
+                                                <!-- End of Account profile -->
+                                        </div>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -437,132 +439,76 @@ span.hidden{
                     </nav>
                 </div>
                 <!-- TOP BAR ENDS-->
-                <!-- Place Holder for header-->
-                <div class="user-info">
-                    <!--BACKGROUND PANEL IMAGE-->
-                    <div class="container-fluid">
-
-                        <img class="panelimg img-responsive" style="background-color: #fff5ee" />
-
-                        <div class="container" style="transform:translateY(-8.5ex)">
-                            <!-- CIRCLE IMAGE THING-->
-
-
-                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)" style="background-color:white; white-space:nowrap;overflow: hidden;">
-                                <img src="statics/images/edit.png" id="photoword"
-                                     style="position:relative;left:20px; text-align:center;
-                                display:none;width:40px;height:40px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
-                                <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;" />
-                                <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
-                            </div>
-
-                            <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
-                            <div class="user-account">
-                                <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
-                                <p></p>
-                                <p class="account" style="position:relative; top:8px;">
-                                    <span style = "font-size: 20pt;" word-wrap: break-word;>Name : <span style = "font-size: 20pt;" id="displayProfilename"></span></span>
-                                    <span class="hidden" style = "font-size: 20pt">UserID : <span style = "font-size: 20pt;" id="displayProfileid"></span></span>
-                                    <span style = "font-size: 20pt;" word-wrap: break-word;> Role : <span style = "font-size: 20pt;" id="displayProfileposition"></span></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- END OF THE TWO HEADER!! -->
-
             <div class="main container-fluid wrapper">
                 <!-- START OF MIDDLE CONTENT-->
-                <div class="right" style="width:800ex; transform:translateY(-9ex)">
+                <div class="right" style="width:120ex; transform:translate(-2ex,11%)">
                     <div class="tap">
-                        <span>E-Portfolio</span>
+                        <span>個人資料</span>
                     </div>
                     <div id="menu" style="display:none;position:fixed;top:6%;left:74%;background-color:white;height:100px;width:200px;z-index:5;">
-                        <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">Language</div>
+                        <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">語言</div>
                         <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;">&nbsp English<br></p>
                         <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;" onclick="window.location.href='/../Frontend-Chinese/07E-portfolio2.html'">&nbsp 中文<br></p>
-                        <p class="logoutselected" onclick="Logout()">&nbsp<i class="icon iconfont icon-dianyuan" style="margin-right:5px;"></i>Logout</p>
+                        <p class="logoutselected" onclick="Logout()">&nbsp<i class="icon iconfont icon-dianyuan" style="margin-right:5px;"></i>登出</p>
                     </div>
-                    <div class="container">
-
-                        <div style="position:relative;top:135px;left:0px;z-index:3;width:50px;" id="portfoliofilter">
-                            <button type="button" onclick="viewportfoliofilter()" style="width:20px; height:120px;background-color:white;border-top:5px solid gray;border-bottom:5px solid gray;border-left:hidden; border-right:hidden;cursor:pointer;">
-                            <p style="transform:scaleX(1.5);font-size:11px;font-weight:bold;position:relative;left:-0.5px;color:lawngreen;">F<br>I<br>L<br>T<br>E<br>R</p>
-                            </button>
-                        </div>
-
-                        <div class="library_form" id="form">
-                            <button style="position:relative;cursor:pointer; left:175px; background-color:white; border-style:none;" onclick="closefilter()" class="xfilter">X</button>
-                            <input type="text" name="search" placeholder="Search" id="searchInput" class="portfolio_keyword_search">
-                            <div class="portfolio_search_position">
-                                <div class="portfolio_search_background">
-                                    <div class="portfolio_search_word">
-                                        <h3> Position: </h3>
-                                    </div>
+                    <form>
+                        <select class="position_filter" id="filterPosition" onchange="filter_Position()">
+                            <option value="all">職位</option>
+                            <option value="DIR">主任</option>
+                            <option value="CNO">護士長</option>
+                            <option value="CNA">護士</option>
+                            <option value="Patient">病人</option>
+                        </select>
+                        <select class="gender_filter" id="filterGender" onchange="filter_Gender()">
+                            <option value="all">性別</option>
+                            <option value="M">男性</option>
+                            <option value="F">女性</option>
+                            <option value="Others">其他</option>
+                        </select> 
+                        <input type="text" name="search" placeholder="搜尋" id="searchInput" autocomplete="off">
+                    </form>
+                        <div class="container">
+                            <div style="position:relative;top:135px;left:0px;z-index:3;width:50px;" id="portfoliofilter">
+                            </div>
+                            <div class="portfolio_display" id="shortportfolio">
+                                <div style="overflow:auto;">
+                                    <table class="portfolio_display_table">
+                                        <tr>
+                                            <th style="width:1%" onclick="sortingTask(0)" class="portfolio_table_firstbox"> 編號 </th>
+                                            <th style="width:20%" onclick="sortingTask(1)" class="portfolio_table_secondbox"> 姓名 </th>
+                                            <th style="width:3%" onclick="sortingTask(2)" class="portfolio_table_thirdbox"> 性別 </th>
+                                            <th style="width:25%"onclick="sortingTask(3)" class="portfolio_table_forthbox"> 聯絡電話 </th>
+                                            <th style="width:15%"onclick="sortingTask(4)" class="portfolio_table_fifthbox"> 信箱 </th>
+                                            <th style="width:6%"onclick="sortingTask(5)" class="portfolio_table_sixthbox"> 職位 </th>
+                                            <th style="width:6%"> <button id="newPortfolio" style="cursor:pointer;display:none;" type="button" onclick="addNewPortfolio()" class="add_button"><img src="statics\images\add.png" height="15px" width="15px" /></button> </th>
+                                        </tr>
+                                        <tbody id="briefPortfolio">
+                                        <tr></tr>
+                                        </tbody>
+                                    </table>        
                                 </div>
-                                <select id="filterPosition">
-                                    <option value="all">All</option>
-                                    <option value="DIR">Director</option>
-                                    <option value="CNO">CNO</option>
-                                    <option value="CNA">CNA</option>
-                                    <option value="Patient">Patient</option>
-                                </select>
-                                <br><br>
+                            </div>
+                        <div class="library_form" id="form">
                                 <div id='Roomhide' style='display:none;'>
                                     <div class="portfolio_search_background">
-                                        <div class="portfolio_search_word">
-                                            <h3> Room No. </h3>
+                                         <div class="portfolio_search_word">
                                         </div>
                                     </div>
                                     <select id="filterRoomNo" onchange="filterRoomNo()">
-                                        <option value="all"> All </option>
+                                        <option value="all"> 全部 </option>
                                     </select>
                                 </div>
-                                <br>
-                                <div id='Genderhide' style='display:block;'>
-                                    <div class="portfolio_search_background">
-                                        <div class="portfolio_search_word">
-                                            <h3> Gender </h3>
-                                        </div>
-                                    </div>
-                                    <select id="filterGender">
-                                        <option value="all"> All </option>
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <button onclick='Cancel()' style="cursor:pointer;"> Refresh</button>
-                            </div>
                         </div>
-                        <div class="portfolio_display" id="shortportfolio">
-                            <table class="portfolio_display_table">
-                                <tr>
-                                    <th style="width:15%"> I.D. </th>
-                                    <th style="width:20%"> Name </th>
-                                    <th style="width:3%"> Gender</th>
-                                    <th style="width:25%"> Contact number</th>
-                                    <th style="width:15%"> Email</th>
-                                    <th style="width:6%"> Role</th>
-                                    <th style="width:6%"> <button id="newPortfolio" style="cursor:pointer;display:none;" type="button" onclick="addNewPortfolio()" class="add_button"><img src="statics\images\add.png" height="15px" width="15px" /></button> </th>
-                                </tr>
-                                <tbody id="briefPortfolio">
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
-
                     </div>
                     <div id="newPortfolioSeletion">
                         <div class="editformselectcreate">
-                            <center><h2>Select Role</h2><br></center><br>
+                            <center><h2>選擇職位</h2><br></center><br>
                             <center>
-                                <button style="cursor:pointer;" class="selectpatientorstaff" id="btnStaff" onclick="staffPortfolio()">CNA</button>
+                                <button style="cursor:pointer;" class="selectpatientorstaff" id="btnStaff" onclick="staffPortfolio()">護士</button>
                                 &nbsp&nbsp&nbsp&nbsp
-                                <button style="cursor:pointer;" class="selectpatientorstaff" id="btnPatient" onclick="patientPortfolio()">PATIENT</button>
+                                <button style="cursor:pointer;" class="selectpatientorstaff" id="btnPatient" onclick="patientPortfolio()">病人</button>
                             </center><br><br>
-                            <center><button style="cursor:pointer;" onclick="Cancel()">Back</button></center>
+                            <center><button style="cursor:pointer;" onclick="Cancel()">返回</button></center>
                         </div>
                     </div>
                 </div>
@@ -570,308 +516,307 @@ span.hidden{
         </div>
         <div id="newStaffPortfolio">
             <div class="editformcreatestaff">
-                <br><center><h2>CNA Portfolio</h2></center><br>
+                <br><center><h2>護士簡介</h2></center><br>
                 <table>
                     <tr>
-                        <td rowspan="3"> Insert Photo: <br><br><input id="btnPicture" type="file" accept="image/*" required /> </td>
+                        <td rowspan="3"> 插入相片: <br><br><input id="btnPicture" type="file" accept="image/*" required /> </td>
                         <td>
-                            <p style="position:relative;left:-50px;display:inline;">Position:</p>
+                            <p style="position:relative;left:-50px;display:inline;">職位:</p>
                             <select style="position:relative;display:inline;left:20px;" id="staffPosition" onchange="pass123()" required>
-                                <option value="">Please Select</option>
-                                <option value="CNA">CNA</option>
+                                <option value="">請選擇</option>
+                                <option value="CNA">護士</option>
                             </select>
                     <tr>
-                        <td> CNA ID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id='StaffID'></span></td>
+                        <td> 護士編號: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id='StaffID'></span></td>
                     </tr>
                     <tr>
-                        <td>Name: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffName" placeholder="Name" required /></td>
+                        <td>姓名: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffName" placeholder="姓名" required /></td>
                     </tr>
                     <tr>
-                        <td colspan="2" id="passtable" style="display:none;"> Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="staffPassword" placeholder="give a password" /></td>
+                        <td colspan="2" id="passtable" style="display:none;"> 密碼: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="staffPassword" placeholder="輸入密碼" /></td>
                     </tr>
                     <tr>
-                        <td> Date of Birth: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffDOB" placeholder="yyyy/mm/dd" required /></td>
-                        <td> Initial Date: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffInitialDate" placeholder="Enter Date" required /></td>
+                        <td> 生日: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffDOB" placeholder="年/月/日" required /></td>
+                        <td> 就職日期: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffInitialDate" placeholder="輸入日期" required /></td>
                     </tr>
                     <tr>
-                        <td> Email Address: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffEmail" placeholder="Email" required /></td>
-                        <td> Gender: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffGender" placeholder="M/F" required /></td>
+                        <td> 電子信箱: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffEmail" placeholder="信箱" required /></td>
+                        <td> 性別: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffGender" placeholder="男/女" required /></td>
                     </tr>
                     <tr>
-                        <td> Contact No: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffContact" placeholder="0123-456-780" required /></td>
-                        <td> Emergency Contact No: <input type="text" id="staffEContact" placeholder="0123-456-780" required /></td>
+                        <td> 聯絡電話: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="staffContact" placeholder="0123-456-780" required /></td>
+                        <td> 緊急聯絡電話: <input type="text" id="staffEContact" placeholder="0123-456-780" required /></td>
                     </tr>
                     <tr>
-                        <td> Emergency Contact Name: <input type="text" id="staffEName" placeholder="Name" required /></td>
-                        <td> Emergency Contact Relationship: <input type="text" id="staffERelationship" placeholder="Relationship" required /></td>
+                        <td> 緊急聯絡人: <input type="text" id="staffEName" placeholder="姓名" required /></td>
+                        <td> 緊急聯絡人關係: <input type="text" id="staffERelationship" placeholder="關係" required /></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Address: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffAddress" placeholder="Address" size="80" required /></td>
+                        <td colspan="2"> 地址: &nbsp&nbsp&nbsp&nbsp<input type="text" id="staffAddress" placeholder="地址" size="80" required /></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Brief Description:<input type="textarea" id="staffbriefdescription" placeholder="Please enter here" size="85" /></td>
+                        <td colspan="2">簡介:<input type="textarea" id="staffbriefdescription" placeholder="輸入" size="85" /></td>
                     </tr>
                     <tr>
-                        <td> Insert CV: &nbsp&nbsp&nbsp&nbsp<input id="staffCV" type="file" accept="image/*" required /></td>
-                        <td> Insert License: &nbsp&nbsp<input id="staffLicense" type="file" accept="image/*" required /></td>
+                        <td> 插入簡歷: &nbsp&nbsp&nbsp&nbsp<input id="staffCV" type="file" accept="image/*" required /></td>
+                        <td> 插入執照: &nbsp&nbsp<input id="staffLicense" type="file" accept="image/*" required /></td>
                     </tr>
                 </table><br>
                 <center>
-                    <button style="cursor:pointer;" id="btnSubmitP"> Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">Cancel</button>
+                    <button style="cursor:pointer;" id="btnSubmitP"> 提交</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">取消</button>
                 </center>
             </div>
         </div>
     </div>
-
     <div id="newPatientPortfolio">
         <div class="editformcreatepatient">
-            <br><center><h2>Patient Portfolio</h2></center><br>
+            <br><center><h2>病人簡介</h2></center><br>
             <table class="portfolio_table">
                 <tr>
-                    <td rowspan="2"> Insert Photo <br><br><input id="btnPicture2" type="file" accept="image/*" required /> </td>
-                    <td> Patient ID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id=PatientID></span></td>
+                    <td rowspan="2"> 插入照片 <br><br><input id="btnPicture2" type="file" accept="image/*" required /> </td>
+                    <td> 病人編號: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id=PatientID></span></td>
                 </tr>
                 <tr>
-                    <td>Name: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientName" placeholder="Name" required /></td>
+                    <td>姓名: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientName" placeholder="姓名" required /></td>
                 </tr>
                 <tr>
-                    <td> Room number: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientRoomNo" placeholder="101.." required /></td>
-                    <td> Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="patientPassword" placeholder="give a password" required /></td>
+                    <td> 房間號: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientRoomNo" placeholder="101.." required /></td>
+                    <td> 密碼: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="patientPassword" placeholder="輸入密碼" required /></td>
                 </tr>
                 <tr>
-                    <td> Date of Birth:  &nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientDOB" placeholder="yyyy/mm/dd" required /></td>
-                    <td> Gender: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientGender" placeholder="M/F" required /></td>
+                    <td> 生日:  &nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientDOB" placeholder="年/月/日" required /></td>
+                    <td> 性別: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientGender" placeholder="男/女" required /></td>
                 </tr>
                 <tr>
-                    <td> Admission Date: &nbsp&nbsp<input type="text" id="patientAdmissionDate" placeholder="Enter Date" required /></td>
-                    <td> Email Address: &nbsp&nbsp<input type="text" id="patientEmail" placeholder="Email" required /></td>
+                    <td> 入住日期: &nbsp&nbsp<input type="text" id="patientAdmissionDate" placeholder="輸入日期" required /></td>
+                    <td> 電子信箱: &nbsp&nbsp<input type="text" id="patientEmail" placeholder="信箱" required /></td>
                 </tr>
                 <tr>
-                    <td> Contact No: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientContact" placeholder="0123-456-780" required /></td>
-                    <td> Emergency Contact No: <input type="text" id="patientEContact" placeholder="0123-456-780" required /></td>
+                    <td> 聯絡電話: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientContact" placeholder="0123-456-780" required /></td>
+                    <td> 緊急聯絡電話: <input type="text" id="patientEContact" placeholder="0123-456-780" required /></td>
                 </tr>
                 <tr>
-                    <td> Emergency Contact Name: &nbsp<input type="text" id="patientEName" placeholder="Enter Name" required /></td>
-                    <td> Emergency Contact Relationship: <input type="text" id="patientERelationship" placeholder="Enter Relationship" required /></td>
+                    <td> 緊急聯絡人: &nbsp<input type="text" id="patientEName" placeholder="輸入姓名" required /></td>
+                    <td> 緊急聯絡人關係: <input type="text" id="patientERelationship" placeholder="輸入關係" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> Address: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAddress" placeholder="Address" size="80" required /></td>
+                    <td colspan="2"> 地址: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAddress" placeholder="地址" size="80" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> Admission Reason: &nbsp&nbsp<input type="text" id="patientAdmissionReason" placeholder="Enter Here" size="85" required /></td>
+                    <td colspan="2"> 入住原因: &nbsp&nbsp<input type="text" id="patientAdmissionReason" placeholder="輸入原因" size="85" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Appointment Record:<input type="textarea" id="AppointmentRecord" placeholder="Appointment Record..." size="85" /></td>
+                    <td colspan="2">預約紀錄:<input type="textarea" id="AppointmentRecord" placeholder="預約紀錄" size="85" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Medical Record:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="MedicalRecord" placeholder="Medical Record..." size="85" /></td>
+                    <td colspan="2">藥物紀錄:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="藥物紀錄" placeholder="Medical Record..." size="85" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Brief Description:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="BriefDescription" placeholder="Brief Description..." size="85" /></td>
+                    <td colspan="2">簡介:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="BriefDescription" placeholder="簡介" size="85" /></td>
                 </tr>
             </table>
-            Upload:<progress value="0" max="100" id="Uploader2">0%</progress>
+            上傳:<progress value="0" max="100" id="Uploader2">0%</progress>
             <center>
-                <button style="cursor:pointer;" id="btnSubmitP2"> Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">Cancel</button>
+                <button style="cursor:pointer;" id="btnSubmitP2"> 提交</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">取消</button>
             </center>
         </div>
     </div>
     </div>
     <div id="viewPatientPortfolio">
         <div class="editformview">
-            <center><h2>Patient Portfolio</h2></center><br>
+            <center><h2>病人簡介</h2></center><br>
             <div>
-                <button style="cursor:pointer;" id="btnEditPP" onclick="editPP()" style="display:inline;">Edit</button>
-                <button style="cursor:pointer;" id="btnDeletePP" onclick="deletePP()" style="display:inline;">Delete</button>
+                <button style="cursor:pointer;" id="btnEditPP" onclick="editPP()" style="display:inline;">編輯</button>
+                <button style="cursor:pointer;" id="btnDeletePP" onclick="deletePP()" style="display:inline;">刪除</button>
             </div>
             <br>
             <table id="viewPatientPortfolioTable">
                 <tr>
                     <td rowspan="2" colspan="2" width="50%"><img id='img1' height="150" width="150" /></td>
-                    <td width="25%"> Patient ID </td>
+                    <td width="25%"> 病人編號 </td>
                     <td width="25%" id="PID"></td>
                 </tr>
                 <tr>
-                    <td> Name </td>
-                    <td id="Name">Name:</td>
+                    <td> 姓名 </td>
+                    <td id="Name">姓名:</td>
                 </tr>
                 <tr>
-                    <td width="25%"> Room No </td>
-                    <td width="25%" id="Room"> Room No.</td>
-                    <td width="25%"> Password </td>
-                    <td width="25%" id="Password">Password</td>
+                    <td width="25%"> 房間號 </td>
+                    <td width="25%" id="Room"> 房間號</td>
+                    <td width="25%"> 密碼 </td>
+                    <td width="25%" id="Password">密碼</td>
                 </tr>
                 <tr>
-                    <td> Date of Birth </td>
+                    <td> 生日 </td>
                     <td id="DOB"> </td>
-                    <td> Gender </td>
-                    <td id="Gender"> Gender</td>
+                    <td> 性別 </td>
+                    <td id="Gender"> 性別</td>
                 </tr>
                 <tr>
-                    <td> Admission Date </td>
-                    <td id="AdmissionDate"> Admission Date</td>
-                    <td> Email Address </td>
-                    <td id="Email"> Email Address</td>
+                    <td> 入住日期 </td>
+                    <td id="AdmissionDate"> 入住日期</td>
+                    <td> 電子信箱 </td>
+                    <td id="Email"> 電子信箱</td>
                 </tr>
                 <tr>
-                    <td> Contact No </td>
-                    <td id="Contactno"> Contact No. </td>
-                    <td> Emergency Contact No </td>
-                    <td id="EContactnoV"> Emergency Contact No</td>
+                    <td> 聯絡電話 </td>
+                    <td id="Contactno"> 聯絡電話 </td>
+                    <td> 緊急聯絡電話 </td>
+                    <td id="EContactnoV"> 緊急聯絡電話</td>
                 </tr>
                 <tr>
-                    <td> Emergency Contact Name </td>
-                    <td id="EName"> Emergency Contact Name </td>
-                    <td> Emergency Contact Relationship </td>
-                    <td id="ERelationship"> Emergency Contact Relationship</td>
+                    <td> 緊急聯絡人 </td>
+                    <td id="EName"> 緊急聯絡人 </td>
+                    <td> 緊急聯絡人關係 </td>
+                    <td id="ERelationship"> 緊急聯絡人關係</td>
                 </tr>
                 <tr>
-                    <td> Address </td>
+                    <td> 地址 </td>
                     <td colspan="3" id="AddressV"></td>
                 </tr>
                 <tr>
-                    <td> Admission Reason </td>
+                    <td> 入住原因 </td>
                     <td colspan="3" id="AdmissionReason"></td>
                 </tr>
                 <tr>
-                    <td> Appointment Record </td>
+                    <td> 預約紀錄 </td>
                     <td colspan="3" id="ARV"> </td>
                 </tr>
                 <tr>
-                    <td> Medical Record </td>
+                    <td> 藥物紀錄 </td>
                     <td colspan="3" id="MRV"> </td>
                 </tr>
                 <tr>
-                    <td> Brief Description </td>
+                    <td> 簡介 </td>
                     <td colspan="3" id="BDV"> </td>
                 </tr>
             </table><br>
-            <button type="button" onclick="Cancel()" style="cursor:pointer;">Back</button>
+            <button type="button" onclick="Cancel()" style="cursor:pointer;">返回</button>
         </div>
     </div>
     </div>
     <div id="viewStaffPortfolio">
         <div class="editformview" style="height:1020px;">
-            <center><h2>Staff Portfolio</h2></center><br>
+            <center><h2>員工簡介</h2></center><br>
             <div id = "CNAbuttons"></div>
             <br>
             <table id="viewStaffPortfolioTable">
                 <tr>
                     <td rowspan="2" colspan="2" width="50%"><img id='imgS' height="150" width="150" /></td>
-                    <td width="25%"> Staff ID </td>
+                    <td width="25%"> 員工編號 </td>
                     <td width="25%" id="SID"></td>
                 </tr>
                 <tr>
-                    <td> Name </td>
-                    <td id="sName">Name:</td>
+                    <td> 姓名 </td>
+                    <td id="sName">姓名:</td>
                 </tr>
                 <tr>
-                    <td width="25%"> Inital Date </td>
+                    <td width="25%"> 就職日期 </td>
                     <td width="25%" id="sInitialDate"> </td>
-                    <td width="25%" id="ssP"> Password </td>
+                    <td width="25%" id="ssP"> 密碼 </td>
                     <td width="25%" id="ssPassword"> </td>
                 </tr>
                 <tr>
-                    <td> Date of Birth </td>
+                    <td> 生日 </td>
                     <td id="sDOB"> </td>
-                    <td> Position </td>
+                    <td> 職位 </td>
                     <td id="sPosition"> </td>
                 </tr>
                 <tr>
-                    <td> Email Address</td>
+                    <td> 電子信箱</td>
                     <td id="sEmail"> </td>
-                    <td> Gender</td>
+                    <td> 性別</td>
                     <td id="sGender">  </td>
                 </tr>
                 <tr>
-                    <td> Contact No. </td>
+                    <td> 聯絡電話 </td>
                     <td id="sContact"> </td>
-                    <td> Emergency Contact No.</td>
+                    <td> 緊急聯絡電話</td>
                     <td id="sEContact"> </td>
                 </tr>
                 <tr>
-                    <td> Emergency Contact Name </td>
+                    <td> 緊急聯絡人 </td>
                     <td id="sEName"> </td>
-                    <td> Emergency Contact Relationship</td>
+                    <td> 緊急聯絡人關係</td>
                     <td id="sERelationship"> </td>
                 </tr>
                 <tr>
-                    <td> Address</td>
+                    <td> 地址</td>
                     <td colspan="3" id="sAddress"></td>
                 </tr>
                 <tr>
-                    <td> Brief Description </td>
+                    <td> 簡介 </td>
                     <td colspan="3" id="sBriefDescription"> </td>
                 </tr>
                 <tr>
-                    <td> CV </td>
+                    <td> 簡歷 </td>
                     <td colspan="3"><img id="sCV" height="150" width="150" /></td>
                 </tr>
                 <tr>
-                    <td> License </td>
+                    <td> 執照 </td>
                     <td colspan="3"><img id="sLicense" height="150" width="150" /></td>
                 </tr>
             </table><br>
-            <button type="button" onclick="Cancel()" style="cursor:pointer;">Back</button>
+            <button type="button" onclick="Cancel()" style="cursor:pointer;">返回</button>
         </div>
     </div>
     </div>
 
     <div id="editPatientPortfolio">
         <div class="editformedit">
-            <br><center><h2>Patient Portfolio</h2></center><br>
+            <br><center><h2>病人簡介</h2></center><br>
             <table class="portfolio_table" >
                 <tr>
-                    <td rowspan="2" width="50%"> Patient Picture URL:<p type="text" id="PictureP" required></p></td>
-                    <td width="50%"> Patient ID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id='PatientID2'></span></td>
+                    <td rowspan="2" width="50%"> 病人照片 連結:<p type="text" id="PictureP" required></p></td>
+                    <td width="50%"> 病人編號: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id='PatientID2'></span></td>
                 </tr>
                 <tr>
-                    <td>Name: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientName2" placeholder="Name" required /></td>
+                    <td>姓名: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientName2" placeholder="Name" required /></td>
                 </tr>
                 <tr>
-                    <td> Room number: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientRoomNo2" placeholder="101.." required /></td>
-                    <td> Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    <input type="text" id="patientPassword2" placeholder="give a password" required /></td>
+                    <td> 房間號: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientRoomNo2" placeholder="101.." required /></td>
+                    <td> 密碼: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    <input type="text" id="patientPassword2" placeholder="give a password" required /></td>
                 </tr>
                 <tr>
-                    <td> Date of Birth: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientDOB2" placeholder="yyyy/mm/dd" required /></td>
-                    <td> Gender: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientGender2" placeholder="M/F" required /></td>
+                    <td> 生日: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientDOB2" placeholder="yyyy/mm/dd" required /></td>
+                    <td> 性別: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientGender2" placeholder="M/F" required /></td>
                 </tr>
                 <tr>
-                    <td> Admission Date: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAdmissionDate2" placeholder="Date" required /></td>
-                    <td> Email Address: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientEmail2" placeholder="Email" required /></td>
+                    <td> 入住日期: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAdmissionDate2" placeholder="Date" required /></td>
+                    <td> 電子信箱: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientEmail2" placeholder="Email" required /></td>
                 </tr>
                 <tr>
-                    <td> Contact No: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientContact2" placeholder="0123-456-780" required /></td>
-                    <td> Emergency Contact No: <input type="text" id="patientEContact2" placeholder="0123-456-780" required /></td>
+                    <td> 聯絡電話: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="patientContact2" placeholder="0123-456-780" required /></td>
+                    <td> 緊急聯絡電話: <input type="text" id="patientEContact2" placeholder="0123-456-780" required /></td>
                 </tr>
                 <tr>
-                    <td> Emergency Contact Name: &nbsp&nbsp&nbsp<input type="text" id="patientEName2" placeholder="Enter Name" required /></td>
-                    <td> Emergency Contact Relationship: <input type="text" id="patientERelationship2" placeholder="Enter Relationship" required /></td>
+                    <td> 緊急聯絡人: &nbsp&nbsp&nbsp<input type="text" id="patientEName2" placeholder="Enter Name" required /></td>
+                    <td> 緊急聯絡人關係: <input type="text" id="patientERelationship2" placeholder="Enter Relationship" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> Address: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAddress2" placeholder="Address" size="80" required /></td>
+                    <td colspan="2"> 地址: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAddress2" placeholder="Address" size="80" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> Admission Reason: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAdmissionReason2" placeholder="Enter Here" size="85" required /></td>
+                    <td colspan="2"> 入住原因: &nbsp&nbsp&nbsp&nbsp<input type="text" id="patientAdmissionReason2" placeholder="Enter Here" size="85" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Appointment Record:<input type="textarea" id="AppointmentRecord2" placeholder="Appointment Record..." size="85" /></td>
+                    <td colspan="2">預約紀錄:<input type="textarea" id="AppointmentRecord2" placeholder="Appointment Record..." size="85" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Medical Record:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="MedicalRecord2" placeholder="Medical Record..." size="85" /></td>
+                    <td colspan="2">藥物紀錄:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="MedicalRecord2" placeholder="Medical Record..." size="85" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Brief Description:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="BriefDescription2" placeholder="Brief Description..." size="85" /></td>
+                    <td colspan="2">簡介:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="textarea" id="BriefDescription2" placeholder="Brief Description..." size="85" /></td>
                 </tr>
                 <tr>
-                    <td colspan='2'>Orginal Picture Folder: <span id='patientpicFilename'></span></td>
+                    <td colspan='2'>原始照片檔案: <span id='patientpicFilename'></span></td>
                 </tr>
             </table> <br>
             <center>
-                <button style="cursor:pointer;" id="btnSubmitPP" onclick="SubmitPPPP()"> Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">Cancel</button>
+                <button style="cursor:pointer;" id="btnSubmitPP" onclick="SubmitPPPP()"> 提交</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">取消</button>
             </center>
         </div>
     </div>
@@ -880,72 +825,72 @@ span.hidden{
 
     <div id="editStaffPortfolio">
         <div class="editformedit">
-            <br>	<center><h2>Staff Portfolio</h2></center><br>
+            <br>	<center><h2>員工簡介</h2></center><br>
             <table style = "text-align: left" >
                 <tr>
-                    <td colspan="4" style = "text-align: left"> Staff Picture URL: <span id = "PictureS"></span></td>
+                    <td colspan="4" style = "text-align: left"> 員工照片 連結: <span id = "PictureS"></span></td>
                 </tr>
                 <tr>
-                    <td width="25%" style = "text-align: left">Name: </td>
+                    <td width="25%" style = "text-align: left">性名: </td>
                     <td width="25%"><input type="text" id="staffName2" placeholder="Name" required /></td>
-                    <td width="25%" style = "text-align: left">Staff ID: </td>
+                    <td width="25%" style = "text-align: left">員工編號: </td>
                     <td width="25%" style = "text-align: left"><span id="StaffID2"></span></td>
                 </tr>
                 <tr>
-                    <td id="ssBD2" style = "text-align: left"> Initial Date: </td>
+                    <td id="ssBD2" style = "text-align: left"> 就職日期: </td>
                     <td><input type="text" id="staffInitialDate2" placeholder="Enter Date" required /></td>
-                    <td id="ssP2" style = "text-align: left"> Password: </td>
+                    <td id="ssP2" style = "text-align: left"> 密碼: </td>
                     <td><input type="password" id="staffPassword2" placeholder="give a password" required /></td>
                 </tr>
                 <tr>
-                    <td style = "text-align: left"> Position: </span></td>
+                    <td style = "text-align: left"> 職位: </span></td>
                     <td style = "text-align: left"><span id = "staffPosition2"></span></td>
-                    <td style = "text-align: left">  Date of Birth: </td>
+                    <td style = "text-align: left">  生日: </td>
                     <td><input type="text" id="staffDOB2" placeholder="yyyy/mm/dd" required /></td>
                 </tr>
                 <tr>
-                    <td style = "text-align: left"> Email Address: </td>
+                    <td style = "text-align: left"> 電子信箱: </td>
                     <td><input type="text" id="staffEmail2" placeholder="Email" required /></td>
-                    <td style = "text-align: left"> Gender: </td>
+                    <td style = "text-align: left"> 性別: </td>
                     <td><input type="text" id="staffGender2" placeholder="M/F" required /></td>
                 </tr>
                 <tr>
-                    <td style = "text-align: left"> Contact No: </td>
+                    <td style = "text-align: left"> 聯絡電話: </td>
                     <td><input type="text" id="staffContact2" placeholder="0123-456-780" required /></td>
-                    <td style = "text-align: left"> Emergency Contact No: </td>
+                    <td style = "text-align: left"> 緊急聯絡電話: </td>
                     <td><input type="text" id="staffEContact2" placeholder="0123-456-780" required /></td>
                 </tr>
                 <tr>
-                    <td style = "text-align: left">Emergency Contact Name: </td>
+                    <td style = "text-align: left">緊急聯絡人: </td>
                     <td><input type="text" id="staffEName2" placeholder="Enter Name" required /></td>
-                    <td style = "text-align: left">Emergency Contact Relationship: </td>
+                    <td style = "text-align: left">緊急聯絡人關係: </td>
                     <td><input type="text" id="staffERelationship2" placeholder="Enter Relationship" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style = "text-align: left"> Address: <input type="text" id="staffAddress2" placeholder="Address" size="80" required /></td>
+                    <td colspan="4" style = "text-align: left"> 地址: <input type="text" id="staffAddress2" placeholder="Address" size="80" required /></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style = "text-align: left"> Brief Description: <input type="text" id="staffBriefDescription2" placeholder="Enter Here" size="90" /></td>
+                    <td colspan="4" style = "text-align: left"> 簡介: <input type="text" id="staffBriefDescription2" placeholder="Enter Here" size="90" /></td>
                 </tr>
                 <tr>
-                    <td colspan='4' style = "text-align: left">CV: <span id='staffCV2'> </span></td>
+                    <td colspan='4' style = "text-align: left">簡歷: <span id='staffCV2'> </span></td>
                 </tr>
                 <tr>
-                    <td colspan='4' style = "text-align: left">License: <span id='stafflicense2'> </span></td>
+                    <td colspan='4' style = "text-align: left">執照: <span id='stafflicense2'> </span></td>
                 </tr>
                 <tr>
-                    <td colspan='4' style = "text-align: left">Orginal Picture Folder: <span id='staffpicfilename'></span></td>
+                    <td colspan='4' style = "text-align: left">原始照片檔案: <span id='staffpicfilename'></span></td>
                 </tr>
                 <tr>
-                    <td colspan='4' style = "text-align: left">Orginal CV Folder: <span id='staffcvfilename'></span></td>
+                    <td colspan='4' style = "text-align: left">原始簡歷檔案: <span id='staffcvfilename'></span></td>
                 </tr>
                 <tr>
-                    <td colspan='4' style = "text-align: left">Orginal License Folder: <span id='stafflicensefilename'></span></td>
+                    <td colspan='4' style = "text-align: left">原始執照檔案: <span id='stafflicensefilename'></span></td>
                 </tr>
             </table><br>
             <center>
-                <button style="cursor:pointer;" id="btnSubmitSP" onclick="submitSP()"> Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">Cancel</button>
+                <button style="cursor:pointer;" id="btnSubmitSP" onclick="submitSP()"> 提交</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button style="cursor:pointer;" id="btnPCancel" onclick="Cancel()">取消</button>
             </center>
         </div>
     </div>
@@ -968,19 +913,17 @@ span.hidden{
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
             });
-            
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar, #content').toggleClass('active');
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                if(document.getElementById("toggleSide").innerHTML=="Hide sidebar"){
-                    document.getElementById("toggleSide").innerHTML = "Show sidebar";
-                } else if (document.getElementById("toggleSide").innerHTML == "Show sidebar") {
-                    document.getElementById("toggleSide").innerHTML = "Hide sidebar";
+                if(document.getElementById("toggleSide").innerHTML=="隱藏列表"){
+                    document.getElementById("toggleSide").innerHTML = "顯示列表";
+                } else if (document.getElementById("toggleSide").innerHTML == "顯示列表") {
+                    document.getElementById("toggleSide").innerHTML = "隱藏列表";
                 }
             });
         });
-
         function imgBlur(obj) {
             var photoword = document.getElementById("photoword");
             var Profilepic = document.getElementById("Profilepic");
@@ -988,7 +931,6 @@ span.hidden{
             photoword.style.position = "absolute";
             photoword.style.transform = "translate(2ex,2ex)";
             photoword.style.zIndex = "2000";
-
             Profilepic.style.filter = "blur(3px)";
             Profilepic.style.display = "inline";
         }

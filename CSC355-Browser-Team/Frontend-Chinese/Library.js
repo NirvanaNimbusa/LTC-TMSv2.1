@@ -93,7 +93,7 @@ snapshot.forEach(function(childSnapshot1){
         cellID.setAttribute("id","id_holder["+num+"]");
         cellID.appendChild(document.createTextNode(childSnapshot2.val()["TaskID"]));
         cellID.setAttribute("hidden", true);
-        button.innerHTML="Detail";
+        button.innerHTML="詳細資料";
             
         var cellButton= row.insertCell(-1);
         cellButton.appendChild(button);
@@ -837,21 +837,21 @@ function injectToDOM(){
   //var $AddToDom = $('<div>Task Name: </div>');
   htmlInjection = "";
 
-  htmlInjection += '<br><div style="text-align:left;"><button type="button" onclick="closeclose_form()">Close Task</button></div><br>';
+  htmlInjection += '<br><div style="text-align:left;"><button type="button" onclick="closeclose_form()">關閉</button></div><br>';
   
   //Task name
-  htmlInjection += '<div style="text-align:left;"> Task Name: '+taskDetails["name"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 任務名稱: '+taskDetails["name"]+'</div>';
   
   //Task Category
-  htmlInjection += '<div style="text-align:left;"> Category: '+taskDetails["category"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 類別: '+taskDetails["category"]+'</div>';
 
   //Task Video
-  htmlInjection += '<div style="text-align:left;"> Video URL: '+taskDetails["videoURL"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 影片連結: '+taskDetails["videoURL"]+'</div>';
 
   //Task outline
-  htmlInjection += '<div style="text-align:left;"> Task Outline: '+taskDetails["outline"]+'</div>';
+  htmlInjection += '<div style="text-align:left;"> 任務大綱: '+taskDetails["outline"]+'</div>';
   
-  htmlInjection += '<div style="text-align:left;"> Click <button onClick = "showDetails()" type="button">HERE</button> for more details.</div>';
+  htmlInjection += '<div style="text-align:left;"> 點選 <button onClick = "showDetails()" type="button">這裡</button> 獲取更多資訊</div>';
   $("#taskHeader").html(htmlInjection);
   htmlInjection = "";
   // Write the HTML for each individual task step
@@ -859,17 +859,17 @@ function injectToDOM(){
       //Task steps
       htmlInjection += "<div  class = ''>";
 
-      htmlInjection += '<br><div style="flex:3; align-content:left;">' + 'Task Step ' + (parseInt(i)+1) + '</div>';
+      htmlInjection += '<br><div style="flex:3; align-content:left;">' + '任務步驟 ' + (parseInt(i)+1) + '</div>';
       //htmlInjection += '<div style="flex:15;"></div>';
       htmlInjection += '</div>';
       htmlInjection += "</div>";
       //Task name
       htmlInjection += "<div class='inputField'>";
-      htmlInjection += "<div>Step Name: "+ steps[i].name +"</div>";
+      htmlInjection += "<div>名稱: "+ steps[i].name +"</div>";
       htmlInjection += "</div>";
 
       //Task description
-      htmlInjection += "<div>Step Description: "+ steps[i].description +"</div>";
+      htmlInjection += "<div>描述: "+ steps[i].description +"</div>";
       htmlInjection += '<div class = "stepImageContainer">';
       //Add in image upload button and image preview
       
@@ -916,7 +916,7 @@ function getDetailedStepHTML(steps, stepNum){
             //Right side of detailed step
             detailHTML += '<div class="detailedStepRightContainer" id= "' + i + '">';
             temp = j+1;
-            detailHTML += "<div>Detail Step " + temp +": "+ steps[i]["detailedSteps"][j] +"</div>";
+            detailHTML += "<div>詳細步驟 " + temp +": "+ steps[i]["detailedSteps"][j] +"</div>";
             detailHTML += '</div>';
 
             detailHTML += '</div>'
@@ -1046,7 +1046,7 @@ function createTaskCopy(){
     copyTask(checked, 0, counter);
   }
   else {
-      window.alert('There is no checked checkbox');
+      window.alert('沒有已完成事項');
   }
 }
 
@@ -1058,7 +1058,7 @@ function copyTask(checked, index, count){
   //alert("Index " + index + " count " + count);
   if (index == count){
     $("#library_requestCopy").attr("disabled", false);
-    alert("Tasks added to task list");
+    alert("任務添加到任務列表");
     return;
   }
   //alert("Index: " + index);
@@ -1087,7 +1087,7 @@ function copyTask(checked, index, count){
 
     }, function(error, commited, TIDSnap){
       if (error){
-        alert("A problem ocurred, aborting task duplication.");
+        alert("出現問題，中止任務重複.");
         return;
       }
       if (commited){
@@ -1137,7 +1137,7 @@ function copyTask(checked, index, count){
           });
 
         } else {
-          alert("A problem ocurred, aborting task duplication of " + newTask["Info"]["Title"]);
+          alert("出現問題，中止任務重複" + newTask["Info"]["Title"]);
           return;
         }
         //(newTask);
