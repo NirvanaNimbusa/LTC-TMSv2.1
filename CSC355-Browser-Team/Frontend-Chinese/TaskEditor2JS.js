@@ -42,30 +42,30 @@ function createNewTask(){
             //alert(TID);
         
             var taskData = {
-                category: "Basic",
-                outline: "Type an outline here",
+                category: "基本",
+                outline: "輸入",
                 videoURL: "",
                 note: "task note",
-                name: "New Task",
+                name: "新任務",
                 owner: userid,
                 taskID: TID,
                 visible: false,
                 published: false,
-                startCategory: "Basic",
+                startCategory: "基本",
                 newTask: true
             };
             taskDetails = taskData;
             console.log(taskData);
             var stepsData = {
-                description: "step description",
-                name: "step name",
+                description: "描述",
+                name: "名稱",
                 number: 1,
                 image: defImage,
                 imageChanged: false,
             }
             steps[0] = stepsData;
             steps[0]["detailedSteps"] = [];
-            steps[0]["detailedSteps"][0] = "Detailed Step";
+            steps[0]["detailedSteps"][0] = "詳細步驟";
             console.log(steps);
         }
         getCategories(categories,task="",function(){injectToDOM();})
@@ -263,13 +263,13 @@ function getTaskFromPath(taskPath, callback){
         if (taskDef != null){
             callback(taskDef);
         } else {
-            alert("Task Failed to load")
+            alert("任務加載失敗")
             Window.location.href("./10Mytask2.html");
             //TODO: Failure routine
         }
         return;
     }, function(error){
-        alert("Task failed to load.");
+        alert("任務加載失敗.");
         Window.location.href("./10Mytask2.html")
     });
 }
@@ -299,14 +299,14 @@ function injectToDOM(){
     //var $AddToDom = $('<div>Task Name: </div>');
     htmlInjection = "";
     //Task name
-    htmlInjection += '<div style="text-align:center;"> Task Name: </div>';
+    htmlInjection += '<div style="text-align:center;"> 任務名稱: </div>';
     if (taskDetails["name"] == "New Task"){
         htmlInjection += '<input style="text-align:center;" type="text" id="nameInput" placeholder="' + taskDetails["name"] + '"> </input>';
     } else {
         htmlInjection += '<input style="text-align:center;" type="text" id="nameInput" value="' + taskDetails["name"] + '"> </input>';
     }
     //Task Category
-    htmlInjection += '<div style="text-align:center;"> Category: </div>';
+    htmlInjection += '<div style="text-align:center;"> 類別: </div>';
     htmlInjection += '<select id="category" name="category">';
     console.log(categories);
     for (var c = 0; c < categories.length; c++){
@@ -323,44 +323,44 @@ function injectToDOM(){
     htmlInjection += '</select>';    // End category input
 
      //Task Video
-     htmlInjection += '<div style="text-align:center;"> Video URL: </div>';
+     htmlInjection += '<div style="text-align:center;"> 影片連結: </div>';
      if (taskDetails["videoURL"] == "" || taskDetails["videoURL"] == null){
-        htmlInjection += '<input style="text-align:center;" type="text" id="videoURLInput" placeholder="Video URL"></input>';
+        htmlInjection += '<input style="text-align:center;" type="text" id="videoURLInput" placeholder="影片連結"></input>';
      } else {
         htmlInjection += '<input style="text-align:center;" type="text" id="videoURLInput" value="' + taskDetails["videoURL"] + '"> </input>';
      }
     //Task outline
     console.log(taskDetails["outline"]);
-    htmlInjection += '<div style="text-align:center;"> Task Outline: </div>';
+    htmlInjection += '<div style="text-align:center;"> 任務大綱: </div>';
     if (taskDetails["outline"] == "Type an outline here" || taskDetails["outline"] == ""){
-        htmlInjection += '<div>' + '<textarea class="taskName" id="taskOutline" placeholder="Type an outline here"></textarea>' + '</div>';
+        htmlInjection += '<div>' + '<textarea class="taskName" id="taskOutline" placeholder="輸入"></textarea>' + '</div>';
     } else {
         htmlInjection += '<div>' + '<textarea class="taskName" id="taskOutline" >' + taskDetails["outline"] + ' </textarea>' + '</div>';
     }
     //Visibility
-    htmlInjection += '<div style="text-align:center;"> Task Visibility: </div>';    
+    htmlInjection += '<div style="text-align:center;"> 任務可見性: </div>';    
     htmlInjection += '<div class="radioField">';
     htmlInjection += '<div class="radioChild">';
-    htmlInjection += '<input id="visible"  type="radio" name="status" value="visible"/> Visible';
+    htmlInjection += '<input id="visible"  type="radio" name="status" value="visible"/> 可見';
     htmlInjection += '</div>';
 
     htmlInjection += '<div class="radioChild">';
-    htmlInjection += '<input id="invisible"  type="radio" name="status" value="invisible"/> Invisible';
+    htmlInjection += '<input id="invisible"  type="radio" name="status" value="invisible"/> 不可見';
     htmlInjection += '</div>';
 
     htmlInjection += '</div>';
 
     //Visibility
-    htmlInjection += '<div style="text-align:center; margin-top:25px;"> Publication Status: </div>'; 
+    htmlInjection += '<div style="text-align:center; margin-top:25px;"> 發布狀態: </div>'; 
 
     htmlInjection += '<div class="radioField">';
 
     htmlInjection += '<div class="radioChild">';
-    htmlInjection += '<input id="published"  type="radio" name="visibility" value="published"/> Published';
+    htmlInjection += '<input id="published"  type="radio" name="visibility" value="published"/> 發布';
     htmlInjection += '</div>';  //End Radio chiled
 
     htmlInjection += '<div class="radioChild">';
-    htmlInjection += '<input id="draft"  type="radio" name="visibility" value="draft"/> Draft';
+    htmlInjection += '<input id="draft"  type="radio" name="visibility" value="draft"/> 草稿';
     htmlInjection += '</div>';  //End Radio Child
     
    
@@ -376,22 +376,22 @@ function injectToDOM(){
         htmlInjection += "<div  class = 'taskStep'>";
         htmlInjection += "<div title='Press and hold to drag and reorder steps' class = 'taskStepTop'>";
 
-        htmlInjection += '<div style="flex:3; align-content:left; margin-left:10px; font-size:1.2em;">' + 'Task Step ' + (parseInt(i)+1) + '</div>';
+        htmlInjection += '<div style="flex:3; align-content:left; margin-left:10px; font-size:1.2em;">' + '任務步驟 ' + (parseInt(i)+1) + '</div>';
         htmlInjection += '<div style="flex:15;"></div>';
         htmlInjection += '<div style="flex:1;margin-right:8px;"> <button title="Delete main step" class="mainStepDeleteButton" id = " ' + i + '">[X]</button>';
         htmlInjection += '</div>';
         htmlInjection += "</div>";
         //Task name
         htmlInjection += "<div class='inputField'>";
-        htmlInjection += "<div>Step name:</div> <input width='80' class = 'stepNameInput' type = 'text' placeholder = '" + steps[i].name + "'id = '" + i + "'</input>";
+        htmlInjection += "<div>步驟名稱:</div> <input width='80' class = 'stepNameInput' type = 'text' placeholder = '" + steps[i].name + "'id = '" + i + "'</input>";
         htmlInjection += "</div>";
 
         //Step description
         htmlInjection += "<div class='inputFieldLeft' width='100%'>";
         if (steps[i].description == "step description" || steps[i].description == "" || steps[i].description == "description"){
-            htmlInjection += "Description: <div class='containerDiv'> <div class='desDiv'> <textarea class = 'stepDescriptionInput' id='" + i + "' placeholder='Type a step description here.'></textarea></div>";
+            htmlInjection += "步驟描述: <div class='containerDiv'> <div class='desDiv'> <textarea class = 'stepDescriptionInput' id='" + i + "' placeholder='Type a step description here.'></textarea></div>";
         } else {
-            htmlInjection += "Description: <div class='containerDiv'> <div class='desDiv'> <textarea class = 'stepDescriptionInput' id='" + i + "'>"+ steps[i].description + "</textarea></div>";
+            htmlInjection += "步驟描述: <div class='containerDiv'> <div class='desDiv'> <textarea class = 'stepDescriptionInput' id='" + i + "'>"+ steps[i].description + "</textarea></div>";
         }
         htmlInjection += '<div class = "stepImageContainer">';
         //Add in image upload button and image preview
@@ -408,8 +408,8 @@ function injectToDOM(){
     }   //End loop
     $("#sort").html(htmlInjection); //Insert the HTML for the tasks into the DOM
     htmlInjection = "";
-    htmlInjection+= '<button type="button" id="addStep" val="Add Step">Add Step</button>';
-    htmlInjection += '<button class="saveButton"> Save Task </button>';
+    htmlInjection+= '<button type="button" id="addStep" val="Add Step">新增步驟</button>';
+    htmlInjection += '<button class="saveButton"> 保存任務 </button>';
     $("#taskFooter").html(htmlInjection); //Insert the HTML for the tasks into the DOM
 
     setRadioStartState(taskDetails);
@@ -526,7 +526,7 @@ function getDetailedStepHTML(steps, stepNum){
 
             detailHTML += '</div>'
     }   
-    detailHTML += '<button class = "newDetailedStepButton" style="margin:10px;" id="' + i + '">[+ Add Detailed Step +]</button>';
+    detailHTML += '<button class = "newDetailedStepButton" style="margin:10px;" id="' + i + '">[+ 新增詳細步驟 +]</button>';
     detailHTML += '</div>'  // End detailed steps
     return detailHTML;
 }
@@ -870,7 +870,7 @@ function saveTask(steps, goodPath, taskData){
     }
 
     Promise.all(promises).then(function(tasks) {
-        alert("all image uploads complete.");
+        alert("所有圖片上傳完成.");
         console.log(insertToDatabase);
         var updates = {};
         //updates[goodPath] = insertToDatabase;
@@ -888,12 +888,12 @@ function saveTask(steps, goodPath, taskData){
                 //If the category changed, delete the old database entry.
                 firebase.database().ref().child("TaskInstruction/" + taskDetails["startCategory"] + "/" + taskDetails["taskID"]).remove().then(function(error){
                     console.log("deleted");
-                    alert("Save succesful");
+                    alert("儲存成功");
                     //Put the task into the library
                     window.location.href = "./10Mytask2.html";
                 });
             } else {
-                alert("Save succesful");
+                alert("儲存成功");
                 //Disable redirection warning
                 window.onbeforeunload = function() {
                     return;
@@ -902,7 +902,7 @@ function saveTask(steps, goodPath, taskData){
             }
 
         } else {
-            alert("Task failed to save");
+            alert("任務儲存失敗");
             //Disable redirection warning
             window.onbeforeunload = function() {
                 return;
@@ -965,8 +965,8 @@ function newStep(){
     var data;
     
     data = {
-        description: "description",
-        name: "new step",
+        description: "描述",
+        name: "名稱",
         image: defImage,
         imageChanged: false,
         number: steps.length
@@ -982,6 +982,6 @@ function newStep(){
  * @param {*} stepNum 
  */
 function newDetailedStep(stepNum){
-    var num = steps[stepNum]["detailedSteps"].length;
-    steps[stepNum]["detailedSteps"][ num ] = "Detailed Step ";
+    var num = steps[stepNum]["詳細步驟"].length;
+    steps[stepNum]["詳細步驟"][ num ] = "詳細步驟";
 }

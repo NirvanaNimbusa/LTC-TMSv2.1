@@ -155,39 +155,6 @@
             transform: translateY(-3px);
         }
     }
-
-    .placeholder {
-        position: absolute;
-        z-index: 5000;
-        display: inline;
-        width: 100%;
-        height: 100%;
-        background-color: gray;
-        opacity: 0.65;
-        filter: Alpha(opacity=65);
-        text-align: center;
-        padding-top: 30%;
-        transform: scaleX(50ex);
-    }
-
-    .placeholderFont {
-        display:inline;
-        z-index:5001;
-        position:absolute;
-        font-family: Tahoma, Geneva, sans-serif;
-        font-size: 22px;
-        letter-spacing: 0px;
-        word-spacing: 2px;
-        color: #000000;
-        font-weight: 700;
-        text-decoration: none solid rgb(68, 68, 68);
-        font-style: normal;
-        font-variant: normal;
-        text-transform: uppercase;
-        padding-left: 5ex;
-        padding-right: 5ex;
-        padding-top: 20%;
-    }
 </style>
 <body>
     <div class="wrapper">
@@ -266,7 +233,7 @@
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
                                 <span id="toggleSide">Hide sidebar</span>
                             </button>
@@ -294,24 +261,20 @@
                                                 </div>
                                     </a>
                                     <div class="dropdown-content">
-                                            <!-- Start of Account profile -->
-                                            
-                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                                <div class="user-account">
-                                                    <p></p>
-                                                    
-                                                    <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
-                                                        <span style = "font-size: 12pt"> Name : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
-                                                        <span class="hidden" style = "font-size: 12pt">UserID : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
-                                                        <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                                        <span style = "font-size: 12pt"> Role : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
-                                                    </p>
-                                                    <!-- End of Account profile -->
-                                            </div>
+                                        <!-- Start of Account profile -->
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <div class="user-account">
+                                        </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> Name : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">UserID : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> Role : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
                                         <a href="#">English</a>
-                                        <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
+                                        <a href="/../Frontend-Chinese/04Statusrecord2.html">中文</a>
                                         <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
-                                    </div> <!--end div class="dropdown-content"-->
+                                    </div>
                                 </li>
                             </ul>
                         </div> <!--end div class="container-fluid"-->
@@ -346,9 +309,7 @@
                         <span id="scspan" onclick="showsc()" style="opacity:.8;cursor:pointer;">Special Care</span>
                         <span id="ecspan" onclick="showec()" style="opacity:.8;cursor:pointer;">Env. Condition</span>
                     </div>
-                    <span class="placeholderFont">This is a placeholder! Implementation of this feature will be added on in the future!</span>
-                    <div class="placeholder">
-                    </div>
+                    
                     <div id="menu" style="display:none;position:fixed;top:6%;left:74%;background-color:white;height:100px;width:200px;z-index:5;">
                         <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">Language</div>
                         <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;">&nbsp English<br></p>
@@ -461,9 +422,9 @@
                             <select id="selectPAT" onclick="clearBox()" onchange="selectPatient()">
                                 <option>Patient ID</option>
                             </select>
-                            <select id="selectCNA" style="width:70px;">
-                                <option>CNA ID</option>
-                            </select>
+                            <div id="selectCNA" style="width:70px;">
+                                <!-- div>CNA ID</div> -->
+                            </div>
                             <br><br><br>
                         </div>
                         <br><br>

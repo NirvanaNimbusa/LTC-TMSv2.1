@@ -227,7 +227,7 @@ var randoTime = randoDate.getTime();
 
   var successRef = firebase.database().ref('Reports');
 
-document.getElementById("ReportURL").innerHTML = "Please wait a moment while your report is generated.";
+document.getElementById("ReportURL").innerHTML = "請稍等,報告正在產生中.";
 
 console.log(Success);
 
@@ -242,7 +242,7 @@ console.log(Success);
             document.getElementById("ReportURL").innerHTML = HLReport;
           }
           else {
-            document.getElementById("ReportURL").innerHTML = "Report Generation Failed. Please try again or contact support.";
+            document.getElementById("ReportURL").innerHTML = "報告產生失敗. 請重試或聯絡開發組.";
           }});
         };
 
@@ -292,13 +292,13 @@ window.onload=function(){
 
 
         if(time<"12:00:00" && time>="04:00:00"){
-        document.getElementById("time").innerHTML = "Good Morning &nbsp ";
+        document.getElementById("time").innerHTML = "早上好 &nbsp ";
       }
       if(time>="12:00:00" && time<"18:00:00"){
-      document.getElementById("time").innerHTML = "Good Afternoon &nbsp ";
+      document.getElementById("time").innerHTML = "下午好 &nbsp ";
     }
       if(time>="18:00:00" || time<"04:00:00"){
-    document.getElementById("time").innerHTML = "Good Evening &nbsp ";
+    document.getElementById("time").innerHTML = "晚上好 &nbsp ";
     }
 
 

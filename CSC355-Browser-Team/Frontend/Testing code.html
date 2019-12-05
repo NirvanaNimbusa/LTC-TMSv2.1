@@ -1,0 +1,35 @@
+<html>
+        <head>
+        </head>
+        <body>
+        <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyBP1AdMjTWdba-hH_136OPeFODfurH3ENc",
+                authDomain: "mcultc4.firebaseapp.com",
+                databaseURL: "https://mcultc4.firebaseio.com",
+                projectId: "mcultc4",
+                storageBucket: "",
+                messagingSenderId: "284533224750"
+            };
+            firebase.initializeApp(config); 
+            
+            function writedata(){
+                firebase.database.ref("Calendar").set({
+                    start: document.getElementById("FirdayField").value,
+                    title: document.getElementById("MondayField").value,
+                    
+                });
+
+                getData();
+            }
+
+            
+        </script>
+        <input type = "text" placeholder ="Firday:" id = "FridayField">
+        <input type = "text" placeholder ="Monday:" id = "MondayField">
+        
+        <button onclick="writedata()">Submit</button>
+        <P id="data"></P>
+        </body>
+</html>

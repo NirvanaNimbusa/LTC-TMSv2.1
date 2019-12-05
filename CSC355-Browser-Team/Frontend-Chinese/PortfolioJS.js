@@ -180,7 +180,7 @@ function handleuploadfileSubmit(e) {
         .then(function(url4){
           console.log(url4);
            firebase.database().ref(staffPosition+"/"+StaffID+"/Portfolio"+"/License/").set(url4);
-           alert("Successfully Created: "+ staffName +"'s Portfolio");
+           alert("成功創建: "+ staffName +"的個人資料");
            location.reload();
         }); //end function(url4)
   }); //end function complete //end uploadtask.on('state_changed'
@@ -323,7 +323,7 @@ function portfolio_Table(fb){
           childSnapshot1.forEach(function(childSnapshot2){
             var childKey = childSnapshot2.key;
             var childData = childSnapshot2.val();
-            button.innerHTML="View";
+            button.innerHTML="內容";
             if(childKey == "patientRoomNo"){
               arr.push(childData); // add the childkey into array, push is add
               console.log(arr[i]); // to show the key on the console
@@ -675,12 +675,12 @@ function testImage(URL) {
 }
 
 function imageFound(URL) {
-    alert('The image is found and loaded');
+    alert('找到並加載圖片');
     console.log("1: "+URL)
 }
 
 function imageNotFound(URL) {
-    alert('The  image is not found');
+    alert('圖片未找到');
     console.log("2: "+URL)
 }
 
@@ -920,10 +920,10 @@ function deletePP(){
   var fbPP = firebase.database().ref('Patient');
   var id = document.getElementById('PID').innerHTML;
   console.log(id);
-  var r = confirm("Are you sure you want to delete?");
+  var r = confirm("您確定要刪除嗎?");
     if (r == true) {
       fbPP.child(id).remove();
-      alert("successfully deleted!");
+      alert("成功刪除!");
       window.location.reload();
     }
 }
@@ -934,10 +934,10 @@ var id = document.getElementById('SID').innerHTML;
 console.log(id);
 var fbSP = firebase.database().ref(position);
 var fbuAccount = firebase.database().ref('uAccount/');
-var r = confirm ("Are you sure you want to delete?");
+var r = confirm ("您確定要刪除嗎?");
   if (r == true) {
     fbSP.child(id).remove();
-    alert("successfully deleted!");
+    alert("成功刪除!");
     window.location.reload();
   }
 }
