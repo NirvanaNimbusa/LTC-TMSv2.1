@@ -57,7 +57,7 @@ function LoginUser() {
   var promise = auth.signInWithEmailAndPassword(email, pass); //Attempt to login with username and password
 
   promise.catch(function (error) {
-    alert("Incorrect Email or Password!");
+    alert("錯誤信箱或密碼!");
   });
 }
 
@@ -167,16 +167,16 @@ function forgetPass() {
         } else if (position == "Chief Nursing Officer" || position == "CNO") {
           sendEmail(id, getEmail);
         } else {
-          alert("Position doesn't exist!");
+          alert("職位不存在!");
         }
       } else {
-        alert("Email doesn't exist!");
+        alert("信箱不存在!");
       }
     } else {
       if (id == '') {
-        alert("Plase enter your ID!");
+        alert("請輸入您的編號!");
       } else {
-        alert("ID doesn't exist!");
+        alert("編號不存在!");
       }
     }
   });
@@ -214,10 +214,10 @@ function sendEmail(id, getEmail) {
     var fullTime = currentHour + ':' + currentMinute + ':' + currentSecond;
     var fullDateandTime = fullDate + '-' + fullTime;
     firebase.database().ref('AccountStatus/Browser/' + id + '/ChangePasswordHistory/' + fullDateandTime).set('Password Reset Through Email');
-    alert("Please check your email to reset the password!");
+    alert("請確認郵件並重設密碼!");
     window.location.reload();
   }).catch(function (error) {
-    alert("Failed to send Email!");
+    alert("郵件寄送失敗!");
   });
 }
 

@@ -29,7 +29,6 @@ function start(){
         }
     });
 }
-window.onload=start;
 
 dateArray = [];
 function viewTable() {
@@ -64,8 +63,8 @@ function injectToDOM(dateArray,userID){
                 htmlInjection += '<tr>';
                 htmlInjection += '<td style="width:15%;">'+snapshot.key+'</td>';
                 htmlInjection += '<td style="width:55%;">'+temp[key]+'</td>';
-                htmlInjection += '<td style="width:15%"><button id="edit'+key+'" onclick="editMemo(\''+ snapshot.key+'\', \''+key +'\')" style="cursor:pointer;">Edit</button></td>';
-                htmlInjection += '<td style="width:15%"><button id="delete'+key+'" onclick="deleteMemo(\''+ snapshot.key+'\', \''+key +'\')" style="cursor:pointer;">Delete</button></td></tr>';
+                htmlInjection += '<td style="width:15%"><button id="edit'+key+'" onclick="editMemo(\''+ snapshot.key+'\', \''+key +'\')" style="cursor:pointer;">編輯</button></td>';
+                htmlInjection += '<td style="width:15%"><button id="delete'+key+'" onclick="deleteMemo(\''+ snapshot.key+'\', \''+key +'\')" style="cursor:pointer;">刪除</button></td></tr>';
 
             }
             $("#table_data").html(htmlInjection); //Insert the HTML for the tasks into the DOM
@@ -109,10 +108,10 @@ function submit(){
     //create alert message
     var fields = "";
     if(ymd == ""){fields += "Date\n";}
-    if(memo_text == ""){fields += "Memo Text\n";}
+    if(memo_text == ""){fields += "備忘事項\n";}
 
     if(ymd == "" || memo_text == "" ) {
-        alert ("Please enter the following data:\n"+fields);
+        alert ("請輸入下列資料:\n"+fields);
     }
     
     else {
@@ -165,7 +164,7 @@ function editMemo(date, key) {
     var fbB= firebase.database().ref('MEMO/'+userID+'/'+date+'/'+key);
     fbB.on('value', function(memoSnapshot){
       var text = memoSnapshot.val();
-      var editButton = '<button onclick="submitEdit(\''+date +'\', \''+ key +'\')" type="button" class="btn">Submit</button>';
+      var editButton = '<button onclick="submitEdit(\''+date +'\', \''+ key +'\')" type="button" class="btn">提交</button>';
       $("#editDate").html(date);
       $("#memoedited").html(text);
       $("#editButtons").html(editButton);
@@ -177,10 +176,10 @@ function editMemo(date, key) {
     var text = $("#memoedited").val();
     
     if(text == ""){
-        alert ("Please enter data");
+        alert ("請輸入資料");
     }
     else {
-        var r = confirm("Are you sure you want to enter this data?");
+        var r = confirm("確定要新增這份資料嗎?");
         if (r == true) {
             var fbGet = firebase.database().ref("MEMO/"+userID+"/"+date+"/");
             fbGet.once("value",function(snapshot){
@@ -200,7 +199,7 @@ function deleteMemo(date,key) {
     var userID = document.getElementById("displayProfileid").innerHTML;
     var fbB= firebase.database().ref('MEMO/'+userID+'/'+date);
     console.log(date);
-    var r = confirm("Are you sure you want to delete this memo?");
+    var r = confirm("你確定你要刪除這條備忘錄嗎?");
     if (r == true) {
         fbB.child(key).remove();
         location.href ="./03Memo2.html";

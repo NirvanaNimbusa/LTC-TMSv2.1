@@ -73,53 +73,59 @@
         <nav id="sidebar"><!-- SIDEBAR -->
             <ul class="list-unstyled components">
                 <li class="current">
-                    <a href="../Frontend/01Aboutus2.html">
+                    <a href="../Frontend-Chinese/01Aboutus2.html">
                         <i class="glyphicon glyphicon-info-sign"></i>
-                        About Us
+                        關於我們
                     </a>
                 </li>
                 <li>
-                    <a href="../Frontend/02Schedule2.html">
+                    <a href="../Frontend-Chinese/02Schedule2.html">
                         <i class="glyphicon glyphicon-calendar"></i>
-                    Schedule</a>
+                        行事曆
+                    </a>
                 </li>
                 <li>
-                    <a href="../Frontend/03Memo2.html">
+                    <a href="../Frontend-Chinese/03Memo2.html">
                         <i class="glyphicon glyphicon-folder-close"></i>
-                    Memo</a>
+                        備忘錄
+                    </a>
                 </li>
-                <li>
-                    <a href="../Frontend/04Statusrecord2.html">
+                <li >
+                    <a href="../Frontend-Chinese/04Statusrecord2.html">
                         <i class="glyphicon glyphicon-heart-empty"></i>
-                    Status Record</a>
+                        狀態紀錄
+                    </a>
                 </li>
 
-                <li>
-                    <a href="../Frontend/Reports.html">
+                <li >
+                    <a href="../Frontend-Chinese/Reports.html">
                         <i class="glyphicon glyphicon-file"></i>
-                        Reports
+                        報告
                     </a>
                 </li>
                 <li>
-                    <a href="../Frontend/05Library2.html">
+                    <a href="../Frontend-Chinese/05Library2.html">
                         <i class="glyphicon glyphicon-book"></i>
-                    Library</a>
-                </li>
-                <li>
-                    <a href="../Frontend/10Mytask2.html">
-                        <i class="glyphicon glyphicon-list-alt"></i>
-                        My Task
+                        全部任務
                     </a>
                 </li>
                 <li>
-                    <a href="../Frontend/07E-portfolio2.html">
-                        <i class="glyphicon glyphicon-user"></i>
-                    E-Portfolio</a>
+                    <a href="../Frontend-Chinese/10Mytask2.html">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                        我的任務
+                    </a>
                 </li>
                 <li>
-                    <a href="../Frontend/08Helpandsupport2.html">
+                    <a href="../Frontend-Chinese/07E-portfolio2.html">
+                        <i class="glyphicon glyphicon-user"></i>
+                        個人資料
+                    </a>
+                </li>
+                <li>
+                    <a href="../Frontend-Chinese/08Helpandsupport2.html">
                         <i class="glyphicon glyphicon-question-sign"></i>
-                    Help and Support</a>
+                        問題與協助
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -133,14 +139,14 @@
                     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default"><!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 3ex;padding-top:1.5ex;padding-bottom:1.5ex; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
-                                <span>Toggle Sidebar</span>
+                                <span id="toggleSide">隱藏列表</span>
                             </button>
 
                             <div class="navbar-header">
 
-                                <a href="../Frontend/01Aboutus2.html" style="padding-left:4px">
+                                <a href="../Frontend/01Aboutus2.html">
                                     <img src="statics/images/v2ltctmslogo.png" height="50" width="60" />
                                 </a>
 
@@ -148,53 +154,55 @@
                                     <span class="white-text title"> LTC-TMS</span>
                                 </a>
 
-                            </div>
+                            </div> <!--end div class="navbar-header"-->
                             <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
                                 <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropbtn"><span class="glyphicon glyphicon-cog white-text"></span></a>
+                                    <a href="javascript:void(0)" class="dropbtn">
+                                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
+                                                    <img src="statics/images/edit.png" id="photoword" 
+                                                         style="position:relative;left:3px; text-align:center;
+                                                    display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
+                                                    <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
+                                                    <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                                </div>
+                                    </a>
                                     <div class="dropdown-content">
-                                        <a href="#">English</a>
-                                        <a href="/../Frontend-Chinese/06TaskEditor2.html">Chinese</a>
-                                        <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
-                                    </div>
+                                            <!-- Start of Account profile -->
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
+                                            </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> 姓名 : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">使用者編號 : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> 職稱 : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
+                                        <a href="/../Frontend/06Taskeditor2.html">English</a>
+                                        <a href="#">中文</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">登出</a>
+                                    </div> <!--end div class="dropdown-content"-->
                                 </li>
                             </ul>
-                        </div>
+                        </div> <!--end div class="container-fluid"-->
                     </nav>
-                </div>
+                </div><!--end div class="bar"-->
                 <!-- TOP BAR ENDS-->
                 <!-- Place Holder for header-->
                 <div class="user-info">
                     <!--BACKGROUND PANEL IMAGE-->
                     <div class="container-fluid">
 
-                        <img class="panelimg img-responsive" style="background-color: #fff5ee" />
-
                         <div class="container" style="transform:translateY(-8.5ex)">
                             <!-- CIRCLE IMAGE THING-->
-
-
-                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)" style="background-color:white; white-space:nowrap;overflow: hidden;">
-                                <img src="statics/images/edit.png" id="photoword"
-                                     style="position:relative;left:20px; text-align:center;
-                                display:none;width:40px;height:40px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
-                                <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;" />
-                                <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
-                            </div>
-
+                           
                             <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
                             <div class="user-account">
                                 <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
-                                <p></p>
-                                <p class="account" style="position:relative; top:8px;">
-                                    <span style = "font-size: 20pt;" word-wrap: break-word;>Name : <span style = "font-size: 20pt;" id="displayProfilename"></span></span>
-                                    <span style = "font-size: 20pt"> UserID : <span style = "font-size: 20pt;" id="displayProfileid"></span></span>
-                                    <span style = "font-size: 20pt;" word-wrap: break-word;> Role : <span style = "font-size: 20pt;" id="displayProfileposition"></span></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                
+                            </div> <!--end div class="user-account"-->
+                        </div> <!--end div class="container" -->
+                    </div> <!--end div class="container-fluid"-->
+                </div> <!--end div class="user-info"-->
             </div> <!-- END OF THE TWO HEADER!! -->
 
 
@@ -223,8 +231,8 @@
              
                 </div>
                 <div class = "newCategoryPopup">
-                    <button id="newCategoryPopupCloseButton">Close</button>
-                    <div class="newCategoryContentContainer">Content</div>
+                    <button id="newCategoryPopupCloseButton">關閉</button>
+                    <div class="newCategoryContentContainer">內容</div>
                 </div>
 
 

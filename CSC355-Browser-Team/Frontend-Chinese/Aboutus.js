@@ -18,7 +18,7 @@ function aboutus_submit(){
 
     firebase.database().ref("CenterInformation/ContactInfo/Aboutus").set(text);
     firebase.database().ref("CenterInformation/ContactInfo/AboutusAndroid").set(text+"(end)");
-    alert("Succesfully entered");
+    alert("成功輸入");
 
 }
 
@@ -68,7 +68,7 @@ function CI_submit(){
     var address = $("#Address1").val();
 
     if(name == "" || contact_no == "" || email_address == "" || address == ""){
-      alert ("Please enter all information")
+      alert ("請輸入所有資料")
     }
     else {
     firebase.database().ref("CenterInformation/ContactInfo/Name").set(name);
@@ -83,7 +83,7 @@ function CI_submit(){
     document.getElementById("Contact_No1").style.display = "none";
     document.getElementById("Email_Address1").style.display = "none";
     document.getElementById("Address1").style.display = "none";
-    alert ("Succesfully entered")
+    alert ("成功輸入")
     location.reload();
   }
 }
@@ -94,7 +94,7 @@ function upload(){
     var file = $("#fileButton").get(0).files[0];
     console.log(file);
     if ( text == "" || name =="" || file == null){
-      alert ("Please input all data!");
+      alert ("請輸入所有資料!");
     }
     else{
     //firebase.database().ref("CenterInformation/"+"Sponsor/"+name+"/url").set(text);
@@ -117,7 +117,7 @@ function upload(){
       updates={};
       updates['CenterInformation/Sponsor/'+name]=data;
       firebase.database().ref().update(updates);
-      alert("success");
+      alert("成功");
       window.location.reload();
     });
     }
@@ -180,14 +180,14 @@ fbSponsor.once("value")
 
 function remove(sponsor){
     var fbSP= firebase.database().ref("CenterInformation/"+"Sponsor/"+sp[sponsor]);
-    var r = confirm("Are you sure you want to remove a sponsor?");
+    var r = confirm("您確定要刪除贊助商嗎？?");
     if (r == true) {
         fbSP.child("/photoname").once('value').
         then(function(snapshot){
             var storageRef=firebase.storage().ref();
             storageRef.child("Sponsor/"+snapshot.val()).delete().then(function(){
                fbSP.remove();
-                 alert("successfully deleted!");
+                 alert("成功刪除!");
                  window.location.reload();
            });
         });

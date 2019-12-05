@@ -54,7 +54,7 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
       Profilepic.setAttribute('value',pic);
     });
   }else{
-   alert("You're Logged out now! Please Login again if you need to use this system!");
+   alert("您已登出! 欲使用本系統請再次登入!");
    window.location.href = "/../Frontend/00Login2.html";
   }
   });
@@ -93,7 +93,7 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
       if(user){
         if(user.email != email){
           user.updateEmail(email).then(function(){
-            alert("Email Changed!");
+            alert("信箱已更換!");
           }).catch(function(error){
             //console.log(error.message);
           });
@@ -101,7 +101,7 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
         user.updateProfile({
           displayName:name
         }).then(function(){
-          alert("Profile have been updated!");
+          alert("個人資料已更新!");
           window.location.reload();
         }).catch(function(error){
           //console.log('Profile update Failed'+ error.message);
@@ -184,16 +184,16 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
               var passRenewal = oldPass +'~' + newPass;
               firebase.database().ref('AccountStatus/Browser/'+ user.uid+'/ChangePasswordHistory/'+fullDateandTime).set(passRenewal);
   
-              alert('Successfully Re-New Password!');
+              alert('成功更新密碼!');
               window.location.reload();
             }).catch(function(error){
               alert(error.message);
             });
           }).catch(function(error) {
-            alert('Failed to reauthenticate!');
+            alert('無法重新進行身份驗證!');
           });
     }else{
-      alert("Your Password are not match!")
+      alert("您的密碼不匹配!")
     }
   
   }
@@ -249,10 +249,10 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
             user.updateProfile({
               photoURL: url
             }).then(function(){
-              alert('Successfully Renew the Profile Picture!');
+              alert('成功更新個人照片!');
               window.location.reload();
             }).catch(function(err){
-              alert('Failed to Renew! Error:'+ err.message);
+              alert('更新失敗! 錯誤:'+ err.message);
             });
           });
         });
@@ -282,13 +282,13 @@ firebase.auth().onAuthStateChanged(function (firebaseUser){
   window.onload=function(){
     console.log("HELLO");
       if(time123<"12:00:00" && time123>="04:00:00"){
-      document.getElementById("time123").innerHTML = "Good Morning &nbsp ";
+      document.getElementById("time123").innerHTML = "早安 &nbsp ";
     }
     if(time123>="12:00:00" && time123<"18:00:00"){
-      document.getElementById("time123").innerHTML = "Good Afternoon &nbsp ";
+      document.getElementById("time123").innerHTML = "午安 &nbsp ";
     }
     if(time123>="18:00:00" || time123<"04:00:00"){
-      document.getElementById("time123").innerHTML = "Good Evening &nbsp ";
+      document.getElementById("time123").innerHTML = "晚安 &nbsp ";
     }
   }
   

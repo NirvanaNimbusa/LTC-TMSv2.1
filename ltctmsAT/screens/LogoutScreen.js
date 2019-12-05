@@ -16,7 +16,8 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { StackNavigator } from 'react-navigation';
@@ -32,7 +33,6 @@ class LogoutScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       userInfo: '',
       position: 'sadf',
@@ -125,6 +125,15 @@ class LogoutScreen extends React.Component {
     )
   }
 
+  headerStyle = function(screenWidth) {
+    return {
+      height:130,
+      backgroundColor: '#C2CFDB',
+      width: screenWidth,
+    }
+  }
+
+
   componentDidMount(){
     this.props.navigation.setParams({navigatePress:this.LogoutButton});
   }
@@ -140,7 +149,7 @@ class LogoutScreen extends React.Component {
       <View style={styles.container}>
          <ScrollView style={styles2.container}>
         <View>
-        <View style={styles2.header}></View>
+        <View style={this.headerStyle(Math.round(Dimensions.get('window').width))}></View>
         <Thumbnail style={{width:130,height:130,borderRadius:130/2,alignSelf:'center',position: 'absolute',marginTop:50,borderColor: "white",borderWidth: 4}} source={{uri:this.state.profile_Pic}} />
         <View style={styles2.body}>
           <View style={styles2.bodyContent2}></View>
@@ -190,9 +199,7 @@ const styles2 = StyleSheet.create({
     paddingRight:20
 
   },
-  header:{
-    height:130,
-    backgroundColor: '#C2CFDB',   
+  header:{ 
   },
   body:{
     marginTop:20, 

@@ -20,15 +20,19 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  Dimensions,
+  Image,
+  Linking,
+  
   
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import {  Text,Content,Container, Header,  Icon, Item, Button, Input} from 'native-base'
+import {  Text,Content,Container, Header,  Icon, Item, Input} from 'native-base'
 import firebase from 'react-native-firebase';
 import styles from '../styles/styles';
 import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-
+import { SearchBar, Button } from 'react-native-elements';
 
 
 class TaskScreen extends React.Component {
@@ -50,6 +54,12 @@ class TaskScreen extends React.Component {
     fixedTasks: [],
     refreshing: false
   };
+
+  constructor(props) {
+    super(props);
+    //setting default state
+    this.arrayholder = [];
+  }
 
 
 
@@ -131,6 +141,32 @@ class TaskScreen extends React.Component {
 
   }
 
+  seperatorStyle = function(screenWidth) {
+    return {
+      height:2,
+      backgroundColor: '#C2CFDB',
+      width: screenWidth,
+    }
+  }
+
+  _rendervideo(item) {
+    console.log("\n\n\n\nvideo link is " + item.videolink);
+    if(item.videolink != "null"){
+      return (
+        <View >
+          <TouchableOpacity>
+            <Button
+            title = "Tap to watch video"
+            titleStyle = {{marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'center'}}
+            type='solid'
+            buttonStyle={{backgroundColor:'#3f9fff', marginTop: 5, alignSelf: 'center', flex: 1, justifyContent: 'space-between', width: 250}}
+            onPress={() => Linking.openURL(item.videolink)}
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
   // toggles the collapse state for categories of tasks
   toggleCollapse(item) {
     item.collapsed = !item.collapsed;
@@ -168,6 +204,7 @@ class TaskScreen extends React.Component {
         var stepsData = {
           description: task[stepF]["MDescriptionIOS"],
           name: task[stepF]["MtitleIOS"],
+          pic: task[stepF]["ImageURL"],
           number: stepF,
           detailedSteps: detailedStepsJSON
         }
@@ -182,9 +219,10 @@ class TaskScreen extends React.Component {
       taskID: task["TaskID"],
       category: task["Info"]["Category"],
       outline: task["Info"]["OutlineIOS"],
-      videoURL: task["Info"]["videoURL"],
+      videolink: task["Info"]["videoURL"],
       note: task["Info"]["NoteIOS"],
       name: task["Info"]["Title"],
+      pic: task["Info"]["imageURL2"],
       collapsed: task["collapsed"],
       steps: steps,
     }]
@@ -195,51 +233,99 @@ class TaskScreen extends React.Component {
   }
 
 
+
+  //search function
+  search = text => {
+    console.log(text);
+  };
+  clear = () => {
+    this.search.clear();
+  };
+
+
+  // search filter container
+  filterlist(text){
+    //getting text inserted in textinput
+    const newData = this.arrayholder.filter(function(item){
+      //applying filter for the inserted text in search bar
+      const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      //setting the filtered newData on datasource
+      //After setting the data it will automatically re-render the view
+      dataSource: newData,
+      search:text,
+    });
+  }
+
+
   createStepText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2'}}>   Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 22, color: '#1976d2', paddingLeft: 5}}>   Step {step} : {text}</Text></View>
     );
   }
 
   createDetailText(text, step) {
     return (
-      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black' }}>     Detailed Step {step} : {text}</Text></View>
+      <View key={text.toString()}><Text style={{ fontSize: 18, color: 'black', paddingLeft: 15}}>   Detailed Step {step} : {text}</Text></View>
     );
   }
 
   // renders the individual items into appropriate fields
   _renderItem = ({ item }) => {
     stepsArray = [];
+    imageArray=[];
     detailedStepsArray = [];
     for (var i = 0; i < item.steps.length; i++) {
       stepsArray.push(this.createStepText(item.steps[i].name, [i + 1]));
+      //imageArray.push(this.createStepimage(item.steps[i].pic, [i+1]));
       for (var j = 0; j < item.steps[i].detailedSteps.length; j++) {
         stepsArray.push(this.createDetailText(item.steps[i].detailedSteps[j], [j + 1]));
       }
     }
 
+  
+    
     return (
       <View>
         <TouchableOpacity
           onPress={this.toggleCollapse.bind(this, item)}
         >
           <Text style={styles.itemCategory}>{item.category}</Text>
+          <Text style={this.seperatorStyle(Math.round(Dimensions.get('window').width))}>─</Text>
         </TouchableOpacity>
         {item.collapsed ?
           <View /> :
           <View>
-            <TouchableOpacity
-              onPress={this.toggleCollapseStep.bind(this, item)}
-            >
-              <Text style={styles.itemTask, {fontSize: 25, color: '#004dcf', fontWeight: 'bold'}}>  {item.name}</Text>
-            </TouchableOpacity>
-            {item.collapsedStep ?
-              <View /> :
-              <View>
-                {stepsArray}
-              </View>}
+            <Text style={styles.itemTask}># {item.outline}</Text>
+            {item.collapsed ?
+              <View/> :
+                <View>
+                  {this._rendervideo(item)}
+                  {item.collapsed ?
+                  <View /> :
+                  <View>
+                  <TouchableOpacity
+                    onPress={this.toggleCollapseStep.bind(this, item)}
+                  >
+                    <Text style={styles.itemTask, {fontSize: 23, color: '#004dcf', fontWeight: 'bold', paddingLeft: 2}}>  {item.name}</Text>
+                  </TouchableOpacity>
+                  {item.collapsedStep ?
+                    <View /> :
+                    <View>
+                        <Image 
+                        style={{width:400,height:100,alignSelf: 'center'}}
+                        source={{uri:item.pic}}
+                        />
+                      {stepsArray}
+                    </View>}
+                  </View>}
+                </View>}
           </View>}
       </View>
+      
     )
   }
 
@@ -265,15 +351,16 @@ class TaskScreen extends React.Component {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           
-        <Header searchBar rounded>
-          <Item>
-            <Icon active name="search" />
-            <Input placeholder="Search" />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
+          <SearchBar
+        // searchbar funuction, icon and style set
+          round
+          containerStyle={{backgroundColor:'transparent'}}
+          searchIcon={{ size: 30 }}
+          placeholder="Tasks instruct Search......"
+          onChangeText={text => this.filterlist(text)}  
+          onPressCancel={text => this.filterlist('')}
+          value={this.state.search}
+        />
 
           <FlatList
             style={{ flexGrow: 1 }}

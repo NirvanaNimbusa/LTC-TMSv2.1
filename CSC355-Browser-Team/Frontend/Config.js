@@ -9,7 +9,7 @@ var config = {
     authDomain: "mcultc4.firebaseapp.com",
     databaseURL: "https://mcultc4.firebaseio.com",
     projectId: "mcultc4",
-    storageBucket: "mcultc4.appspot.com",
+    storageBucket: "",
     messagingSenderId: "284533224750"
  };
  firebase.initializeApp(config); 

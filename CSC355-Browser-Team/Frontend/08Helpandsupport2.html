@@ -296,7 +296,7 @@
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
                                 <span id="toggleSide">Hide sidebar</span>
                             </button>
@@ -323,23 +323,19 @@
                                                     <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
                                                 </div>
                                     </a>
-                                    <div class="dropdown-content">
+                                        <div class="dropdown-content">
                                             <!-- Start of Account profile -->
-                                            
                                                 <div class="container" style="transform:translateY(-8.5ex)"></div>
                                                 <div class="user-account">
-                                                    <p></p>
-                                                    
-                                                    <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
-                                                        <span style = "font-size: 12pt"> Name : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
-                                                        <span class="hidden" style = "font-size: 12pt">UserID : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
-                                                        <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                                        <span style = "font-size: 12pt"> Role : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
-                                                    </p>
-                                                    <!-- End of Account profile -->
                                             </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> Name : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">UserID : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> Role : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
                                         <a href="#">English</a>
-                                        <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
+                                        <a href="/../Frontend-Chinese/08Helpandsupport2.html">中文</a>
                                         <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
                                     </div> <!--end div class="dropdown-content"-->
                                 </li>
@@ -384,21 +380,29 @@
                                     <th style="width:35%" id="feedback"> Feedback </th>
                                     <th style="width:35%" id="reply"> Reply </th>
                                 </tr>
-                                <tr>
-                                        <td>User Email(template)</td>
-                                        <td>User I.d<br>(template)</td>
-                                        <td>Feedback(template)</td>
-                                        <td>Reply(template)</td>
-                                </tr>
-                                <tr>
-                                        <td>User Email(template)</td>
-                                        <td>User I.d<br>(template)</td>
-                                        <td>Feedback(template)</td>
-                                        <td>Reply(template)</td>
-                                </tr>
+                                
                                 <tr></tr>
-                            
                             </table>
+
+                            <script>
+                                var database = firebase.database();
+                                database.ref('Feedback').once('value', function(snapshot){
+                                    if(snapshot.exists()){
+                                        var content = '';
+                                        snapshot.forEach(function(data){
+                                            var val = data.val();
+                                            if(val.feedbackType=='System'){
+                                          content +='<tr>';
+                                          content += '<td>' + val.userEmail + '</td>';
+                                          content += '<td>' + val.userId + '</td>';
+                                          content += '<td>' + val.feedbackText + '</td>';
+                                          content += '<td>' + val.feedbackType + '</td>';
+                                          content += '</tr>';}
+                                          });
+                                      $('#staffFeedback').append(content);
+                                      }  
+                                  });
+                            </script>
 
 
                             <!--usermessag  Please don't delete
@@ -421,24 +425,37 @@
                 -->
                         </div>
                         <div id="container1" class="container" style="display:none;overflow-y:scroll;">
-                            <table id="familyTable" class="familyTable" border="1">
+                            <table id="familyTable" class="familyTable" >
                                 <tr>
                                     <th style="width:20%" class="library_table_firstbox"> UserEmail </th>
                                     <th style="width:10%" class="library_table_firstbox"> User I.D </th>
+                                    <th style="width:35%" class="library_table_firstbox"> Feedback </th>
                                     <th style="width:70%" class="library_table_firstbox"> Reply </th>
                                 </tr>
-                                <tr>
-                                    <td>User Email(template)</td>
-                                    <td>User I.d<br>(template)</td>
-                                    <td>Reply(template)</td>
-                                </tr>
-                                <tr>
-                                    <td>User Email(template)</td>
-                                    <td>User I.d<br>(template)</td>
-                                    <td>Reply(template)</td>
-                                </tr>
-                                <tr></tr>
+                                
                             </table>
+                        
+                            <script>
+                                var database = firebase.database();
+                                database.ref('Feedback').once('value', function(snapshot){
+                                    if(snapshot.exists()){
+                                        var content = '';
+                                        snapshot.forEach(function(data){
+                                            var val = data.val();
+                                            if(val.feedbackType != 'System'){
+                                          content +='<tr>';
+                                          content += '<td>' + val.userEmail + '</td>';
+                                          content += '<td>' + val.userId + '</td>';
+                                          content += '<td>' + val.feedbackText + '</td>';
+                                          content += '<td>' + val.feedbackType + '</td>';
+                                          content += '</tr>';}
+                                          });
+                                      $('#familyTable').append(content);
+                                      }  
+                                  });
+                            </script>
+
+                           
                         </div>
                     </div>
                 </div>
@@ -451,9 +468,9 @@
                             <tr>
                                 <th style="padding:6px 6px;">Name </th>
                                 <!--<td style="padding:6px 6px;">Ming Chuan AC IV </td>-->
-                                <td style="padding:6px 6px;">Kutztown University </td>
+                                <td style="padding:6px 6px;">Ming Chuan AC IV </td>
                                 <th style="padding:6px 6px;">Email Address </th>
-                                <td style="padding:6px 6px;">ltctmscenter2018@gmail.com </td>
+                                <td style="padding:6px 6px;">mcultcver4@gmail.com </td>
                         </tr>
                         <tr>
                                 <th style="padding:6px 6px;">Contact No </th>
@@ -461,7 +478,7 @@
                                 <td style="padding:6px 6px;">+1(610)-683-4000 </td>
                                 <th style="padding:6px 6px;">Address </th>
                                 <!--<td style="padding:6px 6px;">No. 5, Deming Road, Guishan District, Taoyuan City, 333 </td>-->
-                                <td style="padding:6px 6px;">15200 Kutztown Rd, Kutztown, PA 19530 </td>
+                                <td style="padding:6px 6px;">No. 5, Deming Road, Guishan District, Taoyuan City, 333 </td>
                         </tr>
                         </table>
             </div>
