@@ -102,9 +102,8 @@ def infiniteloop1():
         fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/"+"HeartRate/"+"/", ltm+ "/",sptdata[0] )
         
         #send fall detection value to Firebase
-        fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/FallRecord", "Fell/", f)  #KU changed
-        
-        #fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/Callstatus/", sptdata[2])
+        fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/FallRecord", "Fell/", f)  
+       
         
         #print to the screen
         print("Patient ID:" +sptdata[1] + "," + '\n'+"Time and Step Count:" + sptdata[4] + '\n' + "Room" + locationdata + "," + y + '\n')
