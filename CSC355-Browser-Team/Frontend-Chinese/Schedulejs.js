@@ -629,91 +629,49 @@ function openmenu() {
 }
 
 // start of calender function 
-  // Prepare of DB connection
-  var fbB = firebase.database().ref('CenterSchedule');
   
 
-  // DB connection complete
-var calendarEl = document.getElementById('calendar');
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
 
+  var calendar = new FullCalendar.Calendar(calendarEl, {
 
-      var i;
-      for (i = 0; i < 1; i++) { 
-        var eventscal = firebase.database().ref("Calendar");
-        //var title = events.child('title');
-        eventscal.once('value',function(snapshot){
-          var events = snapshot.val();
-          console.log(events);
-          /*calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay,
-            event: 'servletURL'
-          })*/
-        });
-          
-      };
+    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list', 'googleCalendar' ],
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list', 'googleCalendar' ],
-
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      navLinks: true, // can click day/week names to navigate views
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      businessHours: true,
-      selectable: true,
-      selectMirror: true,
-      selectHelper: true,
-      displayEventTime: false, // don't show the time column in list view
-      
-      
-      // THIS KEY WON'T WORK IN PRODUCTION!!!
-      // To make your own Google API key, follow the directions here:
-      // http://fullcalendar.io/docs/google_calendar/
-      googleCalendarApiKey: 'AIzaSyBMBwDqNEWKEKb2YIGEcE0h4AeJgEsVhkU',
-
-      events: 'mcultcver4@gmail.com',
-      
-      select: function(arg) {
-        var title = prompt('Event Title:');
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay,
-            event: 'servletURL'
-          })
-          alert('Great. Now, refresh your page...');
-        } 
-        calendar.unselect()
-      },
-      
-      eventClick: function(arg) {
-        // opens events in a popup window
-        window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
-
-        arg.jsEvent.preventDefault() // don't navigate in main tab
-      },
-      
-      loading: function(bool) {
-        document.getElementById('loading').style.display =
-          bool ? 'block' : 'none';
-      },
-
-    });
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    navLinks: true, // can click day/week names to navigate views
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
+    businessHours: true,
+    displayEventTime: false, // don't show the time column in list view
     
-    calendar.render();
+    
+    // THIS KEY WON'T WORK WITH OTHER ACCOUNT!
+    // To make your own Google API key, follow the directions here:
+    // http://fullcalendar.io/docs/google_calendar/
+    googleCalendarApiKey: 'AIzaSyBMBwDqNEWKEKb2YIGEcE0h4AeJgEsVhkU',
+
+    events: 'mcultcver4@gmail.com',
+      
+    eventClick: function(arg) {
+      // opens events in a popup window
+      window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+
+      arg.jsEvent.preventDefault() // don't navigate in main tab
+    },
+    
+    loading: function(bool) {
+      document.getElementById('loading').style.display =
+        bool ? 'block' : 'none';
+    },
+
   });
-    
+  
+  calendar.render();
+});
+  
 // End of calender function
