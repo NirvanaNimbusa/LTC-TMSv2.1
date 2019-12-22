@@ -22,9 +22,21 @@
     <link rel="stylesheet" href="statics/css/skeleton.css">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/list/main.css' rel='stylesheet' />
 
     <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src='fullcalendar/packages/core/main.js'></script>
+    <script src='fullcalendar/packages/daygrid/main.js'></script>
+    <script src='fullcalendar/packages/timegrid/main.js'></script>
+    <script src='fullcalendar/packages/interaction/main.js'></script>
+    <script src='fullcalendar/packages/list/main.js'></script>
+    <script src='fullcalendar/packages/google-calendar/main.js'></script>
+    
+    
 </head>
 <style>
     span.hidden{
@@ -33,7 +45,7 @@
 table, th, td {
     padding: 10px;
     border: 1px solid black;
-    width: 600px;
+    width: -100px;
     text-align: center;
     word-wrap: break-word;
 }
@@ -42,7 +54,7 @@ table, th, td {
         color: #000;
     }
     table td {
-        text-shadow: 2px 2px #FFFFFF;
+        text-shadow: 1px 1px rgb(122, 118, 118);
     }
 #newABlock {
     width: 100%;
@@ -196,6 +208,30 @@ table, th, td {
         transform: translateY(-3px);
     }
 }
+body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #calendar {
+    width: 100%;
+    height: 100%;
+    opacity: .95;
+    right: 0;
+    top: 0;
+    padding: 40px, 60px;  
+    max-width: 900px;
+    margin: 0 auto;
+  }
 </style>
 <body>
 
@@ -207,56 +243,56 @@ table, th, td {
                 <li>
                     <a href="../Frontend-Chinese/01Aboutus2.html">
                         <i class="glyphicon glyphicon-info-sign"></i>
-                        About Us
+                        關於我們
                     </a>
                 </li>
                 <li class="current">
                     <a href="../Frontend-Chinese/02Schedule2.html">
                         <i class="glyphicon glyphicon-calendar"></i>
-                        Schedule
+                        行事曆
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/03Memo2.html">
                         <i class="glyphicon glyphicon-folder-close"></i>
-                        Memo
+                        備忘錄
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/04Statusrecord2.html">
                         <i class="glyphicon glyphicon-heart-empty"></i>
-                        Status Record
+                        狀態紀錄
                     </a>
                 </li>
 
                 <li>
                     <a href="../Frontend-Chinese/Reports.html">
                         <i class="glyphicon glyphicon-file"></i>
-                        Reports
+                        報告
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/05Library2.html">
                         <i class="glyphicon glyphicon-book"></i>
-                        Library
+                        全部任務
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/10Mytask2.html">
                         <i class="glyphicon glyphicon-list-alt"></i>
-                        My Task
+                        我的任務
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/07E-portfolio2.html">
                         <i class="glyphicon glyphicon-user"></i>
-                        E-Portfolio
+                        個人資料
                     </a>
                 </li>
                 <li>
                     <a href="../Frontend-Chinese/08Helpandsupport2.html">
                         <i class="glyphicon glyphicon-question-sign"></i>
-                        Help and Support
+                        問題與協助
                     </a>
                 </li>
             </ul>
@@ -275,14 +311,14 @@ table, th, td {
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
-                                <span id="toggleSide">Hide sidebar</span>
+                                <span id="toggleSide">隱藏列表</span>
                             </button>
 
                             <div class="navbar-header">
 
-                                <a href="../Frontend-Chinese/01Aboutus2.html">
+                                <a href="../Frontend/01Aboutus2.html">
                                     <img src="statics/images/v2ltctmslogo.png" height="50" width="60" />
                                 </a>
 
@@ -293,42 +329,51 @@ table, th, td {
                             </div> <!--end div class="navbar-header"-->
                             <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
                                 <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropbtn"><span class="glyphicon glyphicon-cog white-text"></span></a>
+                                    <a href="javascript:void(0)" class="dropbtn">
+                                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
+                                                    <img src="statics/images/edit.png" id="photoword" 
+                                                         style="position:relative;left:3px; text-align:center;
+                                                    display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
+                                                    <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
+                                                    <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                                </div>
+                                    </a>
                                     <div class="dropdown-content">
+                                            <!-- Start of Account profile -->
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
+                                            </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> 姓名 : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">使用者編號 : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> 職稱 : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
                                         <a href="/../Frontend/02Schedule2.html">English</a>
-                                        <a href="#">Chinese</a>
-                                        <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">Logout</a>
+                                        <a href="#">中文</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend-Chinese/00Login2.html">登出</a>
                                     </div> <!--end div class="dropdown-content"-->
                                 </li>
                             </ul>
                         </div> <!--end div class="container-fluid"-->
                     </nav>
-                </div> <!--end div class="bar"-->
+                </div><!--end div class="bar"-->
                 <!-- TOP BAR ENDS-->
                 <!-- Place Holder for header-->
                 <div class="user-info">
                     <!--BACKGROUND PANEL IMAGE-->
                     <div class="container-fluid">
-                        <img class="panelimg img-responsive" style="background-color: #fff5ee" />
+                        
                         <div class="container" style="transform:translateY(-8.5ex)">
                         <!-- CIRCLE IMAGE THING-->
-                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)" style="background-color:white; white-space:nowrap;overflow: hidden;">
-                                <img src="statics/images/edit.png" id="photoword"
-                                    style="position:relative;left:20px; text-align:center;
-                                    display:none;width:40px;height:40px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
-                                <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;" />
-                                <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
-                            </div> <!--end div class="user-headface"-->
+                            
+                                
+                            
 
                             <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
                             <div class="user-account">
                                 <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
-                                <p class="account" style="position:relative; top:8px;">
                                 
-                                <span style = "font-size: 20pt;" word-wrap: break-word;>Name : <span style = "font-size: 20pt;" id="displayProfilename"></span></span>
-                                <span class="hidden" style = "font-size: 20pt">UserID : <span style = "font-size: 20pt;" id="displayProfileid"></span></span>
-                                <span style = "font-size: 20pt;" word-wrap: break-word;> Role : <span style = "font-size: 20pt;" id="displayProfileposition"></span></span>
-                                </p>
                             </div> <!--end div class="user-account"-->
                         </div> <!--end div class="container" -->
                     </div> <!--end div class="container-fluid"-->
@@ -339,20 +384,20 @@ table, th, td {
                 <!-- START OF MIDDLE CONTENT-->
                 <div class="right" style="width:800ex; transform:translateY(-8ex)">
                     <div class="tap">
-                        <span id="announcementspan" onclick="showannouncement()" style="opacity:1;cursor:pointer;">Announcement</span>
-                        <span id="wsspan" onclick="showws()" style="opacity:.8;cursor:pointer;">Center Schedule</span>
+                        <span id="announcementspan" onclick="showannouncement()" style="opacity:1;cursor:pointer;">公告</span>
+                        <span id="wsspan" onclick="showws()" style="opacity:.8;cursor:pointer;">院所排程</span>
                     </div> <!--end div class="tap-->
                     <div id="menu" style="display:none;position:fixed;top:6%;left:74%;background-color:white;height:100px;width:200px;z-index:5;">
-                        <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">Language</div> <!--end div style="position:relative;left:1%;-->
+                        <div style="position:relative;left:1%;top:2%;background-color:#ddd;width:98%;margin-bottom:5px;">語言</div> <!--end div style="position:relative;left:1%;-->
                         <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;">&nbsp English<br></p>
                         <p class="selected" style="margin-top:3px;margin-bottom:3px;cursor:pointer;" onclick="window.location.href='/../Frontend/02Schedule2.html'">&nbsp 中文<br></p>
-                        <p class="logoutselected" onclick="Logout()">&nbsp<i class="icon iconfont icon-dianyuan" style="margin-right:5px;"></i>Logout</p>
+                        <p class="logoutselected" onclick="Logout()">&nbsp<i class="icon iconfont icon-dianyuan" style="margin-right:5px;"></i>登出</p>
                     </div><!--end div id="menu"-->
                     <div class="container" id="data1">
                         <table id="table" style="width:100%;border-style:hidden;" class="announcement_table">
                             <thread>
                                 <tr>
-                                    <th style="width:50%"> Announcement Title </th>
+                                    <th style="width:50%"> 公告名稱 </th>
                                     <th style="width:16%"></th>
                                     <th style="width:16%"></th>
                                     <th style="width:16%"> <button id="btnAdd" class="add_button" type="button" onclick="AddNewA()" style="cursor:pointer;"><img src="statics\images\add.png" height="15px" width="15px" /></button> </th>
@@ -362,18 +407,18 @@ table, th, td {
                     </div> <!--end div class="container" id="data1"-->
                     <div class="container" id="data3" style="display:none;overflow:scroll;">
                         <br>
-                        <button type="button" onclick="AddNewCS()" class="add_button" style="cursor:pointer;">Add New Schedule</button> 
+                        <button type="button" onclick="AddNewCS()" class="add_button" style="cursor:pointer;">新增排程</button> 
                         <br><br>
                         <table id='WStable' style="width:100%; border: 1px solid black;">
                             <tr>
-                                <th style="width:10%">Week Of</th>
-                                <th style="width:10%">SUN</th>
-                                <th style="width:10%">MON</th>
-                                <th style="width:10%">TUE</th>
-                                <th style="width:10%">WED</th>
-                                <th style="width:10%">THU</th>
-                                <th style="width:10%">FRI</th>
-                                <th style="width:10%">SAT</th>
+                                <th style="width:10%">周</th>
+                                <th style="width:10%">日</th>
+                                <th style="width:10%">一</th>
+                                <th style="width:10%">二</th>
+                                <th style="width:10%">三</th>
+                                <th style="width:10%">四</th>
+                                <th style="width:10%">五</th>
+                                <th style="width:10%">六</th>
                                 <th style="width:20%" colspan="2"></th> 
                             </tr>
                         </table>
@@ -381,38 +426,40 @@ table, th, td {
                     </div> <!--end div class="container" id="data3" style="display:none;"-->
                 </div> <!--end div class="right" style="width:800ex; transform:translateY(-13ex)"-->
             </div> <!--end div class="main container-fluid wrapper"-->
+            <div id='loading'>loading...</div>
+            <div id='calendar'></div> <!--Start of calendar-->
         </div><!-- END OF MAIN DIV CONTAINER CLASS!!! --> <!--end div id="content"-->
     </div><!--End OF WRAPPER CLASS!!--> <!--end div class="wrapper"-->
     <div id="newABlock">
         <div class="editForm_create_announcement">
-            <h2><center><br>New Announcement</center></h2>
+            <h2><center><br>新增公告</center></h2>
             <hr class="schedule_hr">
             <p id='keyname' style='display:none'></p>
-            &nbsp&nbsp Announcement Title:
-            <input id="Atitle" type="text" placeholder="title.." maxlength="50" /><br>
-            &nbsp&nbsp Announcement:
-            <textarea class="schedule_textarea" id="Announcement" type=text rows="4" cols="30" placeholder="Text Here..."></textarea>
+            &nbsp&nbsp 公告名稱:
+            <input id="Atitle" type="text" placeholder="標題" maxlength="50" /><br>
+            &nbsp&nbsp 公告:
+            <textarea class="schedule_textarea" id="Announcement" type=text rows="4" cols="30" placeholder="輸入"></textarea>
             <br>
             <center>
-                <button id="btnSubmitE" onclick="createNewAnnouncement()" style="cursor:pointer;">Submit</button> &nbsp&nbsp&nbsp&nbsp
-                <button id="Ecancel" onclick="document.getElementById('newABlock').style.display='none';" style="cursor:pointer;">Cancel</button>
+                <button id="btnSubmitE" onclick="createNewAnnouncement()" style="cursor:pointer;">提交</button> &nbsp&nbsp&nbsp&nbsp
+                <button id="Ecancel" onclick="document.getElementById('newABlock').style.display='none';" style="cursor:pointer;">取消</button>
             </center>
         </div> <!--end div class="editForm_create_announcement"-->
     </div> <!--end div id="newABlock-->
     <!--</div>-->
     <div id="editABlock">
         <div class="editForm_edit_announcement">
-            <h2><center><br>Editing Announcement</center></h2>
+            <h2><center><br>編輯公告</center></h2>
             <hr class="schedule_hr">
-            &nbsp&nbsp Announcement Title:
+            &nbsp&nbsp 公告名稱:
             <input id="AEtitle2" type="text" placeholder="title.." onkeydown="btnpopUp()" maxlength="50" /><br>
             <br>
-            &nbsp&nbsp Announcement:
+            &nbsp&nbsp 公告:
             <textarea class="schedule_textarea" id="Amsg" onkeydown="btnpopUp()"></textarea>
             <br>
             <center>
-                <button id="Esave" onclick="editSave()" style="cursor:pointer;display:none;">Save</button> &nbsp&nbsp&nbsp&nbsp
-                <button id="Ecancel" onclick="document.getElementById('editABlock').style.display='none';" style="cursor:pointer;">Back</button>
+                <button id="Esave" onclick="editSave()" style="cursor:pointer;display:none;">儲存</button> &nbsp&nbsp&nbsp&nbsp
+                <button id="Ecancel" onclick="document.getElementById('editABlock').style.display='none';" style="cursor:pointer;">返回</button>
             </center>
         </div>
     </div>
@@ -421,16 +468,16 @@ table, th, td {
 <!--</div>-->
     <div id="viewABlock">
         <div class="viewForm_edit_announcement">
-            <h2><center><br>Viewing Announcement</center></h2>
+            <h2><center><br>公告細節</center></h2>
             <hr class="schedule_hr">
-            &nbsp&nbsp Announcement Title:<br>
+            &nbsp&nbsp 公告名稱:<br>
             <span id="AEtitle3"></span><br>
             <br>
-            &nbsp&nbsp Announcement:<br>
+            &nbsp&nbsp 公告:<br>
             <span id = "Amsg2"></span>
             <br>
             <center>
-                <button id="Ecancel" onclick="document.getElementById('viewABlock').style.display='none';" style="cursor:pointer;">Back</button>
+                <button id="Ecancel" onclick="document.getElementById('viewABlock').style.display='none';" style="cursor:pointer;">返回</button>
             </center>
         </div>
     </div>
@@ -441,8 +488,8 @@ table, th, td {
         <div class="create_new_center_schedule_form">
             <input type="text" id="fileButton3"/>
             
-            &nbsp&nbsp&nbsp<button id="btnSubmitCS" style="cursor:pointer;">Submit</button> &nbsp&nbsp
-            <button id="Ecancel" onclick="document.getElementById('newWSBlock').style.display='none';" style="cursor:pointer;">Cancel</button>
+            &nbsp&nbsp&nbsp<button id="btnSubmitCS" style="cursor:pointer;">儲存</button> &nbsp&nbsp
+            <button id="Ecancel" onclick="document.getElementById('newWSBlock').style.display='none';" style="cursor:pointer;">取消</button>
         </div>
     </div>
     <!--</div>-->
@@ -451,94 +498,94 @@ table, th, td {
 
     <div id="newCSBlock">
         <div class="create_new_center_schedule_form">
-            <h2><center>New Center Schedule</center></h2>
+            <h2><center>新增時間</center></h2>
             <hr class="schedule_hr">
             <div style="padding:2%">
                 <table style="border:none; width: 50%;">
                     <tr>
-                        <td style="border:none">Week Of:</td>
+                        <td style="border:none">周:</td>
                         <td style="border:none"><input type="date" id="selected_date" /><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Sunday</td>
+                        <td style="border:none">日</td>
                         <td style="border:none"><input type="text" id="NewCSSun"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Monday</td>
+                        <td style="border:none">一</td>
                         <td style="border:none"><input type="text" id="NewCSMon"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Tuesday</td>
+                        <td style="border:none">二</td>
                         <td style="border:none"><input type="text" id="NewCSTue"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Wednesday</td>
+                        <td style="border:none">三</td>
                         <td style="border:none"><input type="text" id="NewCSWed"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Thursday</td>
+                        <td style="border:none">四</td>
                         <td style="border:none"><input type="text" id="NewCSThu"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Friday</td>
+                        <td style="border:none">五</td>
                         <td style="border:none"><input type="text" id="NewCSFri"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Saturday</td>
+                        <td style="border:none">六</td>
                         <td style="border:none"><input type="text" id="NewCSSat"><br></td>
                     </tr>
                 </table>
                 <br>
 
-                <button id="btnSubmitWS" style="cursor:pointer;" onclick="createNewCenterSchedule()">Submit</button> &nbsp&nbsp
-                <button id="Ecancel" onclick="document.getElementById('newCSBlock').style.display='none';" style="cursor:pointer;">Cancel</button>
+                <button id="btnSubmitWS" style="cursor:pointer;" onclick="createNewCenterSchedule()">提交</button> &nbsp&nbsp
+                <button id="Ecancel" onclick="document.getElementById('newCSBlock').style.display='none';" style="cursor:pointer;">取消</button>
             </div>
         </div>
     </div> <!--end div id="newWSBlock-->
 
     <div id="editWSBlock" style="display:none">
         <div class="create_new_center_schedule_form">
-            <h2><center>New Center Schedule</center></h2>
+            <h2><center>新增時間</center></h2>
             <hr class="schedule_hr">
             <div style="padding:2%">
                 <table style="border:none; width: 50%;">
                     <tr>
-                        <td style="border:none">Week Of:</td>
+                        <td style="border:none">周:</td>
                         <td style="border:none" id = editWeekOf></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Sunday</td>
+                        <td style="border:none">日</td>
                         <td style="border:none"><input type="text" id="editCSSun" value=""><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Monday</td>
+                        <td style="border:none">一</td>
                         <td style="border:none"><input type="text" id="editCSMon"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Tuesday</td>
+                        <td style="border:none">二</td>
                         <td style="border:none"><input type="text" id="editCSTue"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Wednesday</td>
+                        <td style="border:none">三</td>
                         <td style="border:none"><input type="text" id="editCSWed"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Thursday</td>
+                        <td style="border:none">四</td>
                         <td style="border:none"><input type="text" id="editCSThu"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Friday</td>
+                        <td style="border:none">五</td>
                         <td style="border:none"><input type="text" id="editCSFri"><br></td>
                     </tr>
                     <tr>
-                        <td style="border:none">Saturday</td>
+                        <td style="border:none">六</td>
                         <td style="border:none"><input type="text" id="editCSSat"><br></td>
                     </tr>
                 </table>
                 <br>
 
-                <button id="btnSubmitWS" style="cursor:pointer;" onclick="submitEditCenterSchedule()">Submit</button> &nbsp&nbsp
-                <button id="Ecancel" onclick="document.getElementById('editWSBlock').style.display='none';" style="cursor:pointer;">Cancel</button>
+                <button id="btnSubmitWS" style="cursor:pointer;" onclick="submitEditCenterSchedule()">提交</button> &nbsp&nbsp
+                <button id="Ecancel" onclick="document.getElementById('editWSBlock').style.display='none';" style="cursor:pointer;">取消</button>
             </div>
         </div>
     </div><!--end div id="editWSBlock-->
@@ -564,23 +611,17 @@ table, th, td {
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
             });
-
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar, #content').toggleClass('active');
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                if (document.getElementById("toggleSide").innerHTML == "Hide sidebar") {
-                    document.getElementById("toggleSide").innerHTML = "Show sidebar";
-                    
-
-                } else if (document.getElementById("toggleSide").innerHTML == "Show sidebar") {
-                    document.getElementById("toggleSide").innerHTML = "Hide sidebar";
-                
-
+                if(document.getElementById("toggleSide").innerHTML=="隱藏列表"){
+                    document.getElementById("toggleSide").innerHTML = "顯示列表";
+                } else if (document.getElementById("toggleSide").innerHTML == "顯示列表") {
+                    document.getElementById("toggleSide").innerHTML = "隱藏列表";
                 }
             });
         });
-
         function imgBlur(obj) {
             var photoword = document.getElementById("photoword");
             var Profilepic = document.getElementById("Profilepic");

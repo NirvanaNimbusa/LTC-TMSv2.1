@@ -22,9 +22,22 @@
     <link rel="stylesheet" href="statics/css/skeleton.css">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/list/main.css' rel='stylesheet' />
 
     <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src='fullcalendar/packages/core/main.js'></script>
+    <script src='fullcalendar/packages/daygrid/main.js'></script>
+    <script src='fullcalendar/packages/timegrid/main.js'></script>
+    <script src='fullcalendar/packages/interaction/main.js'></script>
+    <script src='fullcalendar/packages/list/main.js'></script>
+    <script src='fullcalendar/packages/google-calendar/main.js'></script>
+     
+    
+    
 </head>
 <style>
     span.hidden{
@@ -33,7 +46,7 @@
 table, th, td {
     padding: 10px;
     border: 1px solid black;
-    width: 600px;
+    width: -100px;
     text-align: center;
     word-wrap: break-word;
 }
@@ -42,7 +55,7 @@ table, th, td {
         color: #000;
     }
     table td {
-        text-shadow: 2px 2px #FFFFFF;
+        text-shadow: 1px 1px rgb(122, 118, 118);
     }
 #newABlock {
     width: 100%;
@@ -196,6 +209,30 @@ table, th, td {
         transform: translateY(-3px);
     }
 }
+body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #calendar {
+    width: 100%;
+    height: 100%;
+    opacity: .95;
+    right: 0;
+    top: 0;
+    padding: 40px, 60px;  
+    max-width: 900px;
+    margin: 0 auto;
+  }
 </style>
 <body>
 
@@ -262,7 +299,7 @@ table, th, td {
             </ul>
         </nav>
         <!-- End of sidebar !-->
-
+         
         <div id="content">
             <!-- Place everything except the sidebar in content class -->
             <div class="header">
@@ -275,7 +312,7 @@ table, th, td {
                         <!-- Bootstrap navigation bar -->
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
                                 <span id="toggleSide">Hide sidebar</span>
                             </button>
@@ -304,21 +341,17 @@ table, th, td {
                                     </a>
                                     <div class="dropdown-content">
                                             <!-- Start of Account profile -->
-                                            
                                                 <div class="container" style="transform:translateY(-8.5ex)"></div>
                                                 <div class="user-account">
-                                                    <p></p>
-                                                    
-                                                    <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
-                                                        <span style = "font-size: 12pt"> Name : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
-                                                        <span class="hidden" style = "font-size: 12pt">UserID : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
-                                                        <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                                        <span style = "font-size: 12pt"> Role : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
-                                                    </p>
-                                                    <!-- End of Account profile -->
                                             </div>
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> Name : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">UserID : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
+                                            <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                            <span style = "font-size: 15pt"> Role : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
                                         <a href="#">English</a>
-                                        <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
+                                        <a href="/../Frontend-Chinese/02Schedule2.html">中文</a>
                                         <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
                                     </div> <!--end div class="dropdown-content"-->
                                 </li>
@@ -331,10 +364,13 @@ table, th, td {
                 <div class="user-info">
                     <!--BACKGROUND PANEL IMAGE-->
                     <div class="container-fluid">
-
+                        
                         <div class="container" style="transform:translateY(-8.5ex)">
-                            <!-- CIRCLE IMAGE THING-->
-                           
+                        <!-- CIRCLE IMAGE THING-->
+                            
+                                
+                            
+
                             <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
                             <div class="user-account">
                                 <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
@@ -344,7 +380,7 @@ table, th, td {
                     </div> <!--end div class="container-fluid"-->
                 </div> <!--end div class="user-info"-->
             </div> <!-- END OF THE TWO HEADER!! --> <!--end div class="header"-->
-
+            
             <div class="main container-fluid wrapper">
                 <!-- START OF MIDDLE CONTENT-->
                 <div class="right" style="width:800ex; transform:translateY(-8ex)">
@@ -391,6 +427,8 @@ table, th, td {
                     </div> <!--end div class="container" id="data3" style="display:none;"-->
                 </div> <!--end div class="right" style="width:800ex; transform:translateY(-13ex)"-->
             </div> <!--end div class="main container-fluid wrapper"-->
+            <div id='loading'>loading...</div>
+            <div id='calendar'></div> <!--Start of calendar-->
         </div><!-- END OF MAIN DIV CONTAINER CLASS!!! --> <!--end div id="content"-->
     </div><!--End OF WRAPPER CLASS!!--> <!--end div class="wrapper"-->
     <div id="newABlock">

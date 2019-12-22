@@ -12,37 +12,64 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  Text,
   TextInput,
   Alert,
+  Picker,
   ScrollView,
+  TouchableHighlight,
+  
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import firebase from 'react-native-firebase';
 import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Button, ThemeProvider, Icon } from 'react-native-elements';
+import Icon2 from 'react-native-vector-icons/Foundation';
+import{Container,Header,Title,Content,Icon,Card,CardItem,Text,Left,Right,Body}from'native-base';
+import { Thumbnail } from 'native-base';
+
 
 import styles from '../styles/styles';
 
 class PortfolioScreen extends React.Component {
   static navigationOptions = {
-    title: 'Portfolio',
+    title: 'Patient Records',
+    headerStyle: {
+      backgroundColor: '#3f9fff',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
   constructor() {
     super();
     this.state = {
+      patientList: [],
+      patient: '',
+      patientRoomNo:'',
+      patientPic: '',
       position: 'sadf',
       userID: 'afsdaasfd',
       buttonArray: [],
+      user_position:'',
     };
   }
-
+  
+  
+  async _fetchUserInfo() {
+    const userInfo = await AsyncStorage.getItem("userInfo");
+    this.setState({
+      userInfo: JSON.parse(userInfo)
+    });
+  }
+ 
   // This pulls the current logged in users data that was saved in asyncstorage into state
 
-  componentWillMount() {
+  async componentWillMount() {
     AsyncStorage.getItem("userInfo").then((value) => {
       const data = JSON.parse(value);
       this.state.userID = data.ID;
       this.state.position = data.Position;
+      console.log(this.state.position)
       this.state.address = data.Address;
       this.state.name = data.Name;
       this.state.room = data.patientRoomNo;
@@ -54,59 +81,222 @@ class PortfolioScreen extends React.Component {
       this.state.email = data.Email;
       this.state.admissionReason = data.AdmissionReason;
       this.state.medicalRecord = data.MedicalRecord;
+      this.state.profile_Pic = data.profilePic;
 
       this.forceUpdate();
     })
+
+    this._fetchPatients();
   }
+
 
   // render content
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles2.container}>
         <ScrollView style={styles2.container}>
-          
           {(this.state.position == "CNA") ? 
           <View>
-                    <Button title="Add Daily Status" type='outline' onPress={this._showDailyStatusAdd} style="padding: 5" />
-                    <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
-          <Button title="Add Vital Status" type='outline' onPress={this._showVitalStatusAdd} style="padding: 5" />
+            <View>             
+              <Text style={styles2.text}>Select Patient:</Text>
+              <Picker
+                mode='anchor'
+                style={styles2.picker, {color:'black'}}
+                selectedValue={this.state.patient}
+                onValueChange={(itemValue, itemIndex) => {this.setState({ patient: itemValue, isLoading:true})}}
+              >
+                <Picker.Item  label = "Select Patient" value="patient"/>
+                {this.state.patientList.map((item, index) => {
+                  return (<Picker.Item label={item.id} value={item.id} key={index}/>)
+                })}
+              </Picker>
+            </View >
+            <View>
+              <Content padder>
+                <Card style={styles.mb}>
+                  <CardItem header bordered>
+                    <Text>Patient Satus</Text>
+                  </CardItem>
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="clipboard-pencil"
+                        style={{ color: "#DD5044" }}
+                        size= {40}
+                      />
+                      <Text>Add Daily Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showDailyStatusAdd} />
+                    </Right>             
+                  </CardItem>
+                  <CardItem>        
+                    <Left><Icon2
+                        active
+                        name="clipboard-notes"
+                        style={{ color: "#3B579D" }}
+                        size= {45}
+                      />
+                      <Text> Check Daily Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+                    </Right>
+                    
+                  </CardItem>
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="heart"
+                        style={{ color: "#D62727" }}
+                        size= {40}
+                      />
+                      <Text>Check AI Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+                    </Right>
+                    
+                  </CardItem>
+
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="pencil"
+                        style={{ color: "#55ACEE" }}
+                        size= {40}
+                      />
+                      <Text>Add Vital Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showVitalStatusAdd} />
+                    </Right>
+                    
+                  </CardItem>
+
+                  <CardItem>        
+                    <Left>
+                      <Icon2
+                        active
+                        name="page"
+                        style={{ color: "#DD5044" }}
+                        size= {45}
+                      />
+                      <Text> Check Vital Status</Text>
+                    </Left>
+                    <Right>
+                      <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+                    </Right>
+                    
+                    </CardItem>
+                  
+                    </Card>
+              </Content>  
+            </View>
           </View>
+          
           : 
           <View>
-          <Button title="Check Daily Status" type='outline' onPress={this._showDailyStatusRead} style="padding: 5" />
-                    <Button title="Check AI Status" type='outline' onPress={this._showAiStatusRead} style="padding: 5" />
-                    <Button title="Check Vital Status" type='outline' onPress={this._showVitalStatusRead} style="padding: 5" />
+            <Content padder>
+              <Card style={styles.mb}>
+                <CardItem header bordered>
+                  <Text>Patient Satus</Text>
+                </CardItem>
+
+                <CardItem>        
+                  <Left><Icon2
+                      active
+                      name="clipboard-notes"
+                      style={{ color: "#3B579D" }}
+                      size= {45}
+                    />
+                    <Text> Check Daily Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showDailyStatusRead} />
+                  </Right>
+                </CardItem>
+
+                <CardItem>        
+                  <Left>
+                    <Icon2
+                      active
+                      name="heart"
+                      style={{ color: "#D62727" }}
+                      size= {40}
+                    />
+                    <Text>Check AI Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showAiStatusRead} />
+                  </Right>
+                </CardItem>
+
+                <CardItem>        
+                  <Left>
+                    <Icon2
+                      active
+                      name="page"
+                      style={{ color: "#DD5044" }}
+                      size= {45}
+                    />
+                    <Text> Check Vital Status</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" onPress={this._showVitalStatusRead} />
+                  </Right>
+                </CardItem>
+              </Card>
+            </Content>
           </View>
           }
-          <Text></Text>
-          <Text></Text>
-        </ScrollView>
+        </ScrollView>      
       </View>
     );
   }
 
   // handler to navigate to the Portfolio page
   _showDailyStatusRead = () => {
-    this.props.navigation.navigate('DailyStatusRead');
+    this.props.navigation.navigate('DailyStatusRead',{patientID:this.state.patient});
   };
 
   _showDailyStatusAdd = () => {
-    this.props.navigation.navigate('DailyStatusAdd');
+    this.props.navigation.navigate('DailyStatusAdd',{patientID:this.state.patient})
+    
   }
 
   _showAiStatusRead = () => {
-    this.props.navigation.navigate('AiStatusRead');
+    this.props.navigation.navigate('AiStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusRead = () => {
-    this.props.navigation.navigate('VitalStatusRead');
+    this.props.navigation.navigate('VitalStatusRead',{patientID:this.state.patient});
   }
 
   _showVitalStatusAdd = () => {
-    this.props.navigation.navigate('VitalStatusAdd');
+
+    this.props.navigation.navigate('VitalStatusAdd',{patientID:this.state.patient});
   }
+  _fetchPatients() {
+    // fetch content
+    const patientData = [];
+    firebase.database().ref('Patient').once('value').then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        patientData.push({
+          id: childSnapshot.key,
+        })
+      })
+      this.setState({
+        patientList: patientData,
+        patient: patientData[0].id,
+        
+      });
+    });
+  }
+
 
   // signout user by deleting locally stored user info and navigate back to sign in screen
   _signOutAsync = async () => {
@@ -118,11 +308,33 @@ class PortfolioScreen extends React.Component {
 
 const styles2 = StyleSheet.create({
   container: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#fff',
     flex: 1,
-    padding: 20,
-    marginTop: 15,
+    padding: 10,
+    marginTop: 1,
   },
+  headerText: {
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    padding: 20
+ 
+  },
+  text: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'left', /*select week*/
+  },
+  
+  mb: {
+    marginBottom: 15
+  },
+  picker:{
+    paddingTop:-10
+  }
   /*
   item: {
     padding: 4,
@@ -139,12 +351,6 @@ const styles2 = StyleSheet.create({
   header: {
     padding: 10
   },
-  headerText: {
-    textAlign: 'center',
-    justifyContent: 'space-evenly',
-    fontSize: 18,
-    fontWeight: 'bold',
-  }
 
   */
 });

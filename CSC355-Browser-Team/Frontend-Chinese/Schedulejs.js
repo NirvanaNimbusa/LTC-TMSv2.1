@@ -7,69 +7,69 @@ window.location = 'Login.html';
 
 //Create new Announcement button
 
-function AddNewA(){
-  document.getElementById('newABlock').style.display ='block';
+function AddNewA() {
+  document.getElementById('newABlock').style.display = 'block';
 }
 
 //Read firebase Announcements
-var an =[];
+var an = [];
 var fbA = firebase.database().ref('Announcements');
 var Atable = document.getElementById('table')
 var rowIndex = 1;
 
-fbA.once('value',function(snapshot){
-  snapshot.forEach(function(childSnapshot){
+fbA.once('value', function (snapshot) {
+  snapshot.forEach(function (childSnapshot) {
     an[rowIndex] = childSnapshot.key
     var childData = childSnapshot.val();
     var button = document.createElement("button");
     var button2 = document.createElement("button");
     var button3 = document.createElement("button");
-    button.innerHTML="Detail";
-    button2.innerHTML = "Edit";
-    button3.innerHTML="Delete";
+    button.innerHTML = "詳細資料";
+    button2.innerHTML = "編輯";
+    button3.innerHTML = "刪除";
 
     var row = Atable.insertRow(rowIndex);
-    var cellAnnouncement= row.insertCell(0);
-    var cellButton= row.insertCell(1)
-    var cellButton2= row.insertCell(2);
-    var cellButton3= row.insertCell(3);
+    var cellAnnouncement = row.insertCell(0);
+    var cellButton = row.insertCell(1)
+    var cellButton2 = row.insertCell(2);
+    var cellButton3 = row.insertCell(3);
 
     cellAnnouncement.appendChild(document.createTextNode(childData.ATitleIOS));
     cellButton.appendChild(button);
     cellButton2.appendChild(button2);
     cellButton3.appendChild(button3);
 
-    button.setAttribute("id","viewA_id["+rowIndex+"]");
-    button.setAttribute("onclick","viewA("+rowIndex+")");
-    button2.setAttribute("id","editA_id["+rowIndex+"]");
-    button2.setAttribute("onclick","editA("+rowIndex+")");
-    button3.setAttribute("id","deleteA_id["+rowIndex+"]");
-    button3.setAttribute("onclick","deleteA("+rowIndex+")");
+    button.setAttribute("id", "viewA_id[" + rowIndex + "]");
+    button.setAttribute("onclick", "viewA(" + rowIndex + ")");
+    button2.setAttribute("id", "editA_id[" + rowIndex + "]");
+    button2.setAttribute("onclick", "editA(" + rowIndex + ")");
+    button3.setAttribute("id", "deleteA_id[" + rowIndex + "]");
+    button3.setAttribute("onclick", "deleteA(" + rowIndex + ")");
 
     rowIndex = rowIndex + 1;
   }); //end function(childSnapchot)
 }); //end 
 
 //createNew Announcement Data
-function createNewAnnouncement(){
+function createNewAnnouncement() {
   var data = $('#Announcement').val();
-  var title1= $('#Atitle').val();
-  var title2= 'xtsx'+title1+'xtex';
+  var title1 = $('#Atitle').val();
+  var title2 = 'xtsx' + title1 + 'xtex';
   var data2 = 'xasx' + data + 'xaex';
   var keyA = fbA.push().key;
   var AData = {
-    a_id : keyA,
-    ATitleAndroid: title2 ,
-    ATitleIOS:title1 ,
-    AnnouncementAndroid:data2,
+    a_id: keyA,
+    ATitleAndroid: title2,
+    ATitleIOS: title1,
+    AnnouncementAndroid: data2,
     AnnouncementIOS: data
   }
   var updates = {};
-  if(data == ""){
+  if (data == "") {
     alert(' Please input a data');
   }
   else {
-    updates['Announcements/'+ keyA] = AData;
+    updates['Announcements/' + keyA] = AData;
     firebase.database().ref().update(updates);
     alert('Successfully Entered');
     window.location.reload();
@@ -77,8 +77,8 @@ function createNewAnnouncement(){
 } //end function createNewAnnouncement
 
 //Deleting Announcements
-function deleteA(rowIndex){
-  var fbB= firebase.database().ref('Announcements');
+function deleteA(rowIndex) {
+  var fbB = firebase.database().ref('Announcements');
   var Ukey = an[rowIndex];
   console.log(Ukey);
   var r = confirm("Are you sure you want to delete an announcement?");
@@ -93,11 +93,11 @@ function deleteA(rowIndex){
 
 //View Announcement, no editing
 //WIP
-function viewA(rowIndex){
-  document.getElementById('viewABlock').style.display ='block';
+function viewA(rowIndex) {
+  document.getElementById('viewABlock').style.display = 'block';
   var Ukey = an[rowIndex];
-  var fbB= firebase.database().ref('Announcements/'+Ukey);
-  fbB.on('value', function(snapshot){
+  var fbB = firebase.database().ref('Announcements/' + Ukey);
+  fbB.on('value', function (snapshot) {
     var EAdata = snapshot.child('AnnouncementIOS').val();
     var EAdata2 = snapshot.child('ATitleIOS').val();
     document.getElementById('Amsg2').innerHTML = EAdata;
@@ -107,11 +107,11 @@ function viewA(rowIndex){
 } //end function viewA
 
 //Edit Announcement, no viewing
-function editA(rowIndex){
-  document.getElementById('editABlock').style.display ='block';
+function editA(rowIndex) {
+  document.getElementById('editABlock').style.display = 'block';
   var Ukey = an[rowIndex];
-  var fbB= firebase.database().ref('Announcements/'+Ukey);
-  fbB.on('value', function(snapshot){
+  var fbB = firebase.database().ref('Announcements/' + Ukey);
+  fbB.on('value', function (snapshot) {
     var EAdata = snapshot.child('AnnouncementIOS').val();
     var EAdata2 = snapshot.child('ATitleIOS').val();
     document.getElementById('Amsg').value = EAdata;
@@ -120,26 +120,26 @@ function editA(rowIndex){
   });
 } //end function editA
 
-function editSave(rowIndex){
+function editSave(rowIndex) {
   var editedData = $("#Amsg").val();
   var editedData2 = 'xasx' + editedData + 'xaex';
   var akey = document.getElementById('keyname').innerHTML;
   console.log(akey);
-  var title1= $('#AEtitle2').val();
-  var title2= 'xtsx'+title1+'xtex';
-  var wholeA ={
+  var title1 = $('#AEtitle2').val();
+  var title2 = 'xtsx' + title1 + 'xtex';
+  var wholeA = {
     ATitleIOS: title1,
-    ATitleAndroid: title2 ,
+    ATitleAndroid: title2,
     AnnouncementAndroid: editedData2,
     AnnouncementIOS: editedData,
     a_id: akey
   };
-  if(editedData == ""){
+  if (editedData == "") {
     alert(' Please input a data');
   }
   else {
-    var updates={};
-    updates['Announcements/'+ akey] = wholeA;
+    var updates = {};
+    updates['Announcements/' + akey] = wholeA;
     firebase.database().ref().update(updates);
     window.location.reload();
   }
@@ -147,7 +147,7 @@ function editSave(rowIndex){
 
 
 
-function btnpopUp(){
+function btnpopUp() {
   document.getElementById('Esave').style.display = "inline";
 } //end function btnpopUP
 
@@ -169,12 +169,12 @@ document.getElementById('newCSBlock').style.display ='block';
 //let file3;
 
 function handleuploadfile3(e) {
-  file3=e.target.files[0];
+  file3 = e.target.files[0];
 } //end function handleuploadfile3
 
 function handleuploadfileSubmit3(e) {
-  if(file3 == undefined){
-    alert ("Please enter data!")
+  if (file3 == undefined) {
+    alert("Please enter data!")
   }
 }
 
@@ -185,8 +185,8 @@ var fbCS = firebase.database().ref('CenterSchedule')
 var weeks = [];
 
 //get weeks stored in an array
-fbCS.once('value',function(snapshot){
-  snapshot.forEach(function(Week){
+fbCS.once('value', function (snapshot) {
+  snapshot.forEach(function (Week) {
     weekOf = Week.key;
     weeks.push(weekOf);
   });
@@ -199,32 +199,32 @@ fbCS.once('value',function(snapshot){
 * @description query for data for individual days given the week, then display in DOM
 * @param {*} weeks array of weeks that have schedules
 */
-function injectToDOM(weeks){
+function injectToDOM(weeks) {
   var htmlInjection = "";
   count = 0;
 
   htmlInjection = '<table style="width:100%; border: 1px solid black;">';
-  for (var i = weeks.length-1; i >= 0; i--){
-    var weekSched = firebase.database().ref('CenterSchedule/'+weeks[i]+'/'); 
-    weekSched.once('value',function(days){
+  for (var i = weeks.length - 1; i >= 0; i--) {
+    var weekSched = firebase.database().ref('CenterSchedule/' + weeks[i] + '/');
+    weekSched.once('value', function (days) {
       count++;
 
       times = [];
       times = days.val();
 
-      htmlInjection += '<tr><td style="width:10%; font-weight:bold;">'+days.key+'</td>';
-      htmlInjection += '<td style="width:10%;">'+times["Sunday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Monday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Tuesday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Wednesday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Thursday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Friday"]+'</td>';
-      htmlInjection += '<td style="width:10%">'+times["Saturday"]+'</td>';
-      htmlInjection += '<td style="width:10%"><button id="edit'+days.key+'" onclick="editCenterSchedule(\''+days.key+'\')" style="cursor:pointer;">Edit</button></td>';
-      htmlInjection += '<td style="width:10%"><button id="delete'+days.key+'" onclick="deleteCenterSchedule(\''+days.key+'\')" style="cursor:pointer;">Delete</button></td>';
+      htmlInjection += '<tr><td style="width:10%; font-weight:bold;">' + days.key + '</td>';
+      htmlInjection += '<td style="width:10%;">' + times["Sunday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Monday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Tuesday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Wednesday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Thursday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Friday"] + '</td>';
+      htmlInjection += '<td style="width:10%">' + times["Saturday"] + '</td>';
+      htmlInjection += '<td style="width:10%"><button id="edit' + days.key + '" onclick="editCenterSchedule(\'' + days.key + '\')" style="cursor:pointer;">編輯</button></td>';
+      htmlInjection += '<td style="width:10%"><button id="delete' + days.key + '" onclick="deleteCenterSchedule(\'' + days.key + '\')" style="cursor:pointer;">刪除</button></td>';
       htmlInjection += '</tr>';
 
-      if(count = weeks.length) //if reached the end of the list of weeks
+      if (count = weeks.length) //if reached the end of the list of weeks
       {
         $("#CenterScheduleInfo").html(htmlInjection); //Insert the HTML for the tasks into the DOM
       } //end if
@@ -236,7 +236,7 @@ function injectToDOM(weeks){
  * @function createNewCenterSchedule
  * @description creates new center schedule for the week
  */
-function createNewCenterSchedule(){
+function createNewCenterSchedule() {
   var ymd = $("#selected_date").val();
 
   var SunData = $("#NewCSSun").val();
@@ -249,40 +249,40 @@ function createNewCenterSchedule(){
 
   //create alert message
   var fields = "";
-  if(ymd == ""){fields += "Week Of\n";}
-  if(SunData == ""){fields += "Sunday\n";}
-  if(MonData == ""){fields += "Monday\n";}
-  if(TueData == ""){fields += "Tuesday\n";}
-  if(WedData == ""){fields += "Wednesday\n";}
-  if(ThuData == ""){fields += "Thursday\n";}
-  if(FriData == ""){fields += "Friday\n";}
-  if(SatData == ""){fields += "Saturday\n";}
+  if (ymd == "") { fields += "Week Of\n"; }
+  if (SunData == "") { fields += "Sunday\n"; }
+  if (MonData == "") { fields += "Monday\n"; }
+  if (TueData == "") { fields += "Tuesday\n"; }
+  if (WedData == "") { fields += "Wednesday\n"; }
+  if (ThuData == "") { fields += "Thursday\n"; }
+  if (FriData == "") { fields += "Friday\n"; }
+  if (SatData == "") { fields += "Saturday\n"; }
 
-  if(ymd == "" || SunData == "" || MonData == "" ||
-  TueData == "" || WedData == "" || ThuData == "" ||
-  FriData == "" || SatData == "") {
-    alert ("Please enter the following data:\n"+fields);
+  if (ymd == "" || SunData == "" || MonData == "" ||
+    TueData == "" || WedData == "" || ThuData == "" ||
+    FriData == "" || SatData == "") {
+    alert("Please enter the following data:\n" + fields);
   }
-  
+
   else {
     var r = confirm("Are you sure you want to create a new Center Schedule?");
     if (r == true) {
 
       var data = {
-        Sunday : SunData,
-        Monday : MonData,
-        Tuesday : TueData,
-        Wednesday : WedData,
-        Thursday : ThuData,
-        Friday : FriData,
-        Saturday : SatData
+        Sunday: SunData,
+        Monday: MonData,
+        Tuesday: TueData,
+        Wednesday: WedData,
+        Thursday: ThuData,
+        Friday: FriData,
+        Saturday: SatData
       }
 
       var updates = {};
-      updates['CenterSchedule/'+ymd] = data;
+      updates['CenterSchedule/' + ymd] = data;
       firebase.database().ref().update(updates);
-      document.getElementById('newCSBlock').style.display ='none';
-      location.href ="./02Schedule2.html";
+      document.getElementById('newCSBlock').style.display = 'none';
+      location.href = "./02Schedule2.html";
     }
   }
 } //end function createNewCenterSchedule
@@ -301,12 +301,12 @@ function getSundayOfCurrentWeek(d)
  * @param {*} date selected center schedule to be edited
  */
 function editCenterSchedule(date) {
-  document.getElementById('editWSBlock').style.display ='block';
+  document.getElementById('editWSBlock').style.display = 'block';
   console.log(date);
-  var fbB= firebase.database().ref('CenterSchedule/'+date);
-  fbB.on('value', function(CSsnapshot){
+  var fbB = firebase.database().ref('CenterSchedule/' + date);
+  fbB.on('value', function (CSsnapshot) {
     var times = [];
-    times = CSsnapshot.val(); 
+    times = CSsnapshot.val();
     setCSEditFields(CSsnapshot.key, times);
   });
 } //end editCenterSchedule
@@ -332,7 +332,7 @@ function setCSEditFields(weekOf, times) {
  * @function submitEditCenterSchedule
  * @description submits edited center schedule
  */
-function submitEditCenterSchedule(){
+function submitEditCenterSchedule() {
   var ymd = document.getElementById('editWeekOf').innerHTML
 
   var SunData = $("#editCSSun").val();
@@ -345,39 +345,39 @@ function submitEditCenterSchedule(){
 
   //create alert message
   var fields = "";
-  if(ymd == ""){fields += "Week Of\n";}
-  if(SunData == ""){fields += "Sunday\n";}
-  if(MonData == ""){fields += "Monday\n";}
-  if(TueData == ""){fields += "Tuesday\n";}
-  if(WedData == ""){fields += "Wednesday\n";}
-  if(ThuData == ""){fields += "Thursday\n";}
-  if(FriData == ""){fields += "Friday\n";}
-  if(SatData == ""){fields += "Saturday\n";}
-  if(ymd == "" || SunData == "" || MonData == "" ||
-  TueData == "" || WedData == "" || ThuData == "" ||
-  FriData == "" || SatData == "") {
-    alert ("Please enter the following data:\n"+fields);
+  if (ymd == "") { fields += "Week Of\n"; }
+  if (SunData == "") { fields += "Sunday\n"; }
+  if (MonData == "") { fields += "Monday\n"; }
+  if (TueData == "") { fields += "Tuesday\n"; }
+  if (WedData == "") { fields += "Wednesday\n"; }
+  if (ThuData == "") { fields += "Thursday\n"; }
+  if (FriData == "") { fields += "Friday\n"; }
+  if (SatData == "") { fields += "Saturday\n"; }
+  if (ymd == "" || SunData == "" || MonData == "" ||
+    TueData == "" || WedData == "" || ThuData == "" ||
+    FriData == "" || SatData == "") {
+    alert("Please enter the following data:\n" + fields);
   }
-  
+
   else {
     var r = confirm("Are you sure you want edit this Center Schedule?");
     if (r == true) {
 
       var data = {
-        Sunday : SunData,
-        Monday : MonData,
-        Tuesday : TueData,
-        Wednesday : WedData,
-        Thursday : ThuData,
-        Friday : FriData,
-        Saturday : SatData
+        Sunday: SunData,
+        Monday: MonData,
+        Tuesday: TueData,
+        Wednesday: WedData,
+        Thursday: ThuData,
+        Friday: FriData,
+        Saturday: SatData
       }
 
       var updates = {};
-      updates['CenterSchedule/'+ymd] = data;
+      updates['CenterSchedule/' + ymd] = data;
       firebase.database().ref().update(updates);
-      document.getElementById('editWSBlock').style.display ='none';
-      location.href ="./02Schedule2.html";
+      document.getElementById('editWSBlock').style.display = 'none';
+      location.href = "./02Schedule2.html";
     } //end if
   } //end else
 } //end function submitEditCenterSchedule
@@ -388,13 +388,13 @@ function submitEditCenterSchedule(){
  * @param {*} date selected center schedule to be removed
  */
 function deleteCenterSchedule(date) {
-  var fbB= firebase.database().ref('CenterSchedule');
+  var fbB = firebase.database().ref('CenterSchedule');
   console.log(date);
-  var r = confirm("Are you sure you want to delete the center schedule for the week of "+date+"?");
+  var r = confirm("Are you sure you want to delete the center schedule for the week of " + date + "?");
   if (r == true) {
     fbB.child(date).remove();
     alert("successfully deleted!");
-    location.href ="./02Schedule2.html";
+    location.href = "./02Schedule2.html";
   } //end if
   else {
   }
@@ -430,7 +430,7 @@ function createNewAnnouncement(){
 
 
 //Working Schedule table
-function AddNewCS(){
+function AddNewCS() {
   document.getElementById("NewCSSun").value = "";
   document.getElementById("NewCSMon").value = "";
   document.getElementById("NewCSTue").value = "";
@@ -439,7 +439,7 @@ function AddNewCS(){
   document.getElementById("NewCSFri").value = "";
   document.getElementById("NewCSSat").value = "";
   //document.getElementById("selected_date").value = year+"-"+mm+"-"+dd;
-  document.getElementById('newCSBlock').style.display ='block';
+  document.getElementById('newCSBlock').style.display = 'block';
 }
 
 /*
@@ -508,39 +508,39 @@ function handleuploadfileSubmit(e) {
 
 
 //WS deletion
-function deleteWS(rowIndexWS){
-  var fbWS= firebase.database().ref('WorkingSchedule');
+function deleteWS(rowIndexWS) {
+  var fbWS = firebase.database().ref('WorkingSchedule');
   //var Ukey = $(this).closest('tr').children('td:first').text();
   var Ukey = ws[rowIndexWS];
   console.log(Ukey);
   var r = confirm("Are you sure you want to delete a working schedule?");
   if (r == true) {
-    fbWS.child(Ukey+"/filename").once('value').
-    then(function(snapshot){
-      var storageRef=firebase.storage().ref();
-      storageRef.child("WorkingSchedule/"+snapshot.val()).delete().then(function(){
-        fbWS.child(Ukey).remove();
-        alert("successfully deleted!");
-        window.location.reload();
+    fbWS.child(Ukey + "/filename").once('value').
+      then(function (snapshot) {
+        var storageRef = firebase.storage().ref();
+        storageRef.child("WorkingSchedule/" + snapshot.val()).delete().then(function () {
+          fbWS.child(Ukey).remove();
+          alert("successfully deleted!");
+          window.location.reload();
+        });
       });
-    });
   }
   else {
   }
 }
 
 //WS download
-function downloadWS(rowIndexWS){
-  var fbWS= firebase.database().ref('WorkingSchedule');
+function downloadWS(rowIndexWS) {
+  var fbWS = firebase.database().ref('WorkingSchedule');
   console.log(rowIndexWS);
   //var Ukey = $(this).closest('tr').children('td:first').text();
   var Ukey = ws[rowIndexWS];
   var url = fbWS.child(Ukey).child('url');
   let downloadURL;
-  url.once("value").then(function(snapshot){
+  url.once("value").then(function (snapshot) {
     downloadURL = snapshot.val();
     console.log(downloadURL);
-    window.open(downloadURL,'_blank');
+    window.open(downloadURL, '_blank');
   });
 }
 
@@ -602,7 +602,7 @@ function handleuploadfileSubmit2(e) {
 }
 */
 
-function showannouncement(){
+function showannouncement() {
   document.getElementById("data1").style.display = "block";
   document.getElementById("data3").style.display = "none";
   document.getElementById("announcementspan").style.opacity = "1";
@@ -610,20 +610,110 @@ function showannouncement(){
   document.getElementById("wsspan").style.opacity = ".8";
 }
 
-function showws(){
+function showws() {
   document.getElementById("data1").style.display = "none";
   document.getElementById("data3").style.display = "block";
   document.getElementById("announcementspan").style.opacity = ".8";
   document.getElementById("wsspan").style.opacity = "1";
 }
 
-function openmenu(){
-  if(document.getElementById("menu").style.display== "block"){
+function openmenu() {
+  if (document.getElementById("menu").style.display == "block") {
     document.getElementById("menu").style.display = "none";
     document.getElementById("openmenu").style.opacity = "1";
   }
-  else{
+  else {
     document.getElementById("menu").style.display = "block";
     document.getElementById("openmenu").style.opacity = ".6";
   }
 }
+
+// start of calender function 
+  // Prepare of DB connection
+  var fbB = firebase.database().ref('CenterSchedule');
+  
+
+  // DB connection complete
+var calendarEl = document.getElementById('calendar');
+
+
+      var i;
+      for (i = 0; i < 1; i++) { 
+        var eventscal = firebase.database().ref("Calendar");
+        //var title = events.child('title');
+        eventscal.once('value',function(snapshot){
+          var events = snapshot.val();
+          console.log(events);
+          /*calendar.addEvent({
+            title: title,
+            start: arg.start,
+            end: arg.end,
+            allDay: arg.allDay,
+            event: 'servletURL'
+          })*/
+        });
+          
+      };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list', 'googleCalendar' ],
+
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      businessHours: true,
+      selectable: true,
+      selectMirror: true,
+      selectHelper: true,
+      displayEventTime: false, // don't show the time column in list view
+      
+      
+      // THIS KEY WON'T WORK IN PRODUCTION!!!
+      // To make your own Google API key, follow the directions here:
+      // http://fullcalendar.io/docs/google_calendar/
+      googleCalendarApiKey: 'AIzaSyBMBwDqNEWKEKb2YIGEcE0h4AeJgEsVhkU',
+
+      events: 'mcultcver4@gmail.com',
+      
+      select: function(arg) {
+        var title = prompt('Event Title:');
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: arg.start,
+            end: arg.end,
+            allDay: arg.allDay,
+            event: 'servletURL'
+          })
+          alert('Great. Now, refresh your page...');
+        } 
+        calendar.unselect()
+      },
+      
+      eventClick: function(arg) {
+        // opens events in a popup window
+        window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+
+        arg.jsEvent.preventDefault() // don't navigate in main tab
+      },
+      
+      loading: function(bool) {
+        document.getElementById('loading').style.display =
+          bool ? 'block' : 'none';
+      },
+
+    });
+    
+    calendar.render();
+  });
+    
+// End of calender function

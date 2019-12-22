@@ -97,10 +97,9 @@
                 <div class="bar"><!-- PlaceHolder for top bar -->
                     
                     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default"><!-- Bootstrap navigation bar -->
-
                         <div class="container-fluid">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:green;outline-color:darkgreen">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" style="float:left; margin-right: 1.5ex;padding-top:1.5ex;padding-bottom:1.5ex;padding-left:2px;padding-right:2px; background-color:SteelBlue;outline-color:darkblue">
                                 <i class="fas fa-align-left"></i>
                                 <span id="toggleSide">Hide sidebar</span>
                             </button>
@@ -115,68 +114,67 @@
                                     <span class="white-text title"> LTC-TMS</span>
                                 </a>
 
-                            </div> <!--end div class="navbar-header"-->
+                            </div>
                             <ul class="nav navbar-nav navbar-right" style="margin-right:3px">
                                 <li class="dropdown">
                                     <a href="javascript:void(0)" class="dropbtn">
-                                        <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
-                                                <img src="statics/images/edit.png" id="photoword" 
-                                                     style="position:relative;left:3px; text-align:center;
-                                                display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
-                                                <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
-                                                <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                            <div class="user-headface" onmouseover="imgBlur(this)" onmouseout="imgOrg(this)">
+                                                    <img src="statics/images/edit.png" id="photoword" 
+                                                         style="position:relative;left:3px; text-align:center;
+                                                    display:none;width:19px;height:19px; white-space:nowrap;overflow: hidden;" onclick="document.getElementById('newPic').click();">
+                                                    <img id="Profilepic" onclick="document.getElementById('newPic').click();" style="cursor:pointer; white-space:nowrap;overflow: hidden;width:30px;height:30px;" />
+                                                    <input id="newPic" type='file' accept="image/*" onchange="uploadPicProfile()" required style="display:none; white-space:nowrap;overflow: hidden;" />
+                                                </div>
+                                    </a>
+                                        <div class="dropdown-content">
+                                            <!-- Start of Account profile -->
+                                                <div class="container" style="transform:translateY(-8.5ex)"></div>
+                                                <div class="user-account">
                                             </div>
-                                </a>
-                                <div class="dropdown-content">
-                                        <!-- Start of Account profile -->
-                                        
+                                        <a href="#"><p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
+                                            <span style = "font-size: 15pt"> Name : <span style = "font-size: 15pt;" id="displayProfilename"></span></span>
+                                            <span class="hidden" style = "font-size: 15pt">UserID : <span style = "font-size: 15pt;" id="displayProfileid"></span></span>
                                             <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                            <div class="user-account">
-                                                <p></p>
-                                                
-                                                <p class="account" style="position:relative; top:10px;"><p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->            
-                                                    <span style = "font-size: 12pt"> Name : <span style = "font-size: 12pt;" id="displayProfilename"></span></span>
-                                                    <span class="hidden" style = "font-size: 12pt">UserID : <span style = "font-size: 12pt;" id="displayProfileid"></span></span>
-                                                    <div class="container" style="transform:translateY(-8.5ex)"></div>
-                                                    <span style = "font-size: 12pt"> Role : <span style = "font-size: 12pt;" id="displayProfileposition"></span></span>
-                                                </p>
-                                                <!-- End of Account profile -->
-                                        </div>
-                                    <a href="#">English</a>
-                                    <a href="/../Frontend-Chinese/07E-portfolio2.html">Chinese</a>
-                                    <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
-                                </div> <!--end div class="dropdown-content"-->
-                            </li>
-                        </ul>
-                    </div> <!--end div class="container-fluid"-->
-                </nav>
-            </div><!--end div class="bar"-->
+                                            <span style = "font-size: 15pt"> Role : <span style = "font-size: 15pt;" id="displayProfileposition"></span></span>
+                                        </p></a> <!-- End of Account profile -->    
+                                        <a href="#">English</a>
+                                        <a href="/../Frontend-Chinese/01Aboutus2.html">中文</a>
+                                        <a onClick="Logout(); return false;" href="../Frontend/00Login2.html">Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
                 <!-- TOP BAR ENDS-->
                 <!-- Place Holder for header-->
                 <div class="user-info">
                     <!--BACKGROUND PANEL IMAGE-->
                     <div class="container-fluid">
 
+                        
+
                         <div class="container" style="transform:translateY(-8.5ex)">
                             <!-- CIRCLE IMAGE THING-->
                            
+
                             <!-- TEXT NEXT TO THE CIRCLE IMAGE THING-->
                             <div class="user-account">
                                 <p class="tip" id="time123"></p><!-- DISPLAYS GOOD MORNING/AFTERNOON/EVENING MSG -->
                                 
-                            </div> <!--end div class="user-account"-->
-                        </div> <!--end div class="container" -->
-                    </div> <!--end div class="container-fluid"-->
-                </div> <!--end div class="user-info"-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div> <!-- END OF THE TWO HEADER!! -->
 
             <div class="main container-fluid wrapper">
                 <!-- START OF MIDDLE CONTENT-->
-                <div class="right"  style="width:800ex; transform:translateY(-9ex); height:800ex;">
+                <div class="right"  style="width:800ex; transform:translateY(-9ex); height:50ex;">
                     <div class="tap">
                         <span id="introductionspan" onclick="showintroductionKU()" style="opacity:1;cursor:pointer;">Introduction</span>
                         <span id="centerinfospan" onclick="showcenterinfoKU()" style="opacity:.8;cursor:pointer;">Center Info</span>
-                        <span id="sponsoredspan" onclick="showsponsored()" style="opacity:.8;cursor:pointer;visibility:hidden">Sponsored</span>
+                      
                     </div>
                     <div class="container" id="data1" style="position:relative;top:0%; left:0%;">
                         <table style="height:100%;width:100%;border-style:hidden;">
@@ -218,34 +216,7 @@
                             <button id="CI_button" style="display:none;position:absolute;top:94%; left:89%;width:8%;cursor:pointer;" onclick="CI_submit()">OK</button>
                         </table>
                     </div>
-                    <div class="container" id="data3" style="display:none;position:relative;">
-                        <table id="sponsor_table" style="height:100%;width:70%;">
-                            <tr>
-                                <th>
-                                    Sponsored
-                                    <button id="deleteBTN" onclick="sponsor_delete()" style="left:-50%;cursor:pointer;">Remove</button>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td id="sponsor_td" style="text-align:center;"></td>
-                            </tr>
-                        </table>
-                        <div style="position:absolute; left:68%;top:2%; width:30%; height:94%;background-color:#ddd;">
-                            <h3 style="text-align:center;">Add Sponsor</h3><br>
-                            <p> Name :<textarea id="sponsorName" rows="1" cols="39"></textarea> </p>
-                            <p style="font-size:12px;"> </p>
-                            <br>
-                            <p>Link:</p>
-                            <textarea id="url_text" rows="1" cols="39"></textarea>
-                            <br><br>
-                            <input type="file" value="" name="Photo" id="fileButton" accept="image/*" />
-                            <br><br>
-                            <center><button onclick="upload()" type="button" class="btn" style="text-align:center;cursor:pointer;">Upload</button></center>
-                        </div>
-                    </div>
                 </div>
-
-                
         </div><!-- END OF MAIN DIV CONTAINER CLASS!!! -->
     </div><!--End OF WRAPPER CLASS!!-->
 
@@ -293,9 +264,11 @@
             photoword.style.position = "absolute";
             photoword.style.transform = "translate(2ex,2ex)";
             photoword.style.zIndex = "2000";
+
             Profilepic.style.filter = "blur(3px)";
             Profilepic.style.display = "inline";
         }
+
         /*************************************************************************/
         /* Function name: imgOrg */
         /* Description: Fix the image post mouse over. */
