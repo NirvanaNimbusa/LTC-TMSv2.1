@@ -1,0 +1,123 @@
+#send data to firebase
+#****************************************************************#
+# Author: MCU                                                    #
+# Major: Information Technology                                  #
+# Creation Date: 2019/12/22                                      #
+# Due Date: N/A                                                  #
+# Course: CSC355                                                 #
+# Professor Name: Dr. Lin                                        #
+# Assignment: LTC-TMS v2.1                                       #
+# Filename: Raspberrypi.py                                       #
+# Language: Python 3                                             #
+# Purpose:  Creating a program that permits the sending/         #
+#           receiving data between the micro:bits to the         #
+#           database                                             #
+#                                                                #
+# To run the program you must know the file location and         #
+# then cd to that location using putty on the acad server.       #
+# Then you will enter "python Microbit.py".                      #
+#****************************************************************#
+
+import threading
+import sys
+import datetime
+from firebase import firebase
+import serial as serial
+import time
+
+
+#**********************************************************************#
+#                                                                      #
+# Function Name: infiniteloop1                                         #
+# Description: This function listens for data from a serial port,      #
+#              formats it, and pushes the data to Firebase for         #
+#              storage.                                                #
+# Parameters:  N/A - It takes in data via serial port, not parameters  #
+# Return Value: N/A - There is nothing to return for another function, #
+#               it pushes the data straight to Firebase                #
+#                                                                      #
+#**********************************************************************#
+
+def infiniteloop1():
+    while True:
+
+        #create a variable called port that will contain the port we are connecting to used to connect our computer to the micro:bit
+        port = "/dev/ttyACM0"
+        #store the connection
+        baud = 115200
+        #to configure our serial port and the speed of connection
+        s = serial.Serial(port)
+        s.baudrate = baud
+
+        #our firebase url
+        url = "https://mcultc4.firebaseio.com/"
+        fb = firebase.FirebaseApplication(url, None)
+        
+       #6 variables for time
+        tm = str(time.strftime("%H~%M"))
+        ltm = str(time.strftime("%H:%M"))# hours, Minutes
+        tms = str(time.strftime("%H~%M~%S"))#hours, minutes, seconds
+        dt = str(time.strftime("%Y-%-m-%-d"))#Year, month, day
+        onlyh = str(time.strftime("%H"))#hours
+        onlym = str(time.strftime("%M"))#minutes
+        
+        #read the lines of data being sent via the serial connection and saving it as variable data
+        data = s.readline()
+
+        #print(data)#b'205,550001,32,0
+        
+        data = str(data[0:])# convert data to a string
+        sptdata = data.split(',')# splits the data with a comma
+
+        print("Data:" + data) #Data:b'205,550001,32,0 
+  
+        #assign room number to variable 
+        #sptdata[0] = "Location"
+        heartrate  = sptdata[0]
+        locationdata = "205"
+        print(sptdata[0])
+
+        #assign patient id to variable
+        #sptdata[1] = "550001"
+        patientid = sptdata[1]
+        print(sptdata[1])
+
+        #step count is at index 2    
+        callstatus = sptdata[2]
+        print(sptdata[2])
+        #fall detection is at index 3
+        fallstatus = sptdata[3]    
+        print(sptdata[3])
+     
+       #variables for different time formats?
+        #x = tm + "?" + "→"+ "?" + stepdata + "?" + "steps"
+        y = "Time:" + tm
+        f = tms + "?" + "→" + "?"+ fallstatus
+        
+        
+        #send step count to Firebase
+        fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI"+"/Step", "Step/", sptdata[4])
+        
+        #send location to Firebase
+        fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/"+"HeartRate/"+"/", ltm+ "/",sptdata[0] )
+        
+        #send fall detection value to Firebase
+        fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/FallRecord", "Fell/", f)  #KU changed
+        
+        #fb.put("/Activities"+"/"+sptdata[1]+"/"+ dt +"/AI" +"/Callstatus/", sptdata[2])
+        
+        #print to the screen
+        print("Patient ID:" +sptdata[1] + "," + '\n'+"Time and Step Count:" + sptdata[4] + '\n' + "Room" + locationdata + "," + y + '\n')
+        time.sleep(10)
+
+        #if the time is 00:00 goodmoring will be printed to the screen
+        if ltm == "00:00":
+            newday = "goodmorning$"
+            s.write(newday.encode()) 
+            print(newday)
+
+    
+#creating threads that process the function infiniteloop1
+thread1 = threading.Thread(target=infiniteloop1)
+thread1.start()
+################################################
